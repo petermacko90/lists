@@ -1,0 +1,7 @@
+.list:hover, .list:focus {
+	background-color: #e6c300
+}
+
+.list-items {
+	line-height: 1.3;
+}
