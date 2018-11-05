@@ -37,41 +37,50 @@ class App extends Component {
     this.props.onRequestItems();
   }
 
+  /* handle selecting a list */
   onClickList = (list, listId) => (e) => {
-    this.props.onSetCurrentList(list);
-    this.props.onSetCurrentItems(listId);
+    this.handleSelectList(list, listId);
   }
 
   onEnterList = (list, listId) => (e) => {
     if (e.key === 'Enter') {
-      this.props.onSetCurrentList(list);
-      this.props.onSetCurrentItems(listId);
+      this.handleSelectList(list, listId);
     }
   }
 
+  handleSelectList = (list, listId) => {
+    this.props.onSetCurrentList(list);
+    this.props.onSetCurrentItems(listId);
+  }
+
+  /* handle toggling an item and deleting an item */
   onClickDeleteItem = (listId, itemId) => (e) => {
     e.stopPropagation();
+    this.handleDeleteItem(listId, itemId);
+  }
+
+  onClickItem = (listId, itemId, checked) => (e) => {
+    this.handleToggleItem(listId, itemId, checked);
+  }
+
+  onKeyPressItem = (listId, itemId, checked) => (e) => {
+    if (e.key === 'Delete') {
+      this.handleDeleteItem(listId, itemId);
+    } else if (e.key === 'Enter') {
+      this.handleToggleItem(listId, itemId, checked);
+    }
+  }
+
+  handleDeleteItem = (listId, itemId) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       this.props.onDeleteItem(itemId);
       this.props.onSetListDate(listId);
     }
   }
 
-  onClickItem = (listId, itemId, checked) => (e) => {
+  handleToggleItem = (listId, itemId, checked) => {
     this.props.onToggleItem(itemId, checked);
     this.props.onSetListDate(listId);
-  }
-
-  onKeyPressItem = (listId, itemId, checked) => (e) => {
-    if (e.key === 'Delete') {
-      if (window.confirm('Are you sure you want to delete this item?')) {
-        this.props.onDeleteItem(itemId);
-        this.props.onSetListDate(listId);
-      }
-    } else if (e.key === 'Enter') {
-      this.props.onToggleItem(itemId, checked);
-      this.props.onSetListDate(listId);
-    }
   }
 
   render() {
