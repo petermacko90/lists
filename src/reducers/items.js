@@ -1,10 +1,16 @@
 import {
-  FETCH_ITEMS, SET_CURRENT_ITEMS, DELETE_ITEM, TOGGLE_ITEM
+  FETCH_ITEMS,
+  SET_CURRENT_ITEMS,
+  DELETE_ITEM,
+  TOGGLE_ITEM,
+  ADD_ITEM,
+  SET_NEW_ITEM_NAME
 } from '../constants/action-types';
 
 const initialStateItems = {
   items: [],
-  currentItems: null
+  currentItems: null,
+  newItemName: ''
 };
 
 export const itemsReducer = (state = initialStateItems, action = {}) => {
@@ -40,6 +46,22 @@ export const itemsReducer = (state = initialStateItems, action = {}) => {
         return { ...item, ...item.checked = !action.payload.checked };
       });
       return { ...state, currentItems, items };
+    case ADD_ITEM:
+      const maxId = state.items.reduce((a, b) => (a.id > b.id) ? a.id : b.id);
+      const newItem = {
+        list_id: action.payload.listId,
+        id: maxId + 1,
+        name: action.payload.name,
+        checked: false
+      };
+      return {
+        ...state,
+        items: state.items.concat(newItem),
+        currentItems: state.currentItems.concat(newItem),
+        newItemName: ''
+      };
+    case SET_NEW_ITEM_NAME:
+      return { ...state, newItemName: action.payload };
     default:
       return state;
   }

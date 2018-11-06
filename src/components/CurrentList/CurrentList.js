@@ -1,9 +1,12 @@
 import React from 'react';
 import ListItem from '../ListItem/ListItem';
+import AddItem from '../AddItem/AddItem';
 import './CurrentList.css';
 
 const CurrentList = ({
-  list, items, onClickItem, onClickDeleteItem, onKeyPressItem
+  list, items, newItemName,
+  onClickItem, onClickDeleteItem, onKeyPressItem, onSetNewItemName,
+  onClickAddItem, onKeyPressAddItem
 }) => {
   return (
     <div className="fl w-75-l w-two-thirds-m w-100 pa3 pt0">
@@ -30,6 +33,13 @@ const CurrentList = ({
             <p>No items</p>
         }
       </ul>
+      <AddItem
+        listId={list.id}
+        newItemName={newItemName}
+        onSetNewItemName={onSetNewItemName}
+        onClickAddItem={onClickAddItem}
+        onKeyPressAddItem={onKeyPressAddItem}
+      />
     </div>
   );
 }

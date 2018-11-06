@@ -1,5 +1,10 @@
 import {
-  FETCH_ITEMS, SET_CURRENT_ITEMS, DELETE_ITEM, TOGGLE_ITEM
+  FETCH_ITEMS,
+  SET_CURRENT_ITEMS,
+  DELETE_ITEM,
+  TOGGLE_ITEM,
+  ADD_ITEM,
+  SET_NEW_ITEM_NAME
 } from '../constants/action-types';
 
 export const requestItems = () => (dispatch) => {
@@ -53,4 +58,14 @@ export const deleteItem = (itemId) => ({
 export const toggleItem = (itemId, checked) => ({
   type: TOGGLE_ITEM,
   payload: { itemId, checked }
+});
+
+export const addItem = (listId, name) => ({
+  type: ADD_ITEM,
+  payload: { listId, name }
+});
+
+export const setNewItemName = (text) => ({
+  type: SET_NEW_ITEM_NAME,
+  payload: text
 });

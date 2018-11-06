@@ -2,7 +2,12 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { requestLists, setCurrentList, setListDate } from './actions/lists';
 import {
-  requestItems, setCurrentItems, deleteItem, toggleItem
+  requestItems,
+  setCurrentItems,
+  deleteItem,
+  toggleItem,
+  addItem,
+  setNewItemName
 } from './actions/items';
 import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
@@ -16,6 +21,7 @@ const mapStateToProps = (state) => {
     items: state.itemsReducer.items,
     currentList: state.setCurrentList.currentList,
     currentItems: state.itemsReducer.currentItems,
+    newItemName: state.itemsReducer.newItemName
   }
 }
 
@@ -27,7 +33,9 @@ const mapDispatchToProps = (dispatch) => {
     onSetCurrentItems: (items) => dispatch(setCurrentItems(items)),
     onSetListDate: (listId) => dispatch(setListDate(listId)),
     onDeleteItem: (itemId) => dispatch(deleteItem(itemId)),
-    onToggleItem: (itemId, checked) => dispatch(toggleItem(itemId, checked))
+    onToggleItem: (itemId, checked) => dispatch(toggleItem(itemId, checked)),
+    onAddItem: (listId, name) => dispatch(addItem(listId, name)),
+    onSetNewItemName: (e) => dispatch(setNewItemName(e.target.value))
   }
 }
 
@@ -83,8 +91,29 @@ class App extends Component {
     this.props.onSetListDate(listId);
   }
 
+  /* handle adding an item */
+  onClickAddItem = (listId, name) => (e) => {
+    this.handleAddItem(listId, name);
+  }
+
+  onKeyPressAddItem = (listId, name) => (e) => {
+    if (e.key === 'Enter') {
+      this.handleAddItem(listId, name);
+    }
+  }
+
+  handleAddItem = (listId, name) => {
+    if (checkEmptyString(name)) {
+      return;
+    }
+    this.props.onAddItem(listId, name);
+    this.props.onSetListDate(listId);
+  }
+
   render() {
-    const { lists, items, currentList, currentItems } = this.props;
+    const {
+      lists, items, currentList, currentItems, newItemName, onSetNewItemName
+    } = this.props;
 
     return (
       <Fragment>
@@ -105,9 +134,13 @@ class App extends Component {
             <CurrentList
               list={currentList}
               items={currentItems}
+              newItemName={newItemName}
               onClickItem={this.onClickItem}
               onClickDeleteItem={this.onClickDeleteItem}
               onKeyPressItem={this.onKeyPressItem}
+              onSetNewItemName={onSetNewItemName}
+              onClickAddItem={this.onClickAddItem}
+              onKeyPressAddItem={this.onKeyPressAddItem}
             />
         }
       </Fragment>
@@ -116,3 +149,11 @@ class App extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// if string contains only whitespace characters, return true
+const checkEmptyString = (name) => {
+  if (!name.replace(/\s+/g, '')) {
+    return true;
+  }
+  return false;
+}
