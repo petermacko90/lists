@@ -1,5 +1,5 @@
 import {
-  FETCH_LISTS, SET_CURRENT_LIST, SET_LIST_DATE
+  FETCH_LISTS, SET_CURRENT_LIST, SET_LIST_DATE, DELETE_LIST
 } from '../constants/action-types';
 
 export const requestLists = () => (dispatch) => {
@@ -31,5 +31,10 @@ export const setCurrentList = (list) => ({
 
 export const setListDate = (listId) => ({
   type: SET_LIST_DATE,
+  payload: listId
+});
+
+export const deleteList = (listId) => ({
+  type: DELETE_LIST,
   payload: listId
 });

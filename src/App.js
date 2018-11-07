@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { requestLists, setCurrentList, setListDate } from './actions/lists';
+import {
+  requestLists, setCurrentList, setListDate, deleteList
+} from './actions/lists';
 import {
   requestItems,
   setCurrentItems,
@@ -18,8 +20,8 @@ import './App.css';
 const mapStateToProps = (state) => {
   return {
     lists: state.listsReducer.lists,
+    currentList: state.listsReducer.currentList,
     items: state.itemsReducer.items,
-    currentList: state.setCurrentList.currentList,
     currentItems: state.itemsReducer.currentItems,
     newItemName: state.itemsReducer.newItemName
   }
@@ -32,6 +34,7 @@ const mapDispatchToProps = (dispatch) => {
     onSetCurrentList: (list) => dispatch(setCurrentList(list)),
     onSetCurrentItems: (items) => dispatch(setCurrentItems(items)),
     onSetListDate: (listId) => dispatch(setListDate(listId)),
+    onDeleteList: (listId) => dispatch(deleteList(listId)),
     onDeleteItem: (itemId) => dispatch(deleteItem(itemId)),
     onToggleItem: (itemId, checked) => dispatch(toggleItem(itemId, checked)),
     onAddItem: (listId, name) => dispatch(addItem(listId, name)),
@@ -110,6 +113,13 @@ class App extends Component {
     this.props.onSetListDate(listId);
   }
 
+  /* handle deleting a list */
+  handleDeleteList = (listId) => (e) => {
+    if (window.confirm('Are you sure you want to delete this list?')) {
+      this.props.onDeleteList(listId);
+    }
+  }
+
   render() {
     const {
       lists, items, currentList, currentItems, newItemName, onSetNewItemName
@@ -135,6 +145,7 @@ class App extends Component {
               list={currentList}
               items={currentItems}
               newItemName={newItemName}
+              onClickDeleteList={this.handleDeleteList}
               onClickItem={this.onClickItem}
               onClickDeleteItem={this.onClickDeleteItem}
               onKeyPressItem={this.onKeyPressItem}
