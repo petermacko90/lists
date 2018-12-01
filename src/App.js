@@ -10,7 +10,6 @@ import './App.css';
 const mapStateToProps = (state) => {
   return {
     lists: state.listsReducer.lists,
-    currentList: state.listsReducer.currentList,
     items: state.itemsReducer.items
   }
 }
@@ -47,7 +46,7 @@ class App extends Component {
   }
 
   render() {
-    const { lists, items, currentList } = this.props;
+    const { lists, items } = this.props;
 
     return (
       <Fragment>
@@ -63,7 +62,7 @@ class App extends Component {
           :
             <p className="message">No lists found</p>
         }
-        { currentList && <CurrentList /> }
+        <CurrentList />
       </Fragment>
     );
   }

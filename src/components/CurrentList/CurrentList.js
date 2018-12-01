@@ -86,6 +86,7 @@ class CurrentList extends Component {
 
   render() {
     const { list, items, newItemName, onSetNewItemName } = this.props;
+    if (!list) return null;
 
     return (
       <div className="fl w-75-l w-two-thirds-m w-100 pa3">
