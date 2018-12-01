@@ -5,7 +5,6 @@ import { requestItems, setCurrentItems } from './actions/items';
 import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
-import Message from './components/Message/Message';
 import './App.css';
 
 const mapStateToProps = (state) => {
@@ -62,7 +61,7 @@ class App extends Component {
               onEnterList={this.onEnterList}
             />
           :
-            <Message text="No lists found" />
+            <p className="message">No lists found</p>
         }
         { currentList && <CurrentList /> }
       </Fragment>
