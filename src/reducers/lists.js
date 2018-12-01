@@ -21,8 +21,8 @@ export const listsReducer = (state = initialStateLists, action = {}) => {
       return { ...state, currentList: action.payload };
     case SET_LIST_DATE:
       const lists = state.lists.map((list) => {
-        if (list.id === action.payload) {
-          return { ...list, ...list.modified = new Date() };
+        if (list.id === action.payload.listId) {
+          return { ...list, ...list.modified = action.payload.modified };
         }
         return  list;
       });
@@ -37,7 +37,7 @@ export const listsReducer = (state = initialStateLists, action = {}) => {
       const newList = {
         id: action.payload.nextId,
         title: action.payload.title,
-        modified: new Date()
+        modified: action.payload.modified
       };
       return {
         ...state,

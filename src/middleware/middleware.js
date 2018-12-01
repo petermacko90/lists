@@ -22,7 +22,8 @@ export const addListOrItemMiddleware = store => next => action => {
       type: ADD_LIST_WITH_ID,
       payload: {
         title: action.payload.title,
-        nextId: maxId + 1
+        nextId: maxId + 1,
+        modified: action.payload.modified
       }
     })
   }

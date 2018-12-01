@@ -36,7 +36,7 @@ export const setCurrentList = (list) => ({
 
 export const setListDate = (listId) => ({
   type: SET_LIST_DATE,
-  payload: listId
+  payload: { listId, modified: new Date() }
 });
 
 export const deleteList = (listId) => ({
@@ -46,7 +46,7 @@ export const deleteList = (listId) => ({
 
 export const addList = (title) => ({
   type: ADD_LIST,
-  payload: title
+  payload: { title, modified: new Date() }
 });
 
 export const setNewListTitle = (title) => ({
