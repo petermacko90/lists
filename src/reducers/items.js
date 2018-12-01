@@ -3,7 +3,7 @@ import {
   SET_CURRENT_ITEMS,
   DELETE_ITEM,
   TOGGLE_ITEM,
-  ADD_ITEM,
+  ADD_ITEM_WITH_ID,
   SET_NEW_ITEM_NAME
 } from '../constants/action-types';
 
@@ -46,11 +46,10 @@ export const itemsReducer = (state = initialStateItems, action = {}) => {
         return { ...item, ...item.checked = !action.payload.checked };
       });
       return { ...state, currentItems, items };
-    case ADD_ITEM:
-      const maxId = state.items.reduce((a, b) => (a.id > b.id) ? a.id : b.id);
+    case ADD_ITEM_WITH_ID:
       const newItem = {
         list_id: action.payload.listId,
-        id: maxId + 1,
+        id: action.payload.nextId,
         name: action.payload.name,
         checked: false
       };

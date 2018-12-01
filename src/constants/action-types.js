@@ -8,4 +8,5 @@ export const SET_CURRENT_ITEMS = 'SET_CURRENT_ITEMS';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const TOGGLE_ITEM = 'TOGGLE_ITEM';
 export const ADD_ITEM = 'ADD_ITEM';
+export const ADD_ITEM_WITH_ID = 'ADD_ITEM_WITH_ID';
 export const SET_NEW_ITEM_NAME = 'SET_NEW_ITEM_NAME';
