@@ -2,3 +2,7 @@
 	max-height: 75vh;
 	overflow-y: auto;
 }
+
+.message {
+  padding: 10px;
+}
