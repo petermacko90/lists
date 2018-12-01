@@ -49,7 +49,6 @@ export const setCurrentItems = (listId) => ({
   payload: listId
 });
 
-
 export const deleteItem = (itemId) => ({
   type: DELETE_ITEM,
   payload: itemId

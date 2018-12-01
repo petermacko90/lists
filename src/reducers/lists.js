@@ -1,10 +1,16 @@
 import {
-  FETCH_LISTS, SET_CURRENT_LIST, SET_LIST_DATE, DELETE_LIST
+  FETCH_LISTS,
+  SET_CURRENT_LIST,
+  SET_LIST_DATE,
+  DELETE_LIST,
+  ADD_LIST_WITH_ID,
+  SET_NEW_LIST_TITLE
 } from '../constants/action-types';
 
 const initialStateLists = {
   lists: [],
-  currentList: null
+  currentList: null,
+  newListTitle: ''
 };
 
 export const listsReducer = (state = initialStateLists, action = {}) => {
@@ -27,6 +33,20 @@ export const listsReducer = (state = initialStateLists, action = {}) => {
         lists: state.lists.filter(list => list.id !== action.payload),
         currentList: null
       };
+    case ADD_LIST_WITH_ID:
+      const newList = {
+        id: action.payload.nextId,
+        title: action.payload.title,
+        modified: new Date()
+      };
+      return {
+        ...state,
+        lists: state.lists.concat(newList),
+        currentList: newList,
+        newListTitle: ''
+      }
+    case SET_NEW_LIST_TITLE:
+      return { ...state, newListTitle: action.payload.title };
     default:
       return state;
   }

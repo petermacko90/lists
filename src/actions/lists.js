@@ -1,5 +1,10 @@
 import {
-  FETCH_LISTS, SET_CURRENT_LIST, SET_LIST_DATE, DELETE_LIST
+  FETCH_LISTS,
+  SET_CURRENT_LIST,
+  SET_LIST_DATE,
+  DELETE_LIST,
+  ADD_LIST,
+  SET_NEW_LIST_TITLE
 } from '../constants/action-types';
 
 export const requestLists = () => (dispatch) => {
@@ -37,4 +42,14 @@ export const setListDate = (listId) => ({
 export const deleteList = (listId) => ({
   type: DELETE_LIST,
   payload: listId
+});
+
+export const addList = (title) => ({
+  type: ADD_LIST,
+  payload: title
+});
+
+export const setNewListTitle = (title) => ({
+  type: SET_NEW_LIST_TITLE,
+  payload: title
 });
