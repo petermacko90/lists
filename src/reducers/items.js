@@ -4,12 +4,13 @@ import {
   DELETE_ITEM,
   TOGGLE_ITEM,
   ADD_ITEM_WITH_ID,
-  SET_NEW_ITEM_NAME
+  SET_NEW_ITEM_NAME,
+  ADD_LIST_WITH_ID
 } from '../constants/action-types';
 
 const initialStateItems = {
   items: [],
-  currentItems: null,
+  currentItems: [],
   newItemName: ''
 };
 
@@ -61,6 +62,8 @@ export const itemsReducer = (state = initialStateItems, action = {}) => {
       };
     case SET_NEW_ITEM_NAME:
       return { ...state, newItemName: action.payload };
+    case ADD_LIST_WITH_ID:
+      return { ...state, currentItems: [] };
     default:
       return state;
   }

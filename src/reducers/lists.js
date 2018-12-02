@@ -46,7 +46,7 @@ export const listsReducer = (state = initialStateLists, action = {}) => {
         newListTitle: ''
       }
     case SET_NEW_LIST_TITLE:
-      return { ...state, newListTitle: action.payload.title };
+      return { ...state, newListTitle: action.payload };
     default:
       return state;
   }
