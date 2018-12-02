@@ -4,6 +4,7 @@ import { setListDate, deleteList } from '../../actions/lists';
 import {
   deleteItem, toggleItem, addItem, setNewItemName
 } from '../../actions/items';
+import { checkEmptyString } from '../../helpers';
 import ListItem from '../ListItem/ListItem';
 import AddItem from '../AddItem/AddItem';
 import './CurrentList.css';
@@ -130,10 +131,3 @@ class CurrentList extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentList);
-
-const checkEmptyString = (name) => {
-  if (!name.replace(/\s+/g, '')) {
-    return true;
-  }
-  return false;
-}

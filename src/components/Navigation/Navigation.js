@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setNewListTitle, addList } from '../../actions/lists';
+import { checkEmptyString } from '../../helpers';
 
 const mapStateToProps = (state) => {
   return {
@@ -82,10 +83,3 @@ class Navigation extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
-
-const checkEmptyString = (name) => {
-  if (!name.replace(/\s+/g, '')) {
-    return true;
-  }
-  return false;
-}
