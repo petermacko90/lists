@@ -1,0 +1,41 @@
+.menu-item, .navbar {
+  flex-direction: column;
+}
+
+.toggle {
+  background-color: transparent;
+}
+
+.toggle:hover {
+  background-color: #fbf1a9;
+}
+
+.bar {
+  display: block;
+  width: 15px;
+  height: 3px;
+  background-color: black;
+  margin-bottom: 3px;
+}
+
+.add-list-button {
+  width: 40%;
+}
+
+.add-list-input {
+  width: 60%
+}
+
+@media screen and (min-width: 30em) {
+  .menu-item, .navbar {
+    flex-direction: row;
+  }
+
+  .toggle {
+    display: none;
+  }
+
+  .add-list-button, .add-list-input {
+    width: initial;
+  }
+}

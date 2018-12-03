@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setNewListTitle, addList } from '../../actions/lists';
 import { checkEmptyString } from '../../helpers';
+import './Navigation.css';
 
 const mapStateToProps = (state) => {
   return {
@@ -21,14 +22,19 @@ class Navigation extends Component {
     super();
     this.addListInput = React.createRef();
     this.state = {
+      showNavigationItems: false,
       showInput: false
     };
   }
 
   componentDidUpdate() {
-    if (this.state.showInput) {
+    if (this.state.showInput && this.state.showNavigationItems) {
       this.addListInput.current.focus();
     }
+  }
+
+  toggleNavigation = () => {
+    this.setState({ showNavigationItems: !this.state.showNavigationItems });
   }
 
   /* handle adding a list */
@@ -58,25 +64,37 @@ class Navigation extends Component {
 
   render() {
     const { newListTitle, onSetNewListTitle } = this.props;
+
     return (
-      <nav className="flex bg-yellow">
-        <h1 className="f2-l f3-m f4 pa3 mv0 dib">Lists</h1>
-        <button type="button" onClick={this.onClickAddList(newListTitle)}
-        className="white b--none ph4 pv3 b pointer bg-green hover-bg-dark-green mv2-l mv1-m mv0">
-          Add list
-        </button>
+      <nav className="flex bg-yellow shadow-2 mb2 navbar">
+        <h1 className="f2 pa3 mv0 menu-item">Lists</h1>
         {
-          this.state.showInput &&
-            <input
-              type="text"
-              value={newListTitle}
-              onChange={onSetNewListTitle}
-              onKeyPress={this.onKeyPressAddList(newListTitle)}
-              placeholder="List title"
-              className="pa3 b--none mv2-l mv1-m mv0"
-              ref={this.addListInput}
-            />
+          this.state.showNavigationItems &&
+            <div className="menu-item">
+              <button type="button" onClick={this.onClickAddList(newListTitle)}
+              className="white b--none ph3 ph4-ns pv3 b pointer bg-green hover-bg-dark-green mv3 add-list-button">
+                Add list
+              </button>
+              {
+                this.state.showInput &&
+                  <input
+                    type="text"
+                    value={newListTitle}
+                    onChange={onSetNewListTitle}
+                    onKeyPress={this.onKeyPressAddList(newListTitle)}
+                    placeholder="List title"
+                    className="pa3 b--none mv3 add-list-input"
+                    ref={this.addListInput}
+                  />
+              }
+            </div>
         }
+        <button type="button" onClick={this.toggleNavigation}
+        className="b--none pa3 ma3 pointer absolute right-0 toggle">
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </button>
       </nav>
     );
   }
