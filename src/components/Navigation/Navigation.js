@@ -22,14 +22,38 @@ class Navigation extends Component {
     super();
     this.addListInput = React.createRef();
     this.state = {
+      showToggleButton: true,
       showNavigationItems: false,
       showInput: false
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', debounce(this.onWindowResize, 250));
+    this.onWindowResize();
+  }
+
   componentDidUpdate() {
     if (this.state.showInput && this.state.showNavigationItems) {
       this.addListInput.current.focus();
+    }
+  }
+
+  componentWillMount() {
+    window.removeEventListener('resize', debounce(this.onWindowResize, 250));
+  }
+
+  onWindowResize = () => {
+    if (window.innerWidth >= 480) {
+      this.setState({
+        showToggleButton: false,
+        showNavigationItems: true
+      });
+    } else {
+      this.setState({
+        showToggleButton: true,
+        showNavigationItems: false
+      });
     }
   }
 
@@ -70,7 +94,7 @@ class Navigation extends Component {
         <h1 className="f2 pa3 mv0 menu-item">Lists</h1>
         {
           this.state.showNavigationItems &&
-            <div className="menu-item">
+            <div className="menu-item mh2 mh0-ns">
               <button type="button" onClick={this.onClickAddList(newListTitle)}
               className="white b--none ph3 ph4-ns pv3 b pointer bg-green hover-bg-dark-green mv3 add-list-button">
                 Add list
@@ -89,15 +113,34 @@ class Navigation extends Component {
               }
             </div>
         }
-        <button type="button" onClick={this.toggleNavigation}
-        className="b--none pa3 ma3 pointer absolute right-0 toggle">
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
-        </button>
+        {
+          this.state.showToggleButton &&
+            <button type="button" onClick={this.toggleNavigation}
+            className="b--none pa3 ma3 pointer absolute right-0 toggle">
+              <span className="bar"></span>
+              <span className="bar"></span>
+              <span className="bar"></span>
+            </button>
+        }
       </nav>
     );
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+
+function debounce(func, wait, immediate) {
+	let timeout;
+	return function() {
+    let context = this;
+    let args = arguments;
+		let later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		let callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	}
+}

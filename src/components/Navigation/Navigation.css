@@ -31,10 +31,6 @@
     flex-direction: row;
   }
 
-  .toggle {
-    display: none;
-  }
-
   .add-list-button, .add-list-input {
     width: initial;
   }
