@@ -41,6 +41,7 @@ class Lists extends Component {
   handleSelectList = (list, listId) => {
     this.props.onSetCurrentList(list);
     this.props.onSetCurrentItems(listId);
+    this.props.scrollToCurrentList();
   }
 
   render() {
