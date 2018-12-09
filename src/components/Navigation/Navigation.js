@@ -24,7 +24,7 @@ class Navigation extends Component {
     this.state = {
       showToggleButton: true,
       showNavigationItems: false,
-      showInput: true
+      showInput: false
     };
   }
 
