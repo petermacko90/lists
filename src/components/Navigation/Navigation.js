@@ -39,7 +39,7 @@ class Navigation extends Component {
     }
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     window.removeEventListener('resize', debounce(this.onWindowResize, 250));
   }
 
@@ -51,8 +51,7 @@ class Navigation extends Component {
       });
     } else {
       this.setState({
-        showToggleButton: true,
-        showNavigationItems: false
+        showToggleButton: true
       });
     }
   }
