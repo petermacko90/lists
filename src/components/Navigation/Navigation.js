@@ -24,7 +24,7 @@ class Navigation extends Component {
     this.state = {
       showToggleButton: true,
       showNavigationItems: false,
-      showInput: false
+      showInput: true
     };
   }
 
@@ -78,8 +78,8 @@ class Navigation extends Component {
         this.setState({ showInput: false });
         return;
       }
+      this.props.scrollToCurrentList();
       this.props.onAddList(title);
-      this.setState({ showInput: false });
     } else {
       this.setState({ showInput: true });
     }

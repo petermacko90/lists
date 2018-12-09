@@ -15,9 +15,10 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Navigation />
+        <Navigation scrollToCurrentList={this.scrollToCurrentList} />
         <Lists scrollToCurrentList={this.scrollToCurrentList} />
-        <div className="fl w-75-l w-two-thirds-m w-100 pa3">
+        <div className="fl w-75-l w-two-thirds-m w-100 pa3"
+        style={{minHeight: '400px'}}>
           <div ref={(ref) => this.scroll = ref} />
           <CurrentList />
         </div>
