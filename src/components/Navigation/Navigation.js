@@ -20,7 +20,6 @@ const mapDispatchToProps = (dispatch) => {
 class Navigation extends Component {
   constructor() {
     super();
-    this.addListInput = React.createRef();
     this.state = {
       showToggleButton: true,
       showNavigationItems: false,
@@ -31,12 +30,6 @@ class Navigation extends Component {
   componentDidMount() {
     window.addEventListener('resize', debounce(this.onWindowResize, 250));
     this.onWindowResize();
-  }
-
-  componentDidUpdate() {
-    if (this.state.showInput && this.state.showNavigationItems) {
-      this.addListInput.current.focus();
-    }
   }
 
   componentWillUnmount() {
@@ -107,15 +100,15 @@ class Navigation extends Component {
                     onKeyPress={this.onKeyPressAddList(newListTitle)}
                     placeholder="List title"
                     className="pa3 b--none mv3 add-list-input"
-                    ref={this.addListInput}
                   />
               }
             </div>
         }
         {
           this.state.showToggleButton &&
-            <button type="button" onClick={this.toggleNavigation}
-            className="b--none pa3 ma3 pointer absolute right-0 toggle">
+            <button type="button" onClick={this.toggleNavigation} 
+            className="b--none pa3 ma3 pointer absolute right-0 toggle"
+            aria-label="Toggle navigation">
               <span className="bar"></span>
               <span className="bar"></span>
               <span className="bar"></span>
