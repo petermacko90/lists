@@ -5,7 +5,9 @@ import {
 export const addListOrItemMiddleware = store => next => action => {
   if (action.type === ADD_ITEM) {
     const items = store.getState().itemsReducer.items;
-    const maxId = items.reduce((a, b) => (a.id > b.id) ? a.id : b.id);
+    const maxId = items.reduce((a, b) => {
+      return (a.id > b.id) ? a.id : b.id;
+    }, 0);
     store.dispatch({
       type: ADD_ITEM_WITH_ID,
       payload: {
@@ -17,7 +19,9 @@ export const addListOrItemMiddleware = store => next => action => {
   }
   if (action.type === ADD_LIST) {
     const lists = store.getState().listsReducer.lists;
-    const maxId = lists.reduce((a, b) => (a.id > b.id) ? a.id : b.id);
+    const maxId = lists.reduce((a, b) => {
+      return (a.id > b.id) ? a.id : b.id;
+    }, 0);
     store.dispatch({
       type: ADD_LIST_WITH_ID,
       payload: {

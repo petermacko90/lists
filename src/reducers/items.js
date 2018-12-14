@@ -5,7 +5,8 @@ import {
   TOGGLE_ITEM,
   ADD_ITEM_WITH_ID,
   SET_NEW_ITEM_NAME,
-  ADD_LIST_WITH_ID
+  ADD_LIST_WITH_ID,
+  DELETE_LIST
 } from '../constants/action-types';
 
 const initialStateItems = {
@@ -64,6 +65,16 @@ export const itemsReducer = (state = initialStateItems, action = {}) => {
       return { ...state, newItemName: action.payload };
     case ADD_LIST_WITH_ID:
       return { ...state, currentItems: [] };
+    case DELETE_LIST:
+      return {
+        ...state,
+        items: state.items.filter(item => {
+          return item.list_id !== action.payload
+        }),
+        currentItems: state.currentItems.filter(item => {
+          return item.list_id !== action.payload
+        })
+      };
     default:
       return state;
   }

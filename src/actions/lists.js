@@ -6,26 +6,10 @@ import {
   ADD_LIST,
   SET_NEW_LIST_TITLE
 } from '../constants/action-types';
+import { loadState } from '../localStorage';
 
 export const requestLists = () => (dispatch) => {
-  const lists = [
-    {
-      id: 1,
-      title: 'Food',
-      modified: new Date('2018-08-20')
-    },
-    {
-      id: 2,
-      title: 'Presents',
-      modified: new Date('2017-12-01')
-    },
-    {
-      id: 3,
-      title: 'Other',
-      modified: new Date('2018-11-02')
-    }
-  ];
-
+  const lists = loadState() === undefined ? [] : loadState().listsReducer.lists;
   dispatch({ type: FETCH_LISTS, payload: lists });
 }
 

@@ -6,41 +6,10 @@ import {
   ADD_ITEM,
   SET_NEW_ITEM_NAME
 } from '../constants/action-types';
+import { loadState } from '../localStorage';
 
 export const requestItems = () => (dispatch) => {
-  const items = [
-    {
-      list_id: 1,
-      id: 1,
-      name: 'Bread',
-      checked: false
-    },
-    {
-      list_id: 1,
-      id: 2,
-      name: 'Sunflower seeds',
-      checked: true
-    },
-    {
-      list_id: 1,
-      id: 3,
-      name: 'Apples',
-      checked: false
-    },
-    {
-      list_id: 2,
-      id: 4,
-      name: 'Gaming PC',
-      checked: true
-    },
-    {
-      list_id: 2,
-      id: 5,
-      name: 'PC games',
-      checked: true
-    }
-  ];
-
+  const items = loadState() === undefined ? [] : loadState().itemsReducer.items;
   dispatch({ type: FETCH_ITEMS, payload: items });
 }
 
