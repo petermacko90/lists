@@ -75,7 +75,7 @@ class CurrentList extends Component {
   }
 
   /* handle deleting a list */
-  handleDeleteList = (listId) => (e) => {
+  handleDeleteList = (listId) => () => {
     if (window.confirm('Are you sure you want to delete this list?')) {
       this.props.onDeleteList(listId);
     }
@@ -87,7 +87,7 @@ class CurrentList extends Component {
     this.handleDeleteItem(listId, itemId);
   }
 
-  onClickItem = (listId, itemId, checked) => (e) => {
+  onClickItem = (listId, itemId, checked) => () => {
     this.handleToggleItem(listId, itemId, checked);
   }
 
@@ -148,7 +148,7 @@ class CurrentList extends Component {
                 type="text"
                 value={newListTitle}
                 onChange={this.onChangeListTitle}
-                onKeyPress={this.onKeyPressEditTitle}
+                onKeyPress={this.onKeyPressEditTitle(list.id, newListTitle)}
                 placeholder="List title"
                 className="pa3 b--none mv4"
               />
