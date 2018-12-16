@@ -67,7 +67,7 @@ class CurrentList extends Component {
   }
 
   /* handle adding an item */
-  onClickAddItem = (listId, name) => (e) => {
+  onClickAddItem = (listId, name) => () => {
     this.handleAddItem(listId, name);
   }
 

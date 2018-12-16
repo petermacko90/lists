@@ -51,7 +51,7 @@ class Navigation extends Component {
 
   /* handle adding a list */
 
-  onClickAddList = (title) => (e) => {
+  onClickAddList = (title) => () => {
     this.handleAddList(title);
   }
 
