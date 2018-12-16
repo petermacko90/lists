@@ -91,7 +91,7 @@ class Navigation extends Component {
                 this.state.showInput &&
                   <input
                     type="text"
-                    value={newListTitle}
+                    value={newListTitle || ""}
                     onChange={onSetNewListTitle}
                     onKeyPress={this.onKeyPressAddList(newListTitle)}
                     placeholder="List title"
