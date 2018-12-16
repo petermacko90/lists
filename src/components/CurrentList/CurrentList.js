@@ -78,6 +78,7 @@ class CurrentList extends Component {
   handleDeleteList = (listId) => () => {
     if (window.confirm('Are you sure you want to delete this list?')) {
       this.props.onDeleteList(listId);
+      this.hideEditTitle();
     }
   }
 
@@ -138,24 +139,16 @@ class CurrentList extends Component {
     return (
       <Fragment>
         <button type="button" onClick={this.handleDeleteList(list.id)}
-        className="white b--none ph4 pv3 b pointer bg-red hover-bg-dark-red db">
+        className="white b--none ph4 pv3 b pointer bg-red hover-bg-dark-red">
           Delete
         </button>
         {
           isEditTitle ?
             <Fragment>
-              <input
-                type="text"
-                value={newListTitle}
-                onChange={this.onChangeListTitle}
-                onKeyPress={this.onKeyPressEditTitle(list.id, newListTitle)}
-                placeholder="List title"
-                className="pa3 b--none mv4"
-              />
               <button type="button"
               onClick={this.onClickEditTitle(list.id, newListTitle)}
               className="white b--none ph4 pv3 b pointer bg-green hover-bg-dark-green">
-                Save
+                Save title
               </button>
               <button type="button" onClick={this.hideEditTitle}
               className="white b--none ph4 pv3 b pointer bg-blue hover-bg-dark-blue">
@@ -163,13 +156,23 @@ class CurrentList extends Component {
               </button>
             </Fragment>
           :
-            <Fragment>
-              <h2 className="f2 mv4 truncate dib v-mid" style={{height:'50.4px'}}>{list.title}</h2>
-              <button type="button" onClick={this.showEditTitle}
-              className="white b--none ph4 pv3 b pointer bg-blue hover-bg-dark-blue ml3">
-                Edit title
-              </button>
-            </Fragment>
+            <button type="button" onClick={this.showEditTitle}
+            className="white b--none ph4 pv3 b pointer bg-blue hover-bg-dark-blue">
+              Edit title
+            </button>
+        }
+        {
+          isEditTitle ?
+            <input
+              type="text"
+              value={newListTitle}
+              onChange={this.onChangeListTitle}
+              onKeyPress={this.onKeyPressEditTitle(list.id, newListTitle)}
+              placeholder="List title"
+              className="pa3 b--none mv4 db"
+            />
+          :
+            <h2 className="f2 mv4 truncate" style={{height:'50.4px'}}>{list.title}</h2>
         }
         <p>{list.modified.toLocaleDateString()}</p>
         <ul>
