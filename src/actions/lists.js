@@ -1,7 +1,7 @@
 import {
   FETCH_LISTS,
   SET_CURRENT_LIST,
-  SET_LIST_DATE,
+  EDIT_LIST,
   DELETE_LIST,
   ADD_LIST,
   SET_NEW_LIST_TITLE
@@ -18,9 +18,9 @@ export const setCurrentList = (list) => ({
   payload: list
 });
 
-export const setListDate = (listId) => ({
-  type: SET_LIST_DATE,
-  payload: { listId, modified: new Date() }
+export const editList = (id, title, modified) => ({
+  type: EDIT_LIST,
+  payload: { id, title, modified }
 });
 
 export const deleteList = (listId) => ({

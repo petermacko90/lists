@@ -1,6 +1,6 @@
 export const FETCH_LISTS = 'FETCH_LISTS';
 export const SET_CURRENT_LIST = 'SET_CURRENT_LIST';
-export const SET_LIST_DATE = 'SET_LIST_DATE';
+export const EDIT_LIST = 'EDIT_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
 export const ADD_LIST = 'ADD_LIST';
 export const ADD_LIST_WITH_ID = 'ADD_LIST_WITH_ID';

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { setListDate, deleteList } from '../../actions/lists';
+import { editList, deleteList } from '../../actions/lists';
 import {
   deleteItem, toggleItem, addItem, setNewItemName
 } from '../../actions/items';
@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSetListDate: (listId) => dispatch(setListDate(listId)),
+    onEditList: (id, title, modified) => dispatch(editList(id, title, modified)),
     onDeleteList: (listId) => dispatch(deleteList(listId)),
     onDeleteItem: (itemId) => dispatch(deleteItem(itemId)),
     onToggleItem: (itemId, checked) => dispatch(toggleItem(itemId, checked)),
@@ -29,6 +29,51 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class CurrentList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isEditTitle: false,
+      newListTitle: ''
+    };
+  }
+
+  hideEditTitle = () => {
+    this.setState({
+      isEditTitle: false,
+      newListTitle: ''
+    });
+  }
+
+  showEditTitle = () => {
+    this.setState({
+      isEditTitle: true,
+      newListTitle: this.props.list.title
+    });
+  }
+
+  onChangeListTitle = (e) => {
+    this.setState({ newListTitle: e.target.value });
+  }
+
+  /* handle editing a list */
+  onClickEditTitle = (listId, title) => () => {
+    this.handleEditTitle(listId, title);
+  }
+
+  onKeyPressEditTitle = (listId, title) => (e) => {
+    if (e.key === 'Enter') {
+      this.handleEditTitle(listId, title);
+    }
+  }
+
+  handleEditTitle = (listId, title) => {
+    this.props.onEditList(listId, title, new Date());
+    this.setState({
+      newListTitle: '',
+      isEditTitle: false
+    });
+  }
+
   /* handle deleting a list */
   handleDeleteList = (listId) => (e) => {
     if (window.confirm('Are you sure you want to delete this list?')) {
@@ -57,13 +102,13 @@ class CurrentList extends Component {
   handleDeleteItem = (listId, itemId) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       this.props.onDeleteItem(itemId);
-      this.props.onSetListDate(listId);
+      this.props.onEditList(listId, this.props.list.title, new Date());
     }
   }
 
   handleToggleItem = (listId, itemId, checked) => {
     this.props.onToggleItem(itemId, checked);
-    this.props.onSetListDate(listId);
+    this.props.onEditList(listId, this.props.list.title, new Date());
   }
 
   /* handle adding an item */
@@ -82,20 +127,50 @@ class CurrentList extends Component {
       return;
     }
     this.props.onAddItem(listId, name);
-    this.props.onSetListDate(listId);
+    this.props.onEditList(listId, this.props.list.title, new Date());
   }
 
   render() {
     const { list, items, newItemName, onSetNewItemName } = this.props;
+    const { isEditTitle, newListTitle } = this.state;
     if (!list) return null;
 
     return (
       <Fragment>
         <button type="button" onClick={this.handleDeleteList(list.id)}
-        className="white b--none ph4 pv3 b pointer bg-red hover-bg-dark-red">
+        className="white b--none ph4 pv3 b pointer bg-red hover-bg-dark-red db">
           Delete
         </button>
-        <h2 className="f2-l f3-m f4 mv4 truncate">{list.title}</h2>
+        {
+          isEditTitle ?
+            <Fragment>
+              <input
+                type="text"
+                value={newListTitle}
+                onChange={this.onChangeListTitle}
+                onKeyPress={this.onKeyPressEditTitle}
+                placeholder="List title"
+                className="pa3 b--none mv4"
+              />
+              <button type="button"
+              onClick={this.onClickEditTitle(list.id, newListTitle)}
+              className="white b--none ph4 pv3 b pointer bg-green hover-bg-dark-green">
+                Save
+              </button>
+              <button type="button" onClick={this.hideEditTitle}
+              className="white b--none ph4 pv3 b pointer bg-blue hover-bg-dark-blue">
+                Don't save
+              </button>
+            </Fragment>
+          :
+            <Fragment>
+              <h2 className="f2 mv4 truncate dib v-mid" style={{height:'50.4px'}}>{list.title}</h2>
+              <button type="button" onClick={this.showEditTitle}
+              className="white b--none ph4 pv3 b pointer bg-blue hover-bg-dark-blue ml3">
+                Edit title
+              </button>
+            </Fragment>
+        }
         <p>{list.modified.toLocaleDateString()}</p>
         <ul>
           {

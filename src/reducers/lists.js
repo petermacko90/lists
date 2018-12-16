@@ -1,7 +1,7 @@
 import {
   FETCH_LISTS,
   SET_CURRENT_LIST,
-  SET_LIST_DATE,
+  EDIT_LIST,
   DELETE_LIST,
   ADD_LIST_WITH_ID,
   SET_NEW_LIST_TITLE
@@ -19,14 +19,18 @@ export const listsReducer = (state = initialStateLists, action = {}) => {
       return { ...state, lists: action.payload };
     case SET_CURRENT_LIST:
       return { ...state, currentList: action.payload };
-    case SET_LIST_DATE:
+    case EDIT_LIST:
       const lists = state.lists.map((list) => {
-        if (list.id === action.payload.listId) {
-          return { ...list, ...list.modified = action.payload.modified };
+        if (list.id === action.payload.id) {
+          return { ...list, ...action.payload };
         }
-        return  list;
+        return list;
       });
-      return { ...state, lists };
+      return {
+        ...state,
+        lists,
+        currentList: { ...state.currentList, ...action.payload }
+      };
     case DELETE_LIST:
       return {
         ...state,
