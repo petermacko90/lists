@@ -28,7 +28,7 @@ class Lists extends Component {
   }
 
   /* handle selecting a list */
-  onClickList = (list, listId) => (e) => {
+  onClickList = (list, listId) => () => {
     this.handleSelectList(list, listId);
   }
 
@@ -72,7 +72,7 @@ class Lists extends Component {
         {
           listComponents.length > 0
             ? listComponents
-            : <p className="message">No lists found</p>
+            : <p className="ml3">No lists found</p>
         }
       </div>
     );
