@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { editList, deleteList } from '../../actions/lists';
-import {
-  deleteItem, toggleItem, addItem, setNewItemName
-} from '../../actions/items';
+import { deleteItem, toggleItem, addItem } from '../../actions/items';
 import { checkEmptyString } from '../../helpers';
 import ListItem from '../ListItem/ListItem';
 import AddItem from '../AddItem/AddItem';
@@ -12,8 +10,7 @@ import './CurrentList.css';
 const mapStateToProps = (state) => {
   return {
     list: state.listsReducer.currentList,
-    items: state.itemsReducer.currentItems,
-    newItemName: state.itemsReducer.newItemName
+    items: state.itemsReducer.currentItems
   }
 }
 
@@ -23,8 +20,7 @@ const mapDispatchToProps = (dispatch) => {
     onDeleteList: (listId) => dispatch(deleteList(listId)),
     onDeleteItem: (itemId) => dispatch(deleteItem(itemId)),
     onToggleItem: (itemId, checked) => dispatch(toggleItem(itemId, checked)),
-    onAddItem: (listId, name) => dispatch(addItem(listId, name)),
-    onSetNewItemName: (e) => dispatch(setNewItemName(e.target.value))
+    onAddItem: (listId, name) => dispatch(addItem(listId, name))
   }
 }
 
@@ -33,7 +29,8 @@ class CurrentList extends Component {
     super();
     this.state = {
       isEditTitle: false,
-      newListTitle: ''
+      newListTitle: '',
+      newItemName: ''
     };
   }
 
@@ -79,6 +76,7 @@ class CurrentList extends Component {
     if (window.confirm('Are you sure you want to delete this list?')) {
       this.props.onDeleteList(listId);
       this.hideEditTitle();
+      this.setState({ newItemName: '' });
     }
   }
 
@@ -129,11 +127,16 @@ class CurrentList extends Component {
     }
     this.props.onAddItem(listId, name);
     this.props.onEditList(listId, this.props.list.title, new Date());
+    this.setState({ newItemName: '' });
+  }
+
+  onChangeNewItemName = (e) => {
+    this.setState({ newItemName: e.target.value });
   }
 
   render() {
-    const { list, items, newItemName, onSetNewItemName } = this.props;
-    const { isEditTitle, newListTitle } = this.state;
+    const { list, items } = this.props;
+    const { isEditTitle, newListTitle, newItemName } = this.state;
     if (!list) return null;
 
     return (
@@ -199,7 +202,7 @@ class CurrentList extends Component {
         <AddItem
           listId={list.id}
           newItemName={newItemName}
-          onSetNewItemName={onSetNewItemName}
+          onSetNewItemName={this.onChangeNewItemName}
           onClickAddItem={this.onClickAddItem}
           onKeyPressAddItem={this.onKeyPressAddItem}
         />

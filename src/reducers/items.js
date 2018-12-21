@@ -4,18 +4,16 @@ import {
   DELETE_ITEM,
   TOGGLE_ITEM,
   ADD_ITEM_WITH_ID,
-  SET_NEW_ITEM_NAME,
   ADD_LIST_WITH_ID,
   DELETE_LIST
 } from '../constants/action-types';
 
-const initialStateItems = {
+const initialState = {
   items: [],
-  currentItems: [],
-  newItemName: ''
+  currentItems: []
 };
 
-export const itemsReducer = (state = initialStateItems, action = {}) => {
+export const itemsReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case FETCH_ITEMS:
       return { ...state, items: action.payload };
@@ -58,11 +56,8 @@ export const itemsReducer = (state = initialStateItems, action = {}) => {
       return {
         ...state,
         items: state.items.concat(newItem),
-        currentItems: state.currentItems.concat(newItem),
-        newItemName: ''
+        currentItems: state.currentItems.concat(newItem)
       };
-    case SET_NEW_ITEM_NAME:
-      return { ...state, newItemName: action.payload };
     case ADD_LIST_WITH_ID:
       return { ...state, currentItems: [] };
     case DELETE_LIST:
