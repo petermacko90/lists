@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setNewListTitle, addList } from '../../actions/lists';
+import { addList } from '../../actions/lists';
 import { checkEmptyString, debounce } from '../../helpers';
 import './Navigation.css';
 
-const mapStateToProps = (state) => {
-  return {
-    newListTitle: state.listsReducer.newListTitle
-  };
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddList: (title) => dispatch(addList(title)),
-    onSetNewListTitle: (e) => dispatch(setNewListTitle(e.target.value))
+    onAddList: (title) => dispatch(addList(title))
   };
 }
 
@@ -23,7 +16,8 @@ class Navigation extends Component {
     this.state = {
       showToggleButton: true,
       showNavigationItems: false,
-      showInput: false
+      showInput: false,
+      newListTitle: ''
     };
   }
 
@@ -69,13 +63,18 @@ class Navigation extends Component {
       }
       this.props.scrollToCurrentList();
       this.props.onAddList(title);
+      this.setState({ newListTitle: '' });
     } else {
       this.setState({ showInput: true });
     }
   }
 
+  onChangeNewListTitle = (e) => {
+    this.setState({ newListTitle: e.target.value });
+  }
+
   render() {
-    const { newListTitle, onSetNewListTitle } = this.props;
+    const { newListTitle } = this.state;
 
     return (
       <nav className="flex bg-yellow shadow-2 mb2 navbar">
@@ -91,8 +90,8 @@ class Navigation extends Component {
                 this.state.showInput &&
                   <input
                     type="text"
-                    value={newListTitle || ""}
-                    onChange={onSetNewListTitle}
+                    value={newListTitle}
+                    onChange={this.onChangeNewListTitle}
                     onKeyPress={this.onKeyPressAddList(newListTitle)}
                     placeholder="List title"
                     className="pa3 b--none mv3 add-list-input"
@@ -115,4 +114,4 @@ class Navigation extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default connect(null, mapDispatchToProps)(Navigation);

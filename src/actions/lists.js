@@ -1,10 +1,5 @@
 import {
-  FETCH_LISTS,
-  SET_CURRENT_LIST,
-  EDIT_LIST,
-  DELETE_LIST,
-  ADD_LIST,
-  SET_NEW_LIST_TITLE
+  FETCH_LISTS, SET_CURRENT_LIST, EDIT_LIST, DELETE_LIST, ADD_LIST
 } from '../constants/action-types';
 import { loadState } from '../localStorage';
 
@@ -31,9 +26,4 @@ export const deleteList = (listId) => ({
 export const addList = (title) => ({
   type: ADD_LIST,
   payload: { title, modified: new Date() }
-});
-
-export const setNewListTitle = (title) => ({
-  type: SET_NEW_LIST_TITLE,
-  payload: title
 });

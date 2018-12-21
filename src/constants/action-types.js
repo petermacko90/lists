@@ -4,7 +4,6 @@ export const EDIT_LIST = 'EDIT_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
 export const ADD_LIST = 'ADD_LIST';
 export const ADD_LIST_WITH_ID = 'ADD_LIST_WITH_ID';
-export const SET_NEW_LIST_TITLE = 'SET_NEW_LIST_TITLE';
 
 export const FETCH_ITEMS = 'FETCH_ITEMS';
 export const SET_CURRENT_ITEMS = 'SET_CURRENT_ITEMS';
