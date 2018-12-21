@@ -7,7 +7,7 @@ const AddItem = ({
     <div className="mt3">
       <input
         type="text"
-        value={newItemName || ""}
+        value={newItemName}
         onChange={onSetNewItemName}
         onKeyPress={onKeyPressAddItem(listId, newItemName)}
         placeholder="Add item"
