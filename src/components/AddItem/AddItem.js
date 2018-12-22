@@ -10,11 +10,11 @@ const AddItem = ({
         value={newItemName}
         onChange={onSetNewItemName}
         onKeyPress={onKeyPressAddItem(listId, newItemName)}
-        placeholder="Add item"
-        className="pa3 b--none"
+        placeholder="Item name"
+        className="pa3 b--none w-100 w-70-m w-auto-l"
       />
       <button type="button" onClick={onClickAddItem(listId, newItemName)}
-      className="white b--none ph4 pv3 b pointer bg-green hover-bg-dark-green">
+      className="white b--none ph4 pv3 mt3 mt0-ns b pointer bg-green hover-bg-dark-green w-30-m w-auto-l">
         Add
       </button>
     </div>
