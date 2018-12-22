@@ -34,7 +34,8 @@ class Navigation extends Component {
       });
     } else {
       this.setState({
-        showToggleButton: true
+        showToggleButton: true,
+        showInput: true
       });
     }
   }
@@ -61,9 +62,12 @@ class Navigation extends Component {
         this.setState({ showInput: false });
         return;
       }
-      this.props.scrollToCurrentList();
       this.props.onAddList(title);
-      this.setState({ newListTitle: '' });
+      this.setState({
+        newListTitle: '',
+        showNavigationItems: false
+      });
+      setTimeout(() => this.props.scrollToCurrentList(), 0);
     } else {
       this.setState({ showInput: true });
     }
@@ -77,13 +81,13 @@ class Navigation extends Component {
     const { newListTitle } = this.state;
 
     return (
-      <nav className="flex bg-yellow shadow-2 mb2 navbar">
-        <h1 className="f2 pa3 mv0 menu-item">Lists</h1>
+      <nav className="flex flex-column flex-row-ns bg-yellow shadow-2 mb2">
+        <h1 className="flex-column flex-row-ns f2 pa3 mv0">Lists</h1>
         {
           this.state.showNavigationItems &&
-            <div className="menu-item mh2 mh0-ns">
+            <div className="flex-column flex-row-ns mh3 mh0-ns">
               <button type="button" onClick={this.onClickAddList(newListTitle)}
-              className="white b--none ph3 ph4-ns pv3 b pointer bg-green hover-bg-dark-green mv3 add-list-button">
+              className="white b--none ph3 ph4-ns pv3 b pointer bg-green hover-bg-dark-green mv3 w-40 w-auto-ns">
                 Add list
               </button>
               {
@@ -94,7 +98,7 @@ class Navigation extends Component {
                     onChange={this.onChangeNewListTitle}
                     onKeyPress={this.onKeyPressAddList(newListTitle)}
                     placeholder="List title"
-                    className="pa3 b--none mv3 add-list-input"
+                    className="pa3 b--none mv3 w-60 w-auto-ns"
                   />
               }
             </div>
@@ -102,11 +106,11 @@ class Navigation extends Component {
         {
           this.state.showToggleButton &&
             <button type="button" onClick={this.toggleNavigation} 
-            className="b--none pa3 ma3 pointer absolute right-0 toggle"
+            className="b--none pa3 ma3 pointer absolute right-0 toggle bg-transparent hover-bg-light-yellow"
             aria-label="Toggle navigation">
-              <span className="bar"></span>
-              <span className="bar"></span>
-              <span className="bar"></span>
+              <span className="bar db bg-black"></span>
+              <span className="bar db bg-black"></span>
+              <span className="bar db bg-black"></span>
             </button>
         }
       </nav>
