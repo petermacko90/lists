@@ -32,6 +32,7 @@ class Navigation extends Component {
     if (windowWidth === this.state.windowWidth) {
       return;
     }
+    this.setState({ windowWidth });
     if (windowWidth >= 480) {
       this.setState({
         showToggleButton: false,
