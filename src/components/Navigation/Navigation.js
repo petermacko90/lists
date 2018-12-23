@@ -16,8 +16,9 @@ class Navigation extends Component {
     this.state = {
       showToggleButton: true,
       showNavigationItems: false,
-      showInput: false,
-      newListTitle: ''
+      showInput: true,
+      newListTitle: '',
+      windowWidth: 0
     };
   }
 
@@ -27,14 +28,20 @@ class Navigation extends Component {
   }
 
   onWindowResize = () => {
-    if (window.innerWidth >= 480) {
+    const windowWidth = window.innerWidth;
+    if (windowWidth === this.state.windowWidth) {
+      return;
+    }
+    if (windowWidth >= 480) {
       this.setState({
         showToggleButton: false,
-        showNavigationItems: true
+        showNavigationItems: true,
+        showInput: false
       });
     } else {
       this.setState({
         showToggleButton: true,
+        showNavigationItems: false,
         showInput: true
       });
     }
@@ -62,12 +69,9 @@ class Navigation extends Component {
         this.setState({ showInput: false });
         return;
       }
+      this.props.scrollToCurrentList();
       this.props.onAddList(title);
-      this.setState({
-        newListTitle: '',
-        showNavigationItems: false
-      });
-      setTimeout(() => this.props.scrollToCurrentList(), 0);
+      this.setState({ newListTitle: '' });
     } else {
       this.setState({ showInput: true });
     }
@@ -105,7 +109,7 @@ class Navigation extends Component {
         }
         {
           this.state.showToggleButton &&
-            <button type="button" onClick={this.toggleNavigation} 
+            <button type="button" onClick={this.toggleNavigation}
             className="b--none pa3 ma3 pointer absolute right-0 toggle bg-transparent hover-bg-light-yellow"
             aria-label="Toggle navigation">
               <span className="bar db bg-black"></span>
