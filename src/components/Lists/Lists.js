@@ -68,7 +68,7 @@ class Lists extends Component {
     });
 
     return (
-      <div className="fl w-25-l w-third-m w-100 lists">
+      <div className="lists">
         {
           listComponents.length > 0
             ? listComponents
