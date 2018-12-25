@@ -73,6 +73,9 @@ class Navigation extends Component {
       this.props.scrollToCurrentList();
       this.props.onAddList(title);
       this.setState({ newListTitle: '' });
+      if (this.state.windowWidth < 480) {
+        this.setState({ showNavigationItems: false });
+      }
     } else {
       this.setState({ showInput: true });
     }
