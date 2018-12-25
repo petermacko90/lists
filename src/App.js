@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { debounce } from './helpers';
 import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
@@ -7,8 +8,54 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      isShowLists: true
+      isShowLists: true,
+      isShowToggleButton: true,
+      isShowNavItems: false,
+      isShowAddListInput: true,
+      windowWidth: 0
     };
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', debounce(this.onWindowResize, 250));
+    this.onWindowResize();
+  }
+
+  onWindowResize = () => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth === this.state.windowWidth) {
+      return;
+    }
+    this.setState({ windowWidth });
+    if (windowWidth >= 480) {
+      this.setState({
+        isShowToggleButton: false,
+        isShowNavItems: true,
+        isShowAddListInput: false
+      });
+    } else {
+      this.setState({
+        isShowToggleButton: true,
+        isShowNavItems: false,
+        isShowAddListInput: true
+      });
+    }
+  }
+
+  toggleNavigation = () => {
+    this.setState({ isShowNavItems: !this.state.isShowNavItems });
+  }
+
+  showAddListInput = () => {
+    this.setState({ isShowAddListInput: true });
+  }
+
+  hideAddListInput = () => {
+    this.setState({ isShowAddListInput: false });
+  }
+
+  hideNavItems = () => {
+    this.setState({ isShowNavItems: false });
   }
 
   scrollToCurrentList = () => {
@@ -26,10 +73,27 @@ class App extends Component {
   }
 
   render() {
-    const { isShowLists } = this.state;
+    const {
+      isShowLists,
+      isShowToggleButton,
+      isShowNavItems,
+      isShowAddListInput,
+      windowWidth
+    } = this.state;
+
     return (
       <Fragment>
-        <Navigation scrollToCurrentList={this.scrollToCurrentList} />
+        <Navigation
+          isShowToggleButton={isShowToggleButton}
+          isShowNavItems={isShowNavItems}
+          isShowAddListInput={isShowAddListInput}
+          windowWidth={windowWidth}
+          toggleNavigation={this.toggleNavigation}
+          showAddListInput={this.showAddListInput}
+          hideAddListInput={this.hideAddListInput}
+          hideNavItems={this.hideNavItems}
+          scrollToCurrentList={this.scrollToCurrentList}
+        />
         <div className="fl w-25-l w-third-m w-100">
         {
           isShowLists ?

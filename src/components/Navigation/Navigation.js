@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addList } from '../../actions/lists';
-import { checkEmptyString, debounce } from '../../helpers';
+import { checkEmptyString } from '../../helpers';
 import './Navigation.css';
 
 const mapDispatchToProps = (dispatch) => {
@@ -22,36 +22,6 @@ class Navigation extends Component {
     };
   }
 
-  componentDidMount() {
-    window.addEventListener('resize', debounce(this.onWindowResize, 250));
-    this.onWindowResize();
-  }
-
-  onWindowResize = () => {
-    const windowWidth = window.innerWidth;
-    if (windowWidth === this.state.windowWidth) {
-      return;
-    }
-    this.setState({ windowWidth });
-    if (windowWidth >= 480) {
-      this.setState({
-        showToggleButton: false,
-        showNavigationItems: true,
-        showInput: false
-      });
-    } else {
-      this.setState({
-        showToggleButton: true,
-        showNavigationItems: false,
-        showInput: true
-      });
-    }
-  }
-
-  toggleNavigation = () => {
-    this.setState({ showNavigationItems: !this.state.showNavigationItems });
-  }
-
   /* handle adding a list */
 
   onClickAddList = (title) => () => {
@@ -65,19 +35,19 @@ class Navigation extends Component {
   }
 
   handleAddList = (title) => {
-    if (this.state.showInput) {
+    if (this.props.isShowAddListInput) {
       if (checkEmptyString(title)) {
-        this.setState({ showInput: false });
+        this.props.hideAddListInput();
         return;
       }
       this.props.scrollToCurrentList();
       this.props.onAddList(title);
       this.setState({ newListTitle: '' });
-      if (this.state.windowWidth < 480) {
-        this.setState({ showNavigationItems: false });
+      if (this.props.windowWidth < 480) {
+        this.props.hideNavItems();
       }
     } else {
-      this.setState({ showInput: true });
+      this.props.showAddListInput();
     }
   }
 
@@ -92,14 +62,14 @@ class Navigation extends Component {
       <nav className="flex flex-column flex-row-ns bg-yellow shadow-2 mb2">
         <h1 className="flex-column flex-row-ns f2 pa3 mv0">Lists</h1>
         {
-          this.state.showNavigationItems &&
+          this.props.isShowNavItems &&
             <div className="flex-column flex-row-ns mh3 mh0-ns">
               <button type="button" onClick={this.onClickAddList(newListTitle)}
               className="white b--none ph3 ph4-ns pv3 b pointer bg-green hover-bg-dark-green mv3 w-40 w-auto-ns">
                 Add list
               </button>
               {
-                this.state.showInput &&
+                this.props.isShowAddListInput &&
                   <input
                     type="text"
                     value={newListTitle}
@@ -112,8 +82,8 @@ class Navigation extends Component {
             </div>
         }
         {
-          this.state.showToggleButton &&
-            <button type="button" onClick={this.toggleNavigation}
+          this.props.isShowToggleButton &&
+            <button type="button" onClick={this.props.toggleNavigation}
             className="b--none pa3 ma3 pointer absolute right-0 toggle bg-transparent hover-bg-light-yellow"
             aria-label="Toggle navigation">
               <span className="bar db bg-black"></span>
