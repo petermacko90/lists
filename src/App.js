@@ -106,7 +106,7 @@ class App extends Component {
         </div>
         <div className="fl w-75-l w-two-thirds-m w-100 pa3"
         style={{minHeight: '400px'}}>
-          <CurrentList />
+          <CurrentList showLists={this.showLists} />
         </div>
         <div className="ma3 tc">
           Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">

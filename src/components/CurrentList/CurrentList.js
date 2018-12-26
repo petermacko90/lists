@@ -27,11 +27,16 @@ const mapDispatchToProps = (dispatch) => {
 class CurrentList extends Component {
   constructor() {
     super();
+    this.editTitle = React.createRef();
     this.state = {
       isEditTitle: false,
       newListTitle: '',
       newItemName: ''
     };
+  }
+
+  focusEditTitle = () => {
+    this.editTitle.current.focus();
   }
 
   hideEditTitle = () => {
@@ -42,10 +47,13 @@ class CurrentList extends Component {
   }
 
   showEditTitle = () => {
-    this.setState({
-      isEditTitle: true,
-      newListTitle: this.props.list.title
-    });
+    this.setState(
+      {
+        isEditTitle: true,
+        newListTitle: this.props.list.title
+      },
+      () => this.focusEditTitle()
+    );
   }
 
   onChangeListTitle = (e) => {
@@ -77,6 +85,7 @@ class CurrentList extends Component {
       this.props.onDeleteList(listId);
       this.hideEditTitle();
       this.setState({ newItemName: '' });
+      this.props.showLists();
     }
   }
 
@@ -143,7 +152,7 @@ class CurrentList extends Component {
       <Fragment>
         <button type="button" onClick={this.handleDeleteList(list.id)}
         className="white b--none ph4 pv3 b pointer bg-red hover-bg-dark-red">
-          Delete
+          Delete list
         </button>
         {
           isEditTitle ?
@@ -155,7 +164,7 @@ class CurrentList extends Component {
               </button>
               <button type="button" onClick={this.hideEditTitle}
               className="white b--none ph4 pv3 b pointer bg-blue hover-bg-dark-blue">
-                Don't save
+                Don't save title
               </button>
             </Fragment>
           :
@@ -173,9 +182,12 @@ class CurrentList extends Component {
               onKeyPress={this.onKeyPressEditTitle(list.id, newListTitle)}
               placeholder="List title"
               className="pa3 b--none mv4 db"
+              ref={this.editTitle}
             />
           :
-            <h2 className="f2 mv4 truncate" style={{height:'50.4px'}}>{list.title}</h2>
+            <h2 className="f2 mv4" style={{ minHeight:'50.4px' }}>
+              {list.title}
+            </h2>
         }
         <p>{list.modified.toLocaleDateString()}</p>
         <ul>
