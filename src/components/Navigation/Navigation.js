@@ -14,11 +14,7 @@ class Navigation extends Component {
   constructor() {
     super();
     this.state = {
-      showToggleButton: true,
-      showNavigationItems: false,
-      showInput: true,
-      newListTitle: '',
-      windowWidth: 0
+      newListTitle: ''
     };
   }
 
@@ -43,9 +39,6 @@ class Navigation extends Component {
       this.props.scrollToCurrentList();
       this.props.onAddList(title);
       this.setState({ newListTitle: '' });
-      if (this.props.windowWidth < 480) {
-        this.props.hideNavItems();
-      }
     } else {
       this.props.showAddListInput();
     }

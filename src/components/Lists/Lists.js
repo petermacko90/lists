@@ -45,7 +45,7 @@ class Lists extends Component {
   }
 
   render() {
-    const { lists, items } = this.props;
+    const { lists, items, show } = this.props;
     let listComponents = [];
     let itemsProp = [];
 
@@ -68,7 +68,7 @@ class Lists extends Component {
     });
 
     return (
-      <div className="lists">
+      <div className={`lists ${show ? '' : 'dn'}`}>
         {
           listComponents.length > 0
             ? listComponents

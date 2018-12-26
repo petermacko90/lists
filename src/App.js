@@ -31,7 +31,8 @@ class App extends Component {
       this.setState({
         isShowToggleButton: false,
         isShowNavItems: true,
-        isShowAddListInput: false
+        isShowAddListInput: false,
+        isShowLists: true
       });
     } else {
       this.setState({
@@ -46,31 +47,22 @@ class App extends Component {
     this.setState({ isShowNavItems: !this.state.isShowNavItems });
   }
 
-  showAddListInput = () => {
-    this.setState({ isShowAddListInput: true });
-  }
+  showAddListInput = () => this.setState({ isShowAddListInput: true });
 
-  hideAddListInput = () => {
-    this.setState({ isShowAddListInput: false });
-  }
+  hideAddListInput = () => this.setState({ isShowAddListInput: false });
 
-  hideNavItems = () => {
-    this.setState({ isShowNavItems: false });
-  }
+  hideNavItems = () => this.setState({ isShowNavItems: false });
 
   scrollToCurrentList = () => {
-    if (window.innerWidth < 480) {
-      this.setState({ isShowLists: false });
+    if (this.state.windowWidth < 480) {
+      this.hideLists();
+      this.hideNavItems();
     }
   }
 
-  showLists = () => {
-    this.setState({ isShowLists: true });
-  }
+  showLists = () => this.setState({ isShowLists: true });
 
-  hideLists = () => {
-    this.setState({ isShowLists: false });
-  }
+  hideLists = () => this.setState({ isShowLists: false });
 
   render() {
     const {
@@ -95,21 +87,22 @@ class App extends Component {
           scrollToCurrentList={this.scrollToCurrentList}
         />
         <div className="fl w-25-l w-third-m w-100">
-        {
-          isShowLists ?
-            <Fragment>
+          {
+            isShowLists ?
               <button type="button" onClick={this.hideLists}
               className="bg-yellow b--none pointer pv1 mb1">
                 Hide lists
               </button>
-              <Lists scrollToCurrentList={this.scrollToCurrentList} />
-            </Fragment>
-          :
-            <button type="button" onClick={this.showLists}
-            className="bg-yellow b--none pointer pv1 mb1">
-              Show lists
-            </button>
-        }
+            :
+              <button type="button" onClick={this.showLists}
+              className="bg-yellow b--none pointer pv1 mb1">
+                Show lists
+              </button>
+          }
+          <Lists
+            show={isShowLists}
+            scrollToCurrentList={this.scrollToCurrentList}
+          />
         </div>
         <div className="fl w-75-l w-two-thirds-m w-100 pa3"
         style={{minHeight: '400px'}}>
