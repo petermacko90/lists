@@ -4,7 +4,7 @@ const ListItem = ({
   id, listId, checked, name, onClick, onClickDelete, onKeyPress
 }) => {
   return (
-    <li className={"truncate noselect" + (checked ? ' checked' : '')}
+    <li className={"noselect" + (checked ? ' checked' : '')}
     tabIndex="0" onKeyUp={onKeyPress(listId, id, checked)}
     onClick={onClick(listId, id, checked)}>
       {name}
