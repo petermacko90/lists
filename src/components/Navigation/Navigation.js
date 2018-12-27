@@ -13,9 +13,16 @@ const mapDispatchToProps = (dispatch) => {
 class Navigation extends Component {
   constructor() {
     super();
+    this.addList = React.createRef();
     this.state = {
       newListTitle: ''
     };
+  }
+
+  componentDidUpdate() {
+    if (this.props.isShowAddListInput) {
+      this.addList.current.focus();
+    }
   }
 
   /* handle adding a list */
@@ -70,6 +77,7 @@ class Navigation extends Component {
                     onKeyPress={this.onKeyPressAddList(newListTitle)}
                     placeholder="List title"
                     className="pa3 b--none mv3 w-60 w-auto-ns"
+                    ref={this.addList}
                   />
               }
             </div>
