@@ -51,12 +51,10 @@ class App extends Component {
 
   hideAddListInput = () => this.setState({ isShowAddListInput: false });
 
-  hideNavItems = () => this.setState({ isShowNavItems: false });
-
   scrollToCurrentList = () => {
     if (this.state.windowWidth < 480) {
       this.hideLists();
-      this.hideNavItems();
+      this.setState({ isShowNavItems: false });
     }
   }
 
@@ -69,8 +67,7 @@ class App extends Component {
       isShowLists,
       isShowToggleButton,
       isShowNavItems,
-      isShowAddListInput,
-      windowWidth
+      isShowAddListInput
     } = this.state;
 
     return (
@@ -79,11 +76,9 @@ class App extends Component {
           isShowToggleButton={isShowToggleButton}
           isShowNavItems={isShowNavItems}
           isShowAddListInput={isShowAddListInput}
-          windowWidth={windowWidth}
           toggleNavigation={this.toggleNavigation}
           showAddListInput={this.showAddListInput}
           hideAddListInput={this.hideAddListInput}
-          hideNavItems={this.hideNavItems}
           scrollToCurrentList={this.scrollToCurrentList}
         />
         <div className="fl w-25-l w-third-m w-100">
