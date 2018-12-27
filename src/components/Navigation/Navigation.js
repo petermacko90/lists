@@ -20,7 +20,7 @@ class Navigation extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.isShowAddListInput) {
+    if (this.props.isShowAddListInput && this.props.isShowNavItems) {
       this.addList.current.focus();
     }
   }
@@ -77,6 +77,7 @@ class Navigation extends Component {
                     onKeyPress={this.onKeyPressAddList(newListTitle)}
                     placeholder="List title"
                     className="pa3 b--none mv3 w-60 w-auto-ns"
+                    maxLength="50"
                     ref={this.addList}
                   />
               }

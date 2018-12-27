@@ -11,6 +11,7 @@ const AddItem = ({
         onChange={onSetNewItemName}
         onKeyPress={onKeyPressAddItem(listId, newItemName)}
         placeholder="Item name"
+        maxLength="100"
         className="pa3 b--none w-100 w-70-m w-auto-l"
       />
       <button type="button" onClick={onClickAddItem(listId, newItemName)}
