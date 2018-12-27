@@ -35,6 +35,15 @@ class CurrentList extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      !prevProps.list && !this.props.list &&
+      this.props.list.id !== prevProps.list.id
+    ) {
+      this.hideEditTitle();
+    }
+  }
+
   focusEditTitle = () => {
     this.editTitle.current.focus();
   }
@@ -72,6 +81,9 @@ class CurrentList extends Component {
   }
 
   handleEditTitle = (listId, title) => {
+    if (checkEmptyString(title)) {
+      return;
+    }
     this.props.onEditList(listId, title, new Date());
     this.setState({
       newListTitle: '',
@@ -182,10 +194,12 @@ class CurrentList extends Component {
               onKeyPress={this.onKeyPressEditTitle(list.id, newListTitle)}
               placeholder="List title"
               className="pa3 b--none mv4 db"
+              maxLength="50"
               ref={this.editTitle}
             />
           :
-            <h2 className="f2 mv4" style={{ minHeight:'50.4px' }}>
+            <h2 className="f2 mv4"
+            style={{ minHeight: '50.4px', overflowWrap: 'break-word' }}>
               {list.title}
             </h2>
         }
