@@ -161,7 +161,7 @@ class CurrentList extends Component {
     if (!list) return null;
 
     return (
-      <Fragment>
+      <div className="fl w-75-l w-two-thirds-m w-100 pa3">
         <button type="button" onClick={this.handleDeleteList(list.id)}
         className="white b--none ph4 pv3 b pointer bg-red hover-bg-dark-red">
           Delete list
@@ -232,7 +232,7 @@ class CurrentList extends Component {
           onClickAddItem={this.onClickAddItem}
           onKeyPressAddItem={this.onKeyPressAddItem}
         />
-      </Fragment>
+      </div>
     );
   }
 }
