@@ -82,24 +82,12 @@ class App extends Component {
           hideAddListInput={this.hideAddListInput}
           scrollToCurrentList={this.scrollToCurrentList}
         />
-        <div className="fl w-25-l w-third-m w-100">
-          {
-            isShowLists ?
-              <button type="button" onClick={this.hideLists}
-              className="bg-yellow b--none pointer pv1 mb1">
-                Hide lists
-              </button>
-            :
-              <button type="button" onClick={this.showLists}
-              className="bg-yellow b--none pointer pv1 mb1">
-                Show lists
-              </button>
-          }
-          <Lists
-            show={isShowLists}
-            scrollToCurrentList={this.scrollToCurrentList}
-          />
-        </div>
+        <Lists
+          isShowLists={isShowLists}
+          showLists={this.showLists}
+          hideLists={this.hideLists}
+          scrollToCurrentList={this.scrollToCurrentList}
+        />
         <CurrentList showLists={this.showLists} />
         <Footer />
       </Fragment>

@@ -45,7 +45,7 @@ class Lists extends Component {
   }
 
   render() {
-    const { lists, items, show } = this.props;
+    const { lists, items, isShowLists, showLists, hideLists } = this.props;
     let listComponents = [];
     let itemsProp = [];
 
@@ -68,12 +68,26 @@ class Lists extends Component {
     });
 
     return (
-      <div className={`lists ${show ? '' : 'dn'}`}>
+      <div className="fl w-25-l w-third-m w-100">
         {
-          listComponents.length > 0
-            ? listComponents
-            : <p className="ml3">No lists found</p>
+          isShowLists ?
+            <button type="button" onClick={hideLists}
+            className="bg-yellow b--none pointer pv1 mb1">
+              Hide lists
+            </button>
+          :
+            <button type="button" onClick={showLists}
+            className="bg-yellow b--none pointer pv1 mb1">
+              Show lists
+            </button>
         }
+        <div className={`lists ${isShowLists ? '' : 'dn'}`}>
+          {
+            listComponents.length > 0
+              ? listComponents
+              : <p className="ml3">No lists found</p>
+          }
+        </div>
       </div>
     );
   }
