@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addList } from '../../actions/lists';
 import { checkEmptyString } from '../../helpers';
+import AddList from '../AddList/AddList';
 import './Navigation.css';
 
 const mapDispatchToProps = (dispatch) => {
@@ -64,23 +65,14 @@ class Navigation extends Component {
         {
           this.props.isShowNavItems &&
             <div className="flex-column flex-row-ns mh3 mh0-ns">
-              <button type="button" onClick={this.onClickAddList(newListTitle)}
-              className="white b--none ph3 ph4-ns pv3 b pointer bg-green hover-bg-dark-green mv3 w-40 w-auto-ns">
-                Add list
-              </button>
-              {
-                this.props.isShowAddListInput &&
-                  <input
-                    type="text"
-                    value={newListTitle}
-                    onChange={this.onChangeNewListTitle}
-                    onKeyPress={this.onKeyPressAddList(newListTitle)}
-                    placeholder="List title"
-                    className="pa3 b--none mv3 w-60 w-auto-ns"
-                    maxLength="50"
-                    ref={this.addList}
-                  />
-              }
+              <AddList
+                newListTitle={newListTitle}
+                isShowAddListInput={this.props.isShowAddListInput}
+                onChangeNewListTitle={this.onChangeNewListTitle}
+                onClickAddList={this.onClickAddList(newListTitle)}
+                onKeyPressAddList={this.onKeyPressAddList(newListTitle)}
+                addListRef={this.addList}
+              />
             </div>
         }
         {
