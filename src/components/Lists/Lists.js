@@ -72,13 +72,13 @@ class Lists extends Component {
         {
           isShowLists ?
             <button type="button" onClick={hideLists}
-            className="bg-yellow b--none pointer pv1 mb1">
-              Hide lists
+            className="bg-yellow b--none pointer pv1 ml3 mv1 toggle-lists">
+              Hide lists &#9650;
             </button>
           :
             <button type="button" onClick={showLists}
-            className="bg-yellow b--none pointer pv1 mb1">
-              Show lists
+            className="bg-yellow b--none pointer pv1 ml3 mv1 toggle-lists">
+              Show lists &#9660;
             </button>
         }
         <div className={`lists ${isShowLists ? '' : 'dn'}`}>

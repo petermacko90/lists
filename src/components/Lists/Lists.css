@@ -2,3 +2,7 @@
 	max-height: 75vh;
 	overflow-y: auto;
 }
+
+.toggle-lists:hover {
+	background-color: #e6c300;
+}
