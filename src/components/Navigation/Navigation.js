@@ -78,7 +78,7 @@ class Navigation extends Component {
         {
           this.props.isShowToggleButton &&
             <button type="button" onClick={this.props.toggleNavigation}
-            className="b--none pa3 ma3 pointer absolute right-0 toggle bg-transparent hover-bg-light-yellow"
+            className="b--none pa3 ma3 pointer absolute right-0 bg-transparent"
             aria-label="Toggle navigation">
               <span className="bar db bg-black"></span>
               <span className="bar db bg-black"></span>
