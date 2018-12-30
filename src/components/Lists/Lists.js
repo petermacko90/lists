@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import List from '../List/List';
 import './Lists.css';
@@ -83,9 +83,13 @@ class Lists extends Component {
         }
         <div className={`lists ${isShowLists ? '' : 'dn'}`}>
           {
-            listComponents.length > 0
-              ? listComponents
-              : <p className="ml3">No lists found</p>
+            listComponents.length > 0 ?
+              <Fragment>
+                {listComponents}
+                <hr className="dn-ns moon-gray" />
+              </Fragment>
+            :
+              <p className="ml3">No lists found</p>
           }
         </div>
       </div>
