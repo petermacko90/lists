@@ -3,6 +3,7 @@ import { debounce } from './helpers';
 import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
+import AddList from './components/AddList/AddList';
 import Footer from './components/Footer/Footer';
 
 class App extends Component {
@@ -10,9 +11,7 @@ class App extends Component {
     super();
     this.state = {
       isShowLists: true,
-      isShowToggleButton: true,
-      isShowNavItems: false,
-      isShowAddListInput: true,
+      isShowAddList: false,
       windowWidth: 0
     };
   }
@@ -29,34 +28,24 @@ class App extends Component {
     }
     this.setState({ windowWidth });
     if (windowWidth >= 480) {
-      this.setState({
-        isShowToggleButton: false,
-        isShowNavItems: true,
-        isShowAddListInput: false,
-        isShowLists: true
-      });
-    } else {
-      this.setState({
-        isShowToggleButton: true,
-        isShowNavItems: false,
-        isShowAddListInput: true
-      });
+      this.showLists();
     }
   }
 
-  toggleNavigation = () => {
-    this.setState({ isShowNavItems: !this.state.isShowNavItems });
+  showAddList = () => {
+    this.setState({ isShowAddList: true });
+    if (this.state.windowWidth < 480) {
+      this.hideLists();
+    }
   }
 
-  showAddListInput = () => this.setState({ isShowAddListInput: true });
-
-  hideAddListInput = () => this.setState({ isShowAddListInput: false });
+  hideAddList = () => this.setState({ isShowAddList: false });
 
   scrollToCurrentList = () => {
     if (this.state.windowWidth < 480) {
       this.hideLists();
-      this.setState({ isShowNavItems: false });
     }
+    this.hideAddList();
   }
 
   showLists = () => this.setState({ isShowLists: true });
@@ -64,31 +53,23 @@ class App extends Component {
   hideLists = () => this.setState({ isShowLists: false });
 
   render() {
-    const {
-      isShowLists,
-      isShowToggleButton,
-      isShowNavItems,
-      isShowAddListInput
-    } = this.state;
+    const { isShowLists, isShowAddList } = this.state;
 
     return (
       <Fragment>
-        <Navigation
-          isShowToggleButton={isShowToggleButton}
-          isShowNavItems={isShowNavItems}
-          isShowAddListInput={isShowAddListInput}
-          toggleNavigation={this.toggleNavigation}
-          showAddListInput={this.showAddListInput}
-          hideAddListInput={this.hideAddListInput}
-          scrollToCurrentList={this.scrollToCurrentList}
-        />
+        <Navigation showAddList={this.showAddList} />
         <Lists
           isShowLists={isShowLists}
           showLists={this.showLists}
           hideLists={this.hideLists}
           scrollToCurrentList={this.scrollToCurrentList}
         />
-        <CurrentList showLists={this.showLists} />
+        {
+          isShowAddList ?
+            <AddList scrollToCurrentList={this.scrollToCurrentList} />
+          :
+            <CurrentList showLists={this.showLists} />
+        }
         <Footer />
       </Fragment>
     );

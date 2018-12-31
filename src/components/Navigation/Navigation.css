@@ -1,5 +1,7 @@
-.bar {
-  width: 15px;
-  height: 3px;
-  margin-bottom: 3px;
+.add-list {
+  color: #444;
+}
+
+.add-list:hover {
+  color: #222;
 }
