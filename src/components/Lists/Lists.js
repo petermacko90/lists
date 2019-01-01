@@ -89,7 +89,13 @@ class Lists extends Component {
                 <hr className="dn-ns moon-gray" />
               </Fragment>
             :
-              <p className="ml3">No lists found</p>
+              <div className="ml3">
+                <p>No lists found</p>
+                <button type="button" onClick={this.props.showAddList}
+                className="white b--none ph4 pv3 b pointer bg-green hover-bg-dark-green">
+                  Add list
+                </button>
+              </div>
           }
         </div>
       </div>

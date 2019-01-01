@@ -63,6 +63,7 @@ class App extends Component {
           showLists={this.showLists}
           hideLists={this.hideLists}
           scrollToCurrentList={this.scrollToCurrentList}
+          showAddList={this.showAddList}
         />
         {
           isShowAddList ?
