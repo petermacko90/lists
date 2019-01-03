@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { editList, deleteList } from '../../actions/lists';
 import { deleteItem, toggleItem, addItem } from '../../actions/items';
 import { checkEmptyString } from '../../helpers';
-import ListItem from '../ListItem/ListItem';
+import Item from '../Item/Item';
 import AddItem from '../AddItem/AddItem';
 import './CurrentList.css';
 
@@ -101,22 +101,22 @@ class CurrentList extends Component {
     }
   }
 
-  /* handle toggling an item and deleting an item */
-  onClickDeleteItem = (listId, itemId) => (e) => {
-    e.stopPropagation();
-    this.handleDeleteItem(listId, itemId);
-  }
+  /* handle toggling an item */
 
   onClickItem = (listId, itemId, checked) => () => {
     this.handleToggleItem(listId, itemId, checked);
   }
 
-  onKeyPressItem = (listId, itemId, checked) => (e) => {
-    if (e.key === 'Delete') {
-      this.handleDeleteItem(listId, itemId);
-    } else if (e.key === 'Enter') {
-      this.handleToggleItem(listId, itemId, checked);
-    }
+  handleToggleItem = (listId, itemId, checked) => {
+    this.props.onToggleItem(itemId, checked);
+    this.props.onEditList(listId, this.props.list.title, new Date());
+  }
+
+  /* handle deleting an item */
+
+  onClickDeleteItem = (listId, itemId) => (e) => {
+    e.stopPropagation();
+    this.handleDeleteItem(listId, itemId);
   }
 
   handleDeleteItem = (listId, itemId) => {
@@ -124,11 +124,6 @@ class CurrentList extends Component {
       this.props.onDeleteItem(itemId);
       this.props.onEditList(listId, this.props.list.title, new Date());
     }
-  }
-
-  handleToggleItem = (listId, itemId, checked) => {
-    this.props.onToggleItem(itemId, checked);
-    this.props.onEditList(listId, this.props.list.title, new Date());
   }
 
   /* handle adding an item */
@@ -209,7 +204,7 @@ class CurrentList extends Component {
             items.length > 0 ?
               items.map((item) => {
                 return (
-                  <ListItem
+                  <Item
                     key={item.id}
                     id={item.id}
                     listId={list.id}
@@ -217,7 +212,6 @@ class CurrentList extends Component {
                     name={item.name}
                     onClick={this.onClickItem}
                     onClickDelete={this.onClickDeleteItem}
-                    onKeyPress={this.onKeyPressItem}
                   />
                 );
               })

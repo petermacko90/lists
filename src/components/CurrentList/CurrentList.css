@@ -41,14 +41,33 @@ ul li.checked::before {
 	width: 7px;
 }
 
-.close {
-	position: absolute;
-	right: 0;
-	top: 0;
-	padding: 12px 16px 12px 16px;
+.actions-dropdown {
+	background-color: transparent;
+	font-weight: bold;
+	border-color: transparent;
+	padding: 12px 20px;
 }
 
-.close:hover {
-	background-color: #f44336;
+.actions-dropdown:hover, .actions-dropdown:focus {
+	background-color: #FF4136;
 	color: white;
+}
+
+.actions-content {
+	position: absolute;
+	right: 0;
+	top: 48px;
+	z-index: 1;
+	background-color: #eee;
+}
+
+.actions-content>button {
+	display: block;
+	background-color: transparent;
+	padding: 12px 16px;
+	border: none;
+}
+
+.actions-content>button:hover {
+	background-color: #ddd;
 }
