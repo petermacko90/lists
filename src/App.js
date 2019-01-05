@@ -5,6 +5,7 @@ import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
 import AddList from './components/AddList/AddList';
 import Footer from './components/Footer/Footer';
+import './App.css';
 
 class App extends Component {
   constructor() {
@@ -72,6 +73,13 @@ class App extends Component {
             <CurrentList showLists={this.showLists} />
         }
         <Footer />
+        {
+          this.state.windowWidth < 480 &&
+            <div onClick={this.showAddList} title="Add list"
+            className="floating-button w3 h3 br-100 fixed z-1 bottom-1 right-1 bg-green f2 b tc pointer">
+              +
+            </div>
+        }
       </Fragment>
     );
   }
