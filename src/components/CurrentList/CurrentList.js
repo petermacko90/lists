@@ -85,10 +85,7 @@ class CurrentList extends Component {
       return;
     }
     this.props.onEditList(listId, title, new Date());
-    this.setState({
-      newListTitle: '',
-      isEditTitle: false
-    });
+    this.hideEditTitle();
   }
 
   /* handle deleting a list */
@@ -102,24 +99,14 @@ class CurrentList extends Component {
   }
 
   /* handle toggling an item */
-
-  onClickItem = (listId, itemId, checked) => () => {
-    this.handleToggleItem(listId, itemId, checked);
-  }
-
-  handleToggleItem = (listId, itemId, checked) => {
+  handleToggleItem = (listId, itemId, checked) => () => {
     this.props.onToggleItem(itemId, checked);
     this.props.onEditList(listId, this.props.list.title, new Date());
   }
 
   /* handle deleting an item */
-
-  onClickDeleteItem = (listId, itemId) => (e) => {
+  handleDeleteItem = (listId, itemId) => (e) => {
     e.stopPropagation();
-    this.handleDeleteItem(listId, itemId);
-  }
-
-  handleDeleteItem = (listId, itemId) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       this.props.onDeleteItem(itemId);
       this.props.onEditList(listId, this.props.list.title, new Date());
@@ -193,10 +180,7 @@ class CurrentList extends Component {
               ref={this.editTitle}
             />
           :
-            <h2 className="f2 mv4"
-            style={{ minHeight: '50.4px', overflowWrap: 'break-word' }}>
-              {list.title}
-            </h2>
+            <h2 className="f2 mv4 list-title">{list.title}</h2>
         }
         <p>{list.modified.toLocaleDateString()}</p>
         <ul>
@@ -210,8 +194,8 @@ class CurrentList extends Component {
                     listId={list.id}
                     checked={item.checked}
                     name={item.name}
-                    onClick={this.onClickItem}
-                    onClickDelete={this.onClickDeleteItem}
+                    onClick={this.handleToggleItem}
+                    onClickDelete={this.handleDeleteItem}
                   />
                 );
               })

@@ -8,7 +8,7 @@ const List = ({ list, items, onClickList, onEnterList }) => {
 		onKeyPress={onEnterList(list, list.id)}>
 			<h3 className="f3-l f4-m f5 truncate">{list.title}</h3>
 			<p>{list.modified.toLocaleDateString()}</p>
-			<p className="truncate">
+			<p className="truncate pb1">
 				{
 					items.slice(0, 5).map((item) => {
 						return <span key={item.id}>- {item.name} </span>;

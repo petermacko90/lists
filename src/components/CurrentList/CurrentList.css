@@ -97,3 +97,8 @@ ul li.checked::before {
 .dots::before {
 	top: -8px;
 }
+
+.list-title {
+	min-height: 50.4px;
+	overflow-wrap: break-word;
+}
