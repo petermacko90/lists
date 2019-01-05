@@ -77,7 +77,7 @@ class App extends Component {
           this.state.windowWidth < 480 &&
             <div onClick={this.showAddList} title="Add list"
             className="floating-button w3 h3 br-100 fixed z-1 bottom-1 right-1 bg-green f2 b tc pointer">
-              +
+              <span className="v-mid">+</span>
             </div>
         }
       </Fragment>

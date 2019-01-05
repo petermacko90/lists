@@ -98,6 +98,11 @@ ul li.checked::before {
 	top: -8px;
 }
 
+.copy-text {
+	position: absolute;
+	left: -9999px;
+}
+
 .list-title {
 	min-height: 50.4px;
 	overflow-wrap: break-word;

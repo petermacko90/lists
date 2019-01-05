@@ -28,10 +28,12 @@ class CurrentList extends Component {
   constructor() {
     super();
     this.editTitle = React.createRef();
+    this.copyText = React.createRef();
     this.state = {
       isEditTitle: false,
       newListTitle: '',
-      newItemName: ''
+      newItemName: '',
+      textToCopy: ''
     };
   }
 
@@ -42,6 +44,17 @@ class CurrentList extends Component {
     ) {
       this.hideEditTitle();
     }
+  }
+
+  setTextToCopy = (textToCopy) => (e) => {
+    e.stopPropagation();
+    this.setState(
+      { textToCopy },
+      () => {
+        this.copyText.current.select();
+        document.execCommand('copy');
+      }
+    );
   }
 
   focusEditTitle = () => {
@@ -139,7 +152,7 @@ class CurrentList extends Component {
 
   render() {
     const { list, items } = this.props;
-    const { isEditTitle, newListTitle, newItemName } = this.state;
+    const { isEditTitle, newListTitle, newItemName, textToCopy } = this.state;
     if (!list) return null;
 
     return (
@@ -196,6 +209,7 @@ class CurrentList extends Component {
                     name={item.name}
                     onClick={this.handleToggleItem}
                     onClickDelete={this.handleDeleteItem}
+                    setTextToCopy={this.setTextToCopy}
                   />
                 );
               })
@@ -203,6 +217,13 @@ class CurrentList extends Component {
               <p>No items</p>
           }
         </ul>
+        <input
+          type="text"
+          readOnly
+          value={textToCopy}
+          ref={this.copyText}
+          className="copy-text"
+        />
         <AddItem
           listId={list.id}
           newItemName={newItemName}

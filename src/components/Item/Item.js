@@ -21,7 +21,9 @@ class Item extends Component {
   }
 
   render() {
-    const { id, listId, checked, name, onClick, onClickDelete } = this.props;
+    const {
+      id, listId, checked, name, onClick, onClickDelete, setTextToCopy
+    } = this.props;
     const { isActionsOpen } = this.state;
     const checkAction = checked ? 'Uncheck' : 'Check';
 
@@ -45,6 +47,10 @@ class Item extends Component {
                 <button type="button" onClick={onClickDelete(listId, id)}
                 className="w-100 pointer" title="Delete item">
                   Delete item
+                </button>
+                <button type="button" onClick={setTextToCopy(name)}
+                className="w-100 pointer" title="Copy to clipboard">
+                  Copy name
                 </button>
               </div>
           }
