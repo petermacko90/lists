@@ -44,7 +44,7 @@ ul li.checked::before {
 .actions-dropdown {
 	background-color: transparent;
 	border-color: transparent;
-	padding: 7px 20px 17px;
+	padding: 5.8px 20px 15px;
 }
 
 .actions-dropdown:hover, .actions-dropdown:focus {
