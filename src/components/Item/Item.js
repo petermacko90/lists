@@ -29,11 +29,11 @@ class Item extends Component {
       <li className={"noselect" + (checked ? ' checked' : '')} tabIndex="0"
       title={checkAction} onClick={onClick(listId, id, checked)}>
         {name}
-        <div className="absolute right-0 top-0" onBlur={this.onBlur}
-        onFocus={this.onFocus}>
+        <div className="absolute right-0 top-0" style={{ height: '47.4px' }}
+        onBlur={this.onBlur} onFocus={this.onFocus}>
           <button onClick={this.toggleActions} title="Actions"
           className="actions-dropdown pointer">
-            &#8942;
+            <span className="dots"></span>
           </button>
           {
             isActionsOpen &&

@@ -9,23 +9,23 @@ ul li {
 	position: relative;
 	padding: 12px 32px 12px 40px;
 	overflow-wrap: break-word;
-	background: #eee;
+	background-color: #eee;
 	font-size: 18px;
 	transition: 0.2s;
 }
 
 ul li:nth-child(odd) {
-	background: #f9f9f9;
-}
-
-ul li:hover, ul li:focus {
-	background: #ddd;
+	background-color: #f9f9f9;
 }
 
 ul li.checked {
-	background: #888;
+	background-color: #888;
 	color: #fff;
 	text-decoration: line-through;
+}
+
+ul li:hover, ul li:focus {
+	background-color: #bbb;
 }
 
 ul li.checked::before {
@@ -43,14 +43,12 @@ ul li.checked::before {
 
 .actions-dropdown {
 	background-color: transparent;
-	font-weight: bold;
 	border-color: transparent;
-	padding: 12px 20px;
+	padding: 7px 20px 17px;
 }
 
 .actions-dropdown:hover, .actions-dropdown:focus {
-	background-color: #FF4136;
-	color: white;
+	background-color: rgba(255, 65, 54, 0.8);
 }
 
 .actions-content {
@@ -71,4 +69,31 @@ ul li.checked::before {
 
 .actions-content>button:hover, .actions-content>button:focus {
 	background-color: #ddd;
+}
+
+.dots {
+	position: relative;
+	display: inline-block;
+	height: 4px;
+	width: 4px;
+	background-color: black;
+	border-radius: 50%;
+}
+
+.dots::after, .dots::before {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	background-color: inherit;
+	border-radius: inherit;
+}
+
+.dots::after {
+	top: 8px;
+}
+
+.dots::before {
+	top: -8px;
 }
