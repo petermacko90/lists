@@ -5,7 +5,6 @@ import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
 import AddList from './components/AddList/AddList';
 import Footer from './components/Footer/Footer';
-import './App.css';
 
 class App extends Component {
   constructor() {
@@ -59,25 +58,27 @@ class App extends Component {
     return (
       <Fragment>
         <Navigation showAddList={this.showAddList} />
-        <Lists
-          isShowLists={isShowLists}
-          showLists={this.showLists}
-          hideLists={this.hideLists}
-          scrollToCurrentList={this.scrollToCurrentList}
-          showAddList={this.showAddList}
-        />
-        {
-          isShowAddList ?
-            <AddList scrollToCurrentList={this.scrollToCurrentList} />
-          :
-            <CurrentList showLists={this.showLists} />
-        }
+        <main>
+          <Lists
+            isShowLists={isShowLists}
+            showLists={this.showLists}
+            hideLists={this.hideLists}
+            scrollToCurrentList={this.scrollToCurrentList}
+            showAddList={this.showAddList}
+          />
+          {
+            isShowAddList ?
+              <AddList scrollToCurrentList={this.scrollToCurrentList} />
+            :
+              <CurrentList showLists={this.showLists} />
+          }
+        </main>
         <Footer />
         {
           this.state.windowWidth < 480 &&
             <div onClick={this.showAddList} title="Add list"
-            className="floating-button w3 h3 br-100 fixed z-1 bottom-1 right-1 bg-green f2 b tc pointer">
-              <span className="v-mid">+</span>
+            className="w3 h3 br-100 fixed z-1 bottom-1 right-1 bg-green hover-bg-dark-green pointer shadow-3">
+              <div className="f2 b tc white lh-copy">+</div>
             </div>
         }
       </Fragment>
