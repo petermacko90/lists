@@ -5,6 +5,7 @@ import { deleteItem, toggleItem, addItem } from '../../actions/items';
 import { checkEmptyString } from '../../helpers';
 import Item from '../Item/Item';
 import AddItem from '../AddItem/AddItem';
+import ToastNotification from '../ToastNotification/ToastNotification';
 import './CurrentList.css';
 
 const mapStateToProps = (state) => {
@@ -33,7 +34,11 @@ class CurrentList extends Component {
       isEditTitle: false,
       newListTitle: '',
       newItemName: '',
-      textToCopy: ''
+      textToCopy: '',
+      notification: {
+        show: false,
+        text: ''
+      }
     };
   }
 
@@ -53,8 +58,16 @@ class CurrentList extends Component {
       () => {
         this.copyText.current.select();
         document.execCommand('copy');
+        this.showNotification('Copied to clipboard: ' + textToCopy);
       }
     );
+  }
+
+  showNotification = (text) => {
+    this.setState({ notification: { show: true, text } });
+    setTimeout(() => {
+      this.setState({ notification: { show: false, text: '' } });
+    }, 3000);
   }
 
   focusEditTitle = () => {
@@ -153,10 +166,12 @@ class CurrentList extends Component {
   render() {
     const { list, items } = this.props;
     const { isEditTitle, newListTitle, newItemName, textToCopy } = this.state;
+    const { show, text } = this.state.notification;
     if (!list) return null;
 
     return (
       <div className="fl w-75-l w-two-thirds-m w-100 pa3">
+        <ToastNotification show={show} text={text} />
         <button type="button" onClick={this.handleDeleteList(list.id)}
         className="white b--none ph4 pv3 b pointer bg-red hover-bg-dark-red">
           Delete list

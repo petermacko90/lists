@@ -1,0 +1,15 @@
+.toast {
+  left: 50%;
+  margin-left: -8rem;
+  transition: 0.5s;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+
+}
+
+.toast.show {
+  bottom: 3rem;
+  opacity: 1;
+  visibility: visible;
+}
