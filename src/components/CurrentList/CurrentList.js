@@ -65,7 +65,10 @@ class CurrentList extends Component {
 
   showNotification = (text) => {
     this.setState({ notification: { show: true, text } });
-    setTimeout(() => this.setState({ notification: { show: false } }), 3000);
+    setTimeout(() => {
+      let notification = { ...this.state.notification, show: false };
+      this.setState({ notification });
+    }, 3000);
   }
 
   focusEditTitle = () => {
