@@ -58,7 +58,7 @@ class CurrentList extends Component {
       () => {
         this.copyText.current.select();
         document.execCommand('copy');
-        this.showNotification('Copied to clipboard: ' + textToCopy);
+        this.showNotification('Copied: ' + textToCopy);
       }
     );
   }
@@ -239,6 +239,7 @@ class CurrentList extends Component {
           value={textToCopy}
           ref={this.copyText}
           className="copy-text"
+          tabIndex="-1"
         />
         <AddItem
           listId={list.id}
