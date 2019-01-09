@@ -126,7 +126,8 @@ class CurrentList extends Component {
   }
 
   /* handle toggling an item */
-  handleToggleItem = (listId, itemId, checked) => () => {
+  handleToggleItem = (listId, itemId, checked) => (e) => {
+    e.stopPropagation();
     this.props.onToggleItem(itemId, checked);
     this.props.onEditList(listId, this.props.list.title, new Date());
   }
@@ -219,11 +220,9 @@ class CurrentList extends Component {
                 return (
                   <Item
                     key={item.id}
-                    id={item.id}
+                    item={item}
                     listId={list.id}
-                    checked={item.checked}
-                    name={item.name}
-                    onClick={this.handleToggleItem}
+                    onClickItem={this.handleToggleItem}
                     onClickDelete={this.handleDeleteItem}
                     setTextToCopy={this.setTextToCopy}
                   />

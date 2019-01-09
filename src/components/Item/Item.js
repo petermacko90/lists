@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ItemDropdown from './ItemDropdown';
 
 class Item extends Component {
   constructor() {
@@ -21,38 +22,33 @@ class Item extends Component {
   }
 
   render() {
-    const {
-      id, listId, checked, name, onClick, onClickDelete, setTextToCopy
-    } = this.props;
+    const { listId, onClickItem, onClickDelete, setTextToCopy } = this.props;
+    const { id, checked, name } = this.props.item;
     const { isActionsOpen } = this.state;
     const checkAction = checked ? 'Uncheck' : 'Check';
 
     return (
       <li className={"noselect" + (checked ? ' checked' : '')} tabIndex="0"
-      title={checkAction} onClick={onClick(listId, id, checked)}>
+      title={checkAction} onClick={onClickItem(listId, id, checked)}>
         {name}
         <div className="absolute right-0 top-0" onBlur={this.onBlur}
         onFocus={this.onFocus}>
           <button onClick={this.toggleActions} title="Actions"
           className="actions-dropdown pointer">
-            <span className="dots"></span>
+            <span className="dots" />
           </button>
           {
             isActionsOpen &&
-              <div className="actions-content w4 shadow-3">
-                <button type="button" onClick={onClick(listId, id, checked)}
-                className="w-100 pointer" title={checkAction}>
-                  {checkAction}
-                </button>
-                <button type="button" onClick={onClickDelete(listId, id)}
-                className="w-100 pointer" title="Delete item">
-                  Delete item
-                </button>
-                <button type="button" onClick={setTextToCopy(name)}
-                className="w-100 pointer" title="Copy to clipboard">
-                  Copy name
-                </button>
-              </div>
+              <ItemDropdown
+                id={id}
+                listId={listId}
+                name={name}
+                checked={checked}
+                checkAction={checkAction}
+                onClickItem={onClickItem}
+                onClickDelete={onClickDelete}
+                setTextToCopy={setTextToCopy}
+              />
           }
         </div>
       </li>
