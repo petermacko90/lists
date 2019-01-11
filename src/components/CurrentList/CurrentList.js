@@ -51,8 +51,7 @@ class CurrentList extends Component {
     }
   }
 
-  setTextToCopy = (textToCopy) => (e) => {
-    e.stopPropagation();
+  setTextToCopy = (textToCopy) => () => {
     this.setState(
       { textToCopy },
       () => {
@@ -126,15 +125,23 @@ class CurrentList extends Component {
   }
 
   /* handle toggling an item */
-  handleToggleItem = (listId, itemId, checked) => (e) => {
-    e.stopPropagation();
+  onClickItem = (listId, itemId, checked) => () => {
+    this.handleToggleItem(listId, itemId, checked);
+  }
+
+  onKeyPressItem = (listId, itemId, checked) => (e) => {
+    if (e.key === 'Enter') {
+      this.handleToggleItem(listId, itemId, checked);
+    }
+  }
+
+  handleToggleItem = (listId, itemId, checked) => {
     this.props.onToggleItem(itemId, checked);
     this.props.onEditList(listId, this.props.list.title, new Date());
   }
 
   /* handle deleting an item */
-  handleDeleteItem = (listId, itemId) => (e) => {
-    e.stopPropagation();
+  handleDeleteItem = (listId, itemId) => () => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       this.props.onDeleteItem(itemId);
       this.props.onEditList(listId, this.props.list.title, new Date());
@@ -213,7 +220,7 @@ class CurrentList extends Component {
             <h2 className="f2 mv4 list-title">{list.title}</h2>
         }
         <p>{list.modified.toLocaleDateString()}</p>
-        <ul>
+        <ul className="ma0 pa0 list">
           {
             items.length > 0 ?
               items.map((item) => {
@@ -222,7 +229,8 @@ class CurrentList extends Component {
                     key={item.id}
                     item={item}
                     listId={list.id}
-                    onClickItem={this.handleToggleItem}
+                    onClickItem={this.onClickItem}
+                    onKeyPressItem={this.onKeyPressItem}
                     onClickDelete={this.handleDeleteItem}
                     setTextToCopy={this.setTextToCopy}
                   />

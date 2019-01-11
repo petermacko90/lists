@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ItemDropdown from './ItemDropdown';
+import './Item.css';
 
 class Item extends Component {
   constructor() {
@@ -16,27 +17,45 @@ class Item extends Component {
 
   onFocus = () => clearTimeout(this.timeOutId);
 
-  toggleActions = (e) => {
-    e.stopPropagation();
+  onClickToggleActions = () => {
+    this.handleToggleActions();
+  }
+
+  onKeyPressToggleActions = (e) => {
+    if (e.key === 'Enter') {
+      this.handleToggleActions();
+    }
+  }
+
+  handleToggleActions() {
     this.setState({ isActionsOpen: !this.state.isActionsOpen });
   }
 
   render() {
-    const { listId, onClickItem, onClickDelete, setTextToCopy } = this.props;
+    const {
+      listId, onClickItem, onKeyPressItem, onClickDelete, setTextToCopy
+    } = this.props;
     const { id, checked, name } = this.props.item;
     const { isActionsOpen } = this.state;
     const checkAction = checked ? 'Uncheck' : 'Check';
 
     return (
-      <li className={"noselect" + (checked ? ' checked' : '')} tabIndex="0"
-      title={checkAction} onClick={onClickItem(listId, id, checked)}>
-        {name}
-        <div className="absolute right-0 top-0" onBlur={this.onBlur}
-        onFocus={this.onFocus}>
-          <button onClick={this.toggleActions} title="Actions"
-          className="actions-dropdown pointer">
-            <span className="dots" />
-          </button>
+      <li className={"flex justify-between relative noselect" + (checked ? ' checked' : '')}>
+        <div className="pv3 w-100 pointer" tabIndex="0" title={checkAction}
+        onClick={onClickItem(listId, id, checked)}
+        onKeyPress={onKeyPressItem(listId, id, checked)}>
+          <span className="check dib tc b">
+            { checked && <>&#10004;</> }
+          </span>
+          <span className="dib pl1" style={{ wordBreak: 'break-all' }}>
+            {name}
+          </span>
+        </div>
+        <div className="actions-dropdown hover-bg-red tc pointer" tabIndex="0"
+        title="Actions" onBlur={this.onBlur} onFocus={this.onFocus}
+        onClick={this.onClickToggleActions}
+        onKeyUp={this.onKeyPressToggleActions}>
+          <span className="dots" />
           {
             isActionsOpen &&
               <ItemDropdown
