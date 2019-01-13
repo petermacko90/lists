@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import List from '../List/List';
+import Button from '../Button/Button';
 import './Lists.css';
 import { requestLists, setCurrentList } from '../../actions/lists';
 import { requestItems, setCurrentItems } from '../../actions/items';
@@ -91,10 +92,9 @@ class Lists extends Component {
             :
               <div className="ml3">
                 <p>No lists found</p>
-                <button type="button" onClick={this.props.showAddList}
-                className="white b--none ph4 pv3 b pointer bg-green hover-bg-dark-green">
+                <Button onClick={this.props.showAddList} color="green">
                   Add list
-                </button>
+                </Button>
               </div>
           }
         </div>

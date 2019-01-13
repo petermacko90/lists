@@ -6,6 +6,7 @@ import { checkEmptyString } from '../../helpers';
 import Item from '../Item/Item';
 import AddItem from '../AddItem/AddItem';
 import ToastNotification from '../ToastNotification/ToastNotification';
+import Button from '../Button/Button';
 import './CurrentList.css';
 
 const mapStateToProps = (state) => {
@@ -181,28 +182,24 @@ class CurrentList extends Component {
     return (
       <div className="fl w-75-l w-two-thirds-m w-100 pa3">
         <ToastNotification show={show} text={text} />
-        <button type="button" onClick={this.handleDeleteList(list.id)}
-        className="white b--none ph4 pv3 b pointer bg-red hover-bg-dark-red">
+        <Button onClick={this.handleDeleteList(list.id)} color="red">
           Delete list
-        </button>
+        </Button>
         {
           isEditTitle ?
             <Fragment>
-              <button type="button"
-              onClick={this.onClickEditTitle(list.id, newListTitle)}
-              className="white b--none ph4 pv3 b pointer bg-green hover-bg-dark-green">
+              <Button onClick={this.onClickEditTitle(list.id, newListTitle)}
+              color="green">
                 Save title
-              </button>
-              <button type="button" onClick={this.hideEditTitle}
-              className="white b--none ph4 pv3 b pointer bg-blue hover-bg-dark-blue">
-                Don't save title
-              </button>
+              </Button>
+              <Button onClick={this.hideEditTitle} color="blue">
+                {"Don't save title"}
+              </Button>
             </Fragment>
           :
-            <button type="button" onClick={this.showEditTitle}
-            className="white b--none ph4 pv3 b pointer bg-blue hover-bg-dark-blue">
+            <Button onClick={this.showEditTitle} color="blue">
               Edit title
-            </button>
+            </Button>
         }
         {
           isEditTitle ?
