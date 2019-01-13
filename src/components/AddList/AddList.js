@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addList } from '../../actions/lists';
 import { checkEmptyString } from '../../helpers';
+import Button from '../Button/Button';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -50,14 +51,14 @@ class AddList extends Component {
           onChange={this.onChangeNewListTitle}
           onKeyPress={this.onKeyPressAddList(newListTitle)}
           placeholder="List title"
-          className="pa3 b--none w-100 w-auto-ns"
+          className="pa3 b--none w-75 w-two-thirds-m w-auto-l"
           maxLength="50"
           autoFocus
         />
-        <button type="button" onClick={this.onClickAddList(newListTitle)}
-        className="white b--none ph4 pv3 b pointer bg-green hover-bg-dark-green">
+        <Button onClick={this.onClickAddList(newListTitle)} color="green"
+        classes="w-25 w-third-m w-auto-l">
           Add
-        </button>
+        </Button>
       </div>
     );
   }

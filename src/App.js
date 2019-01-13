@@ -58,7 +58,7 @@ class App extends Component {
     return (
       <Fragment>
         <Navigation showAddList={this.showAddList} />
-        <main>
+        <main className="cf">
           <Lists
             isShowLists={isShowLists}
             showLists={this.showLists}
