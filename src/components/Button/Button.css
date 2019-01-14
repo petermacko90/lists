@@ -1,0 +1,9 @@
+button.bg-green:disabled {
+  background-color: #9EEBCF;
+  color: black;
+}
+
+button.bg-green:disabled:hover {
+  background-color: #9EEBCF;
+  cursor: not-allowed;
+}

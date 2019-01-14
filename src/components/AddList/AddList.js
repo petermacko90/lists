@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addList } from '../../actions/lists';
-import { checkEmptyString } from '../../helpers';
 import Button from '../Button/Button';
 
 const mapDispatchToProps = (dispatch) => {
@@ -31,9 +30,6 @@ class AddList extends Component {
   }
 
   handleAddList = (title) => {
-    if (checkEmptyString(title)) {
-      return;
-    }
     this.props.scrollToCurrentList();
     this.props.onAddList(title);
     this.setState({ newListTitle: '' });
