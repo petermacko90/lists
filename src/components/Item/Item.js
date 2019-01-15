@@ -42,8 +42,8 @@ class Item extends Component {
     return (
       <li className={"flex justify-between relative noselect" + (checked ? ' checked' : '')}>
         <div className="pv3 w-100 pointer" tabIndex="0" title={checkAction}
-        onClick={onClickItem(listId, id, checked)}
-        onKeyPress={onKeyPressItem(listId, id, checked)}>
+        onClick={onClickItem(listId, id, name, !checked)}
+        onKeyPress={onKeyPressItem(listId, id, name, !checked)}>
           <span className="check dib tc b">
             { checked && <>&#10004;</> }
           </span>

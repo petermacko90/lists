@@ -1,8 +1,8 @@
 import {
   FETCH_ITEMS,
   SET_CURRENT_ITEMS,
+  EDIT_ITEM,
   DELETE_ITEM,
-  TOGGLE_ITEM,
   ADD_ITEM_WITH_ID,
   ADD_LIST_WITH_ID,
   DELETE_LIST
@@ -24,6 +24,20 @@ export const itemsReducer = (state = initialState, action = {}) => {
           return item.list_id === action.payload;
         })
       };
+    case EDIT_ITEM:
+      const items = state.items.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, ...action.payload };
+        }
+        return item;
+      });
+      const currentItems = state.currentItems.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, ...action.payload };
+        }
+        return item;
+      });
+      return { ...state, items, currentItems };
     case DELETE_ITEM:
       return {
         ...state,
@@ -32,20 +46,6 @@ export const itemsReducer = (state = initialState, action = {}) => {
           return item.id !== action.payload;
         })
       };
-    case TOGGLE_ITEM:
-      const items = state.items.map((item) => {
-        if (item.id !== action.payload.itemId) {
-          return item;
-        }
-        return { ...item, ...item.checked = !action.payload.checked };
-      });
-      const currentItems = state.currentItems.map((item) => {
-        if (item.id !== action.payload.itemId) {
-          return item;
-        }
-        return { ...item, ...item.checked = !action.payload.checked };
-      });
-      return { ...state, currentItems, items };
     case ADD_ITEM_WITH_ID:
       const newItem = {
         list_id: action.payload.listId,

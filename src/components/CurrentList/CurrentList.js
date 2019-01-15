@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { editList, deleteList } from '../../actions/lists';
-import { deleteItem, toggleItem, addItem } from '../../actions/items';
+import { editItem, deleteItem, addItem } from '../../actions/items';
 import { checkEmptyString } from '../../helpers';
 import Item from '../Item/Item';
 import AddItem from '../AddItem/AddItem';
@@ -20,8 +20,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onEditList: (id, title, modified) => dispatch(editList(id, title, modified)),
     onDeleteList: (listId) => dispatch(deleteList(listId)),
+    onEditItem: (list_id, id, name, checked) => dispatch(editItem(list_id, id, name, checked)),
     onDeleteItem: (itemId) => dispatch(deleteItem(itemId)),
-    onToggleItem: (itemId, checked) => dispatch(toggleItem(itemId, checked)),
     onAddItem: (listId, name) => dispatch(addItem(listId, name))
   }
 }
@@ -126,19 +126,19 @@ class CurrentList extends Component {
   }
 
   /* handle toggling an item */
-  onClickItem = (listId, itemId, checked) => () => {
-    this.handleToggleItem(listId, itemId, checked);
+  onClickItem = (list_id, id, name, checked) => () => {
+    this.handleToggleItem(list_id, id, name, checked);
   }
 
-  onKeyPressItem = (listId, itemId, checked) => (e) => {
+  onKeyPressItem = (list_id, id, name, checked) => (e) => {
     if (e.key === 'Enter') {
-      this.handleToggleItem(listId, itemId, checked);
+      this.handleToggleItem(list_id, id, name, checked);
     }
   }
 
-  handleToggleItem = (listId, itemId, checked) => {
-    this.props.onToggleItem(itemId, checked);
-    this.props.onEditList(listId, this.props.list.title, new Date());
+  handleToggleItem = (list_id, id, name, checked) => {
+    this.props.onEditItem(list_id, id, name, checked);
+    this.props.onEditList(list_id, this.props.list.title, new Date());
   }
 
   /* handle deleting an item */

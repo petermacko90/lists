@@ -7,7 +7,7 @@ export const ADD_LIST_WITH_ID = 'ADD_LIST_WITH_ID';
 
 export const FETCH_ITEMS = 'FETCH_ITEMS';
 export const SET_CURRENT_ITEMS = 'SET_CURRENT_ITEMS';
+export const EDIT_ITEM = 'EDIT_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
-export const TOGGLE_ITEM = 'TOGGLE_ITEM';
 export const ADD_ITEM = 'ADD_ITEM';
 export const ADD_ITEM_WITH_ID = 'ADD_ITEM_WITH_ID';

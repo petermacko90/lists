@@ -1,5 +1,5 @@
 import {
-  FETCH_ITEMS, SET_CURRENT_ITEMS, DELETE_ITEM, TOGGLE_ITEM, ADD_ITEM
+  FETCH_ITEMS, SET_CURRENT_ITEMS, EDIT_ITEM, DELETE_ITEM, ADD_ITEM
 } from '../constants/action-types';
 import { loadState } from '../localStorage';
 
@@ -13,14 +13,14 @@ export const setCurrentItems = (listId) => ({
   payload: listId
 });
 
+export const editItem = (list_id, id, name, checked) => ({
+  type: EDIT_ITEM,
+  payload: { list_id, id, name, checked }
+});
+
 export const deleteItem = (itemId) => ({
   type: DELETE_ITEM,
   payload: itemId
-});
-
-export const toggleItem = (itemId, checked) => ({
-  type: TOGGLE_ITEM,
-  payload: { itemId, checked }
 });
 
 export const addItem = (listId, name) => ({

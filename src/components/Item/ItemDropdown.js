@@ -6,7 +6,7 @@ const ItemDropdown = ({
 }) => {
   return (
     <div className="actions-content w4 shadow-3">
-      <button type="button" onClick={onClickItem(listId, id, checked)}
+      <button type="button" onClick={onClickItem(listId, id, name, !checked)}
       className="w-100 pointer" title={checkAction}>
         {checkAction}
       </button>
