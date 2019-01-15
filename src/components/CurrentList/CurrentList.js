@@ -225,7 +225,6 @@ class CurrentList extends Component {
                   <Item
                     key={item.id}
                     item={item}
-                    listId={list.id}
                     onClickItem={this.onClickItem}
                     onKeyPressItem={this.onKeyPressItem}
                     onClickDelete={this.handleDeleteItem}

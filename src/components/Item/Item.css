@@ -72,3 +72,7 @@ ul li:hover, ul li:focus {
 .dots::before {
 	top: -8px;
 }
+
+.item-name {
+	word-break: break-all;
+}

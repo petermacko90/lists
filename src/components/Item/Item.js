@@ -33,23 +33,19 @@ class Item extends Component {
 
   render() {
     const {
-      listId, onClickItem, onKeyPressItem, onClickDelete, setTextToCopy
+      onClickItem, onKeyPressItem, onClickDelete, setTextToCopy
     } = this.props;
-    const { id, checked, name } = this.props.item;
+    const { id, list_id, checked, name } = this.props.item;
     const { isActionsOpen } = this.state;
     const checkAction = checked ? 'Uncheck' : 'Check';
 
     return (
       <li className={"flex justify-between relative noselect" + (checked ? ' checked' : '')}>
         <div className="pv3 w-100 pointer" tabIndex="0" title={checkAction}
-        onClick={onClickItem(listId, id, name, !checked)}
-        onKeyPress={onKeyPressItem(listId, id, name, !checked)}>
-          <span className="check dib tc b">
-            { checked && <>&#10004;</> }
-          </span>
-          <span className="dib pl1" style={{ wordBreak: 'break-all' }}>
-            {name}
-          </span>
+        onClick={onClickItem(list_id, id, name, !checked)}
+        onKeyPress={onKeyPressItem(list_id, id, name, !checked)}>
+          <span className="check dib tc b">{ checked && <>&#10004;</> }</span>
+          <span className="dib pl1 item-name">{name}</span>
         </div>
         <div className="actions-dropdown hover-bg-red tc pointer" tabIndex="0"
         title="Actions" onBlur={this.onBlur} onFocus={this.onFocus}
@@ -60,7 +56,7 @@ class Item extends Component {
             isActionsOpen &&
               <ItemDropdown
                 id={id}
-                listId={listId}
+                listId={list_id}
                 name={name}
                 checked={checked}
                 checkAction={checkAction}
