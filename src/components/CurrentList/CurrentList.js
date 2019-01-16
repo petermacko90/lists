@@ -5,6 +5,7 @@ import { editItem, deleteItem, addItem } from '../../actions/items';
 import { checkEmptyString } from '../../helpers';
 import Item from '../Item/Item';
 import AddItem from '../AddItem/AddItem';
+import EditItem from '../EditItem/EditItem';
 import ToastNotification from '../ToastNotification/ToastNotification';
 import Button from '../Button/Button';
 import './CurrentList.css';
@@ -36,6 +37,8 @@ class CurrentList extends Component {
       newListTitle: '',
       newItemName: '',
       textToCopy: '',
+      editItemId: -1,
+      editItemName: '',
       notification: {
         show: false,
         text: ''
@@ -45,10 +48,11 @@ class CurrentList extends Component {
 
   componentDidUpdate(prevProps) {
     if (
-      !prevProps.list && !this.props.list &&
+      prevProps.list && this.props.list &&
       this.props.list.id !== prevProps.list.id
     ) {
       this.hideEditTitle();
+      this.hideItemToEdit();
     }
   }
 
@@ -125,20 +129,39 @@ class CurrentList extends Component {
     }
   }
 
-  /* handle toggling an item */
+  /* handle editing an item */
   onClickItem = (list_id, id, name, checked) => () => {
-    this.handleToggleItem(list_id, id, name, checked);
+    this.handleEditItem(list_id, id, name, checked);
   }
 
   onKeyPressItem = (list_id, id, name, checked) => (e) => {
     if (e.key === 'Enter') {
-      this.handleToggleItem(list_id, id, name, checked);
+      this.handleEditItem(list_id, id, name, checked);
     }
   }
 
-  handleToggleItem = (list_id, id, name, checked) => {
+  handleEditItem = (list_id, id, name, checked) => {
+    if (checkEmptyString(name)) {
+      return;
+    }
     this.props.onEditItem(list_id, id, name, checked);
     this.props.onEditList(list_id, this.props.list.title, new Date());
+    this.hideItemToEdit();
+  }
+
+  setItemToEdit = (editItemId, editItemName) => () => {
+    this.setState({ editItemId, editItemName });
+  }
+
+  hideItemToEdit = () => {
+    this.setState({
+      editItemId: -1,
+      editItemName: ''
+    });
+  }
+
+  onChangeEditItemName = (e) => {
+    this.setState({ editItemName: e.target.value });
   }
 
   /* handle deleting an item */
@@ -175,9 +198,45 @@ class CurrentList extends Component {
 
   render() {
     const { list, items } = this.props;
-    const { isEditTitle, newListTitle, newItemName, textToCopy } = this.state;
+    const {
+      isEditTitle, newListTitle, newItemName, textToCopy, editItemId,
+      editItemName
+    } = this.state;
     const { show, text } = this.state.notification;
     if (!list) return null;
+
+    let itemsComponent = [];
+    if (items.length > 0) {
+      itemsComponent = items.map(item => {
+        if (item.id === editItemId) {
+          return (
+            <EditItem
+              key={item.id}
+              item={item}
+              value={editItemName}
+              onChange={this.onChangeEditItemName}
+              onClick={this.onClickItem}
+              onKeyPress={this.onKeyPressItem}
+              hide={this.hideItemToEdit}
+            />
+          );
+        } else {
+          return (
+            <Item
+              key={item.id}
+              item={item}
+              onClickItem={this.onClickItem}
+              onKeyPressItem={this.onKeyPressItem}
+              onClickDelete={this.handleDeleteItem}
+              setTextToCopy={this.setTextToCopy}
+              setItemToEdit={this.setItemToEdit}
+            />
+          );
+        }
+      });
+    } else {
+      itemsComponent = <p>No items</p>;
+    }
 
     return (
       <div className="fl w-75-l w-two-thirds-m w-100 pa3">
@@ -217,25 +276,7 @@ class CurrentList extends Component {
             <h2 className="f2 mv4 list-title">{list.title}</h2>
         }
         <p>{list.modified.toLocaleDateString()}</p>
-        <ul className="ma0 pa0 list">
-          {
-            items.length > 0 ?
-              items.map((item) => {
-                return (
-                  <Item
-                    key={item.id}
-                    item={item}
-                    onClickItem={this.onClickItem}
-                    onKeyPressItem={this.onKeyPressItem}
-                    onClickDelete={this.handleDeleteItem}
-                    setTextToCopy={this.setTextToCopy}
-                  />
-                );
-              })
-            :
-              <p>No items</p>
-          }
-        </ul>
+        <ul className="ma0 pa0 list">{itemsComponent}</ul>
         <input
           type="text"
           readOnly

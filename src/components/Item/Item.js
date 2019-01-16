@@ -33,7 +33,7 @@ class Item extends Component {
 
   render() {
     const {
-      onClickItem, onKeyPressItem, onClickDelete, setTextToCopy
+      onClickItem, onKeyPressItem, onClickDelete, setTextToCopy, setItemToEdit
     } = this.props;
     const { id, list_id, checked, name } = this.props.item;
     const { isActionsOpen } = this.state;
@@ -63,6 +63,7 @@ class Item extends Component {
                 onClickItem={onClickItem}
                 onClickDelete={onClickDelete}
                 setTextToCopy={setTextToCopy}
+                setItemToEdit={setItemToEdit}
               />
           }
         </div>
