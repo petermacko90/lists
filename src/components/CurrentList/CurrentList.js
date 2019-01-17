@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editList, deleteList } from '../../actions/lists';
 import { editItem, deleteItem, addItem } from '../../actions/items';
@@ -112,9 +112,6 @@ class CurrentList extends Component {
   }
 
   handleEditTitle = (listId, title) => {
-    if (checkEmptyString(title)) {
-      return;
-    }
     this.props.onEditList(listId, title, new Date());
     this.hideEditTitle();
   }
@@ -198,12 +195,13 @@ class CurrentList extends Component {
 
   render() {
     const { list, items } = this.props;
+    if (!list) return null;
     const {
       isEditTitle, newListTitle, newItemName, textToCopy, editItemId,
       editItemName
     } = this.state;
     const { show, text } = this.state.notification;
-    if (!list) return null;
+    const title = list.title.length === 0 ? '<No title>' : list.title;
 
     let itemsComponent = [];
     if (items.length > 0) {
@@ -246,34 +244,34 @@ class CurrentList extends Component {
         </Button>
         {
           isEditTitle ?
-            <Fragment>
+            <div className="mv4">
+              <input
+                type="text"
+                value={newListTitle}
+                onChange={this.onChangeListTitle}
+                onKeyPress={this.onKeyPressEditTitle(list.id, newListTitle)}
+                placeholder="List title"
+                className="pa3 b--none w-60 w-auto-l"
+                maxLength="50"
+                ref={this.editTitle}
+              />
               <Button onClick={this.onClickEditTitle(list.id, newListTitle)}
-              color="green">
-                Save title
+              color="green" title="Save" classes="w-20 w-auto-l">
+                &#10003;
               </Button>
-              <Button onClick={this.hideEditTitle} color="blue">
-                {"Don't save title"}
+              <Button onClick={this.hideEditTitle} color="red"
+              title="Close edit" classes="w-20 w-auto-l">
+                &times;
               </Button>
-            </Fragment>
+            </div>
           :
-            <Button onClick={this.showEditTitle} color="blue">
-              Edit title
-            </Button>
-        }
-        {
-          isEditTitle ?
-            <input
-              type="text"
-              value={newListTitle}
-              onChange={this.onChangeListTitle}
-              onKeyPress={this.onKeyPressEditTitle(list.id, newListTitle)}
-              placeholder="List title"
-              className="pa3 b--none mv4 db"
-              maxLength="50"
-              ref={this.editTitle}
-            />
-          :
-            <h2 className="f2 mv4 list-title">{list.title}</h2>
+            <div className="mv4">
+              <Button onClick={this.showEditTitle} color="blue"
+              title="Edit title">
+                &#9999;
+              </Button>
+              <h2 className="f3 mv0 ml3 di list-title">{title}</h2>
+            </div>
         }
         <p>{list.modified.toLocaleDateString()}</p>
         <ul className="ma0 pa0 list">{itemsComponent}</ul>

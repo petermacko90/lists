@@ -1,6 +1,6 @@
 button.bg-green:disabled {
   background-color: #9EEBCF;
-  color: black;
+  color: #555;
 }
 
 button.bg-green:disabled:hover {

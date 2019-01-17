@@ -1,7 +1,6 @@
 import {
   FETCH_LISTS, SET_CURRENT_LIST, EDIT_LIST, DELETE_LIST, ADD_LIST_WITH_ID
 } from '../constants/action-types';
-import { checkEmptyString } from '../helpers';
 
 const initialStateLists = {
   lists: [],
@@ -33,10 +32,9 @@ export const listsReducer = (state = initialStateLists, action = {}) => {
         currentList: null
       };
     case ADD_LIST_WITH_ID:
-      const title = checkEmptyString(action.payload.title) ? 'No title' : action.payload.title;
       const newList = {
         id: action.payload.nextId,
-        title,
+        title: action.payload.title,
         modified: action.payload.modified
       };
       return {

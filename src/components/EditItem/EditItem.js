@@ -18,7 +18,7 @@ const EditItem = ({ item, hide, value, onChange, onClick, onKeyPress }) => {
       <Button onClick={onClick(item.list_id, item.id, value, item.checked)}
       color="green" title="Save" disabled={checkEmptyString(value)}
       classes="w-20 w-auto-l">
-        &#10004;
+        &#10003;
       </Button>
       <Button onClick={hide} color="red" title="Close edit"
       classes="w-20 w-auto-l">
