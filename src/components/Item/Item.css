@@ -10,7 +10,6 @@ ul li:nth-child(odd) {
 ul li.checked {
 	background-color: #888;
 	color: #fff;
-	text-decoration: line-through;
 }
 
 ul li:hover, ul li:focus {
@@ -43,7 +42,7 @@ ul li:hover, ul li:focus {
 }
 
 .check {
-  width: 48px;
+  min-width: 48px;
 }
 
 .dots {
@@ -75,4 +74,5 @@ ul li:hover, ul li:focus {
 
 .item-name {
 	word-break: break-all;
+	word-break: break-word;
 }
