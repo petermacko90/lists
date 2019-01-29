@@ -20,6 +20,12 @@ const isLocalhost = Boolean(
     )
 );
 
+let toast = document.createElement('div');
+toast.id = 'toast';
+toast.title = 'Dismiss';
+toast.onclick = () => toast.classList.remove('show');
+document.body.insertBefore(toast, document.getElementById('root'));
+
 export function register(config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -73,6 +79,8 @@ function registerValidSW(swUrl, config) {
                 'New content is available and will be used when all ' +
                   'tabs for this page are closed. See http://bit.ly/CRA-PWA.'
               );
+              toast.classList.add('show');
+              toast.innerText = 'New content is available and will be used when all tabs for this page are closed';
 
               // Execute callback
               if (config && config.onUpdate) {
@@ -83,6 +91,8 @@ function registerValidSW(swUrl, config) {
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
               console.log('Content is cached for offline use.');
+              toast.classList.add('show');
+              toast.innerText = 'Content is cached for offline use';
 
               // Execute callback
               if (config && config.onSuccess) {
