@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ItemDropdown from './ItemDropdown';
 import './Item.css';
+import { STR_ACTIONS, STR_CHECK, STR_UNCHECK } from '../../constants/strings';
 
 class Item extends Component {
   constructor() {
@@ -37,7 +38,7 @@ class Item extends Component {
     } = this.props;
     const { id, list_id, checked, name } = this.props.item;
     const { isActionsOpen } = this.state;
-    const checkAction = checked ? 'Uncheck' : 'Check';
+    const checkAction = checked ? STR_UNCHECK : STR_CHECK;
 
     return (
       <li className={"flex justify-between relative noselect" + (checked ? ' checked' : '')}>
@@ -48,7 +49,7 @@ class Item extends Component {
           <span className="item-name">{name}</span>
         </div>
         <div className="actions-dropdown hover-bg-red tc pointer" tabIndex="0"
-        title="Actions" onBlur={this.onBlur} onFocus={this.onFocus}
+        title={STR_ACTIONS} onBlur={this.onBlur} onFocus={this.onFocus}
         onClick={this.onClickToggleActions}
         onKeyUp={this.onKeyPressToggleActions}>
           <span className="dots" />
