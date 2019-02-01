@@ -5,6 +5,9 @@ import Button from '../Button/Button';
 import './Lists.css';
 import { requestLists, setCurrentList } from '../../actions/lists';
 import { requestItems, setCurrentItems } from '../../actions/items';
+import {
+  STR_ADD_LIST, STR_HIDE_LISTS, STR_NO_LIST_FOUND, STR_SHOW_LISTS
+} from '../../constants/strings';
 
 const mapStateToProps = (state) => {
   return {
@@ -74,12 +77,12 @@ class Lists extends Component {
           isShowLists ?
             <button type="button" onClick={hideLists}
             className="bg-yellow b--none pointer pv1 ml3 mv1 toggle-lists">
-              Hide lists &#9650;
+              {STR_HIDE_LISTS} &#9650;
             </button>
           :
             <button type="button" onClick={showLists}
             className="bg-yellow b--none pointer pv1 ml3 mv1 toggle-lists">
-              Show lists &#9660;
+              {STR_SHOW_LISTS} &#9660;
             </button>
         }
         <div className={`lists ${isShowLists ? '' : 'dn'}`}>
@@ -91,9 +94,9 @@ class Lists extends Component {
               </Fragment>
             :
               <div className="ml3">
-                <p>No lists found</p>
+                <p>{STR_NO_LIST_FOUND}</p>
                 <Button onClick={this.props.showAddList} color="green">
-                  Add list
+                  {STR_ADD_LIST}
                 </Button>
               </div>
           }

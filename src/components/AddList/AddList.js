@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { addList } from '../../actions/lists';
 import Button from '../Button/Button';
 import { MAX_LENGTH_LIST } from '../../constants/constants';
+import {
+  STR_ADD, STR_ADD_LIST, STR_LIST_TITLE
+} from '../../constants/strings';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -41,20 +44,20 @@ class AddList extends Component {
 
     return (
       <div className="fl w-75-l w-two-thirds-m w-100 pa3">
-        <h2>Add list</h2>
+        <h2>{STR_ADD_LIST}</h2>
         <input
           type="text"
           value={newListTitle}
           onChange={this.onChangeNewListTitle}
           onKeyPress={this.onKeyPressAddList(newListTitle)}
-          placeholder="List title"
+          placeholder={STR_LIST_TITLE}
           className="pa3 b--none w-75 w-two-thirds-m w-auto-l"
           maxLength={MAX_LENGTH_LIST}
           autoFocus
         />
         <Button onClick={this.onClickAddList(newListTitle)} color="green"
         classes="w-25 w-third-m w-auto-l">
-          Add
+          {STR_ADD}
         </Button>
       </div>
     );

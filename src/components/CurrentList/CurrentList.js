@@ -10,6 +10,18 @@ import ToastNotification from '../ToastNotification/ToastNotification';
 import Button from '../Button/Button';
 import './CurrentList.css';
 import { MAX_LENGTH_LIST } from '../../constants/constants';
+import {
+  STR_CLOSE_EDIT,
+  STR_CONFIRM_DELETE_ITEM,
+  STR_CONFIRM_DELETE_LIST,
+  STR_COPIED,
+  STR_DELETE_LIST,
+  STR_EDIT_TITLE,
+  STR_LIST_TITLE,
+  STR_NO_ITEMS,
+  STR_NO_TITLE,
+  STR_SAVE
+} from '../../constants/strings';
 
 const mapStateToProps = (state) => {
   return {
@@ -63,7 +75,7 @@ class CurrentList extends Component {
       () => {
         this.copyText.current.select();
         document.execCommand('copy');
-        this.showNotification('Copied: ' + textToCopy);
+        this.showNotification(`${STR_COPIED}: ${textToCopy}`);
       }
     );
   }
@@ -119,7 +131,7 @@ class CurrentList extends Component {
 
   /* handle deleting a list */
   handleDeleteList = (listId) => () => {
-    if (window.confirm('Are you sure you want to delete this list?')) {
+    if (window.confirm(STR_CONFIRM_DELETE_LIST)) {
       this.props.onDeleteList(listId);
       this.hideEditTitle();
       this.setState({ newItemName: '' });
@@ -164,7 +176,7 @@ class CurrentList extends Component {
 
   /* handle deleting an item */
   handleDeleteItem = (listId, itemId) => () => {
-    if (window.confirm('Are you sure you want to delete this item?')) {
+    if (window.confirm(STR_CONFIRM_DELETE_ITEM)) {
       this.props.onDeleteItem(itemId);
       this.props.onEditList(listId, this.props.list.title, new Date());
     }
@@ -202,7 +214,7 @@ class CurrentList extends Component {
       editItemName
     } = this.state;
     const { show, text } = this.state.notification;
-    const title = list.title.length === 0 ? '<No title>' : list.title;
+    const title = list.title.length === 0 ? STR_NO_TITLE : list.title;
 
     let itemsComponent = [];
     if (items.length > 0) {
@@ -234,14 +246,14 @@ class CurrentList extends Component {
         }
       });
     } else {
-      itemsComponent = <p>No items</p>;
+      itemsComponent = <p>{STR_NO_ITEMS}</p>;
     }
 
     return (
       <div className="fl w-75-l w-two-thirds-m w-100 pa3">
         <ToastNotification show={show} text={text} />
         <Button onClick={this.handleDeleteList(list.id)} color="red">
-          Delete list
+          {STR_DELETE_LIST}
         </Button>
         {
           isEditTitle ?
@@ -251,24 +263,24 @@ class CurrentList extends Component {
                 value={newListTitle}
                 onChange={this.onChangeListTitle}
                 onKeyPress={this.onKeyPressEditTitle(list.id, newListTitle)}
-                placeholder="List title"
+                placeholder={STR_LIST_TITLE}
                 className="pa3 b--none w-60 w-auto-l"
                 maxLength={MAX_LENGTH_LIST}
                 ref={this.editTitle}
               />
               <Button onClick={this.onClickEditTitle(list.id, newListTitle)}
-              color="green" title="Save" classes="w-20 w-auto-l">
+              color="green" title={STR_SAVE} classes="w-20 w-auto-l">
                 &#10003;
               </Button>
               <Button onClick={this.hideEditTitle} color="red"
-              title="Close edit" classes="w-20 w-auto-l">
+              title={STR_CLOSE_EDIT} classes="w-20 w-auto-l">
                 &times;
               </Button>
             </div>
           :
             <div className="mv4">
               <Button onClick={this.showEditTitle} color="blue"
-              title="Edit title">
+              title={STR_EDIT_TITLE}>
                 &#9999;
               </Button>
               <h2 className="f3 mv0 ml3 di list-title">{title}</h2>

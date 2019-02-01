@@ -1,8 +1,9 @@
 import React from 'react';
 import './List.css';
+import { STR_NO_TITLE } from '../../constants/strings';
 
 const List = ({ list, items, onClickList, onEnterList }) => {
-	const title = list.title.length === 0 ? '<No title>' : list.title;
+	const title = list.title.length === 0 ? STR_NO_TITLE : list.title;
 
 	return (
 		<div className="pa2 ma3 bg-yellow pointer shadow-3 noselect list-menu"
