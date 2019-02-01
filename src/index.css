@@ -18,7 +18,7 @@ code {
   user-select: none;
 }
 
-#toast {
+.toast {
   position: fixed;
   z-index: 3;
   width: 16rem;
@@ -26,7 +26,7 @@ code {
   margin-left: -8rem;
   padding: 1rem;
   background-color: #19a974;
-  box-shadow: 2px 2px 4px 2px rgba( 0, 0, 0, .2 );
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
   text-align: center;
   transition: 0.5s;
   bottom: 0;
@@ -34,12 +34,12 @@ code {
   visibility: hidden;
 }
 
-#toast:hover {
+.toast:hover {
   cursor: pointer;
   background-color: #137752;
 }
 
-#toast.show {
+.toast.show {
   bottom: 3rem;
   opacity: 1;
   visibility: visible;

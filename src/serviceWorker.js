@@ -21,7 +21,7 @@ const isLocalhost = Boolean(
 );
 
 let toast = document.createElement('div');
-toast.id = 'toast';
+toast.classList.add('toast');
 toast.title = 'Dismiss';
 toast.onclick = () => toast.classList.remove('show');
 document.body.insertBefore(toast, document.getElementById('root'));
