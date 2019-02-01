@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Button from '../Button/Button';
 import { checkEmptyString } from '../../helpers';
+import { MAX_LENGTH_ITEM } from '../../constants/constants';
 
 const EditItem = ({ item, hide, value, onChange, onClick, onKeyPress }) => {
   return (
@@ -12,7 +13,7 @@ const EditItem = ({ item, hide, value, onChange, onClick, onKeyPress }) => {
         onKeyPress={onKeyPress(item.list_id, item.id, value, item.checked)}
         placeholder="Item name"
         className="pa3 b--none w-60 w-auto-l"
-        maxLength="100"
+        maxLength={MAX_LENGTH_ITEM}
         autoFocus
       />
       <Button onClick={onClick(item.list_id, item.id, value, item.checked)}

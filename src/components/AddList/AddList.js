@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addList } from '../../actions/lists';
 import Button from '../Button/Button';
+import { MAX_LENGTH_LIST } from '../../constants/constants';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -48,7 +49,7 @@ class AddList extends Component {
           onKeyPress={this.onKeyPressAddList(newListTitle)}
           placeholder="List title"
           className="pa3 b--none w-75 w-two-thirds-m w-auto-l"
-          maxLength="50"
+          maxLength={MAX_LENGTH_LIST}
           autoFocus
         />
         <Button onClick={this.onClickAddList(newListTitle)} color="green"

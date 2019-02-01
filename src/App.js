@@ -5,6 +5,7 @@ import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
 import AddList from './components/AddList/AddList';
 import Footer from './components/Footer/Footer';
+import { MEDIUM_SCREEN_BREAKPOINT } from './constants/constants';
 
 class App extends Component {
   constructor() {
@@ -27,14 +28,14 @@ class App extends Component {
       return;
     }
     this.setState({ windowWidth });
-    if (windowWidth >= 480) {
+    if (windowWidth >= MEDIUM_SCREEN_BREAKPOINT) {
       this.showLists();
     }
   }
 
   showAddList = () => {
     this.setState({ isShowAddList: true });
-    if (this.state.windowWidth < 480) {
+    if (this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT) {
       this.hideLists();
     }
   }
@@ -42,7 +43,7 @@ class App extends Component {
   hideAddList = () => this.setState({ isShowAddList: false });
 
   scrollToCurrentList = () => {
-    if (this.state.windowWidth < 480) {
+    if (this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT) {
       this.hideLists();
     }
     this.hideAddList();
@@ -75,7 +76,7 @@ class App extends Component {
         </main>
         <Footer />
         {
-          this.state.windowWidth < 480 &&
+          this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT &&
             <div onClick={this.showAddList} title="Add list"
             className="w3 h3 br-100 fixed z-1 bottom-1 right-1 bg-green hover-bg-dark-green pointer shadow-3">
               <div className="f2 b tc white lh-copy">+</div>

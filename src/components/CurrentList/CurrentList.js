@@ -9,6 +9,7 @@ import EditItem from '../EditItem/EditItem';
 import ToastNotification from '../ToastNotification/ToastNotification';
 import Button from '../Button/Button';
 import './CurrentList.css';
+import { MAX_LENGTH_LIST } from '../../constants/constants';
 
 const mapStateToProps = (state) => {
   return {
@@ -252,7 +253,7 @@ class CurrentList extends Component {
                 onKeyPress={this.onKeyPressEditTitle(list.id, newListTitle)}
                 placeholder="List title"
                 className="pa3 b--none w-60 w-auto-l"
-                maxLength="50"
+                maxLength={MAX_LENGTH_LIST}
                 ref={this.editTitle}
               />
               <Button onClick={this.onClickEditTitle(list.id, newListTitle)}
