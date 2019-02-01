@@ -80,7 +80,7 @@ function registerValidSW(swUrl, config) {
                   'tabs for this page are closed. See http://bit.ly/CRA-PWA.'
               );
               toast.classList.add('show');
-              toast.innerText = 'New content is available and will be used when all tabs for this page are closed';
+              toast.textContent = 'New content is available and will be used when all tabs for this page are closed';
 
               // Execute callback
               if (config && config.onUpdate) {
@@ -92,7 +92,7 @@ function registerValidSW(swUrl, config) {
               // "Content is cached for offline use." message.
               console.log('Content is cached for offline use.');
               toast.classList.add('show');
-              toast.innerText = 'Content is cached for offline use';
+              toast.textContent = 'App is available for offline use';
 
               // Execute callback
               if (config && config.onSuccess) {
