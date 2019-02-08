@@ -45,33 +45,6 @@ ul li:hover, ul li:focus {
   min-width: 48px;
 }
 
-.dots {
-	position: relative;
-	display: inline-block;
-	height: 4px;
-	width: 4px;
-	background-color: black;
-	border-radius: 50%;
-}
-
-.dots::after, .dots::before {
-	content: "";
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	left: 0;
-	background-color: inherit;
-	border-radius: inherit;
-}
-
-.dots::after {
-	top: 8px;
-}
-
-.dots::before {
-	top: -8px;
-}
-
 .item-name {
 	word-break: break-all;
 	word-break: break-word;

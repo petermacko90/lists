@@ -8,6 +8,8 @@ import AddItem from '../AddItem/AddItem';
 import EditItem from '../EditItem/EditItem';
 import ToastNotification from '../ToastNotification/ToastNotification';
 import Button from '../Button/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faEdit, faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import './CurrentList.css';
 import { MAX_LENGTH_LIST } from '../../constants/constants';
 import {
@@ -253,7 +255,7 @@ class CurrentList extends Component {
       <div className="fl w-75-l w-two-thirds-m w-100 pa3">
         <ToastNotification show={show} text={text} />
         <Button onClick={this.handleDeleteList(list.id)} color="red">
-          {STR_DELETE_LIST}
+          <FontAwesomeIcon icon={faTrashAlt} /> {STR_DELETE_LIST}
         </Button>
         {
           isEditTitle ?
@@ -270,18 +272,18 @@ class CurrentList extends Component {
               />
               <Button onClick={this.onClickEditTitle(list.id, newListTitle)}
               color="green" title={STR_SAVE} classes="w-20 w-auto-l">
-                &#10003;
+                <FontAwesomeIcon icon={faCheck} />
               </Button>
               <Button onClick={this.hideEditTitle} color="red"
               title={STR_CLOSE_EDIT} classes="w-20 w-auto-l">
-                &times;
+                <FontAwesomeIcon icon={faTimes} />
               </Button>
             </div>
           :
             <div className="mv4">
               <Button onClick={this.showEditTitle} color="blue"
               title={STR_EDIT_TITLE}>
-                &#9999;
+                <FontAwesomeIcon icon={faEdit} />
               </Button>
               <h2 className="f3 mv0 ml3 di list-title">{title}</h2>
             </div>

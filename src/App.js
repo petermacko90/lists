@@ -5,6 +5,8 @@ import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
 import AddList from './components/AddList/AddList';
 import Footer from './components/Footer/Footer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { MEDIUM_SCREEN_BREAKPOINT } from './constants/constants';
 import { STR_ADD_LIST } from './constants/strings';
 
@@ -78,9 +80,9 @@ class App extends Component {
         <Footer />
         {
           this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT &&
-            <div onClick={this.showAddList} title={STR_ADD_LIST}
-            className="w3 h3 br-100 fixed z-1 bottom-1 right-1 bg-green hover-bg-dark-green pointer shadow-3">
-              <div className="f2 b tc white lh-copy">+</div>
+            <div onClick={this.showAddList} title={STR_ADD_LIST} style={{fontSize: '2.5rem'}}
+            className="w3 h3 br-100 fixed z-1 bottom-1 right-1 bg-green hover-bg-dark-green white pointer shadow-3 tc lh-copy">
+              <FontAwesomeIcon icon={faPlus} />
             </div>
         }
       </Fragment>
