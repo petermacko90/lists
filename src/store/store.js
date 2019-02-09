@@ -7,12 +7,15 @@ import { addListOrItemMiddleware } from '../middleware/middleware';
 import { loadState, saveState } from '../localStorage';
 import { debounce } from '../helpers';
 
-const persistedState = loadState();
 const rootReducer = combineReducers({ listsReducer, itemsReducer });
+const persistedState = loadState();
+let middleware = [addListOrItemMiddleware, thunkMiddleware];
+if (process.env.NODE_ENV === 'development') {
+  middleware = [ ...middleware, logger ];
+}
+
 const store = createStore(
-  rootReducer,
-  persistedState,
-  applyMiddleware(addListOrItemMiddleware, thunkMiddleware, logger)
+  rootReducer, persistedState, applyMiddleware(...middleware)
 );
 
 store.subscribe(
