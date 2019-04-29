@@ -6,4 +6,5 @@ button.bg-green:disabled {
 button.bg-green:disabled:hover {
   background-color: #9EEBCF;
   cursor: not-allowed;
+  opacity: 1;
 }

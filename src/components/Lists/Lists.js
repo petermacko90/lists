@@ -8,6 +8,8 @@ import { requestItems, setCurrentItems } from '../../actions/items';
 import {
   STR_ADD_LIST, STR_HIDE_LISTS, STR_NO_LIST_FOUND, STR_SHOW_LISTS
 } from '../../constants/strings';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const mapStateToProps = (state) => {
   return {
@@ -96,7 +98,7 @@ class Lists extends Component {
               <div className="ml3">
                 <p>{STR_NO_LIST_FOUND}</p>
                 <Button onClick={this.props.showAddList} color="green">
-                  {STR_ADD_LIST}
+                  <FontAwesomeIcon icon={faPlus} /> {STR_ADD_LIST}
                 </Button>
               </div>
           }

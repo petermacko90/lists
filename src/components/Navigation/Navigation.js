@@ -16,6 +16,7 @@ const Navigation = ({ showAddList }) => {
         type="button"
         onClick={showAddList}
         className="b--none ml4 mr3 bg-transparent f3 b pointer v-mid add-list"
+        aria-label="Add List"
       >
         <span><FontAwesomeIcon icon={faPlus} /></span>
         <span className="dn di-ns"> {STR_ADD_LIST}</span>
