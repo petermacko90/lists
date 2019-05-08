@@ -3,29 +3,23 @@ import { connect } from 'react-redux';
 import List from '../List/List';
 import Button from '../Button/Button';
 import './Lists.css';
+import { LocaleConsumer } from '../../index';
 import { requestLists, setCurrentList } from '../../actions/lists';
 import { requestItems, setCurrentItems } from '../../actions/items';
-import {
-  STR_ADD_LIST, STR_HIDE_LISTS, STR_NO_LIST_FOUND, STR_SHOW_LISTS
-} from '../../constants/strings';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const mapStateToProps = (state) => {
-  return {
-    lists: state.listsReducer.lists,
-    items: state.itemsReducer.items
-  }
-}
+const mapStateToProps = (state) => ({
+  lists: state.listsReducer.lists,
+  items: state.itemsReducer.items
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onRequestLists: () => dispatch(requestLists()),
-    onRequestItems: () => dispatch(requestItems()),
-    onSetCurrentList: (list) => dispatch(setCurrentList(list)),
-    onSetCurrentItems: (items) => dispatch(setCurrentItems(items))
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  onRequestLists: () => dispatch(requestLists()),
+  onRequestItems: () => dispatch(requestItems()),
+  onSetCurrentList: (list) => dispatch(setCurrentList(list)),
+  onSetCurrentItems: (items) => dispatch(setCurrentItems(items))
+});
 
 class Lists extends Component {
   componentDidMount() {
@@ -55,8 +49,8 @@ class Lists extends Component {
     let listComponents = [];
     let itemsProp = [];
 
-    lists.forEach((list) => {
-      items.forEach((item) => {
+    lists.forEach(list => {
+      items.forEach(item => {
         if (list.id === item.list_id) {
           itemsProp = itemsProp.concat(item);
         }
@@ -74,36 +68,46 @@ class Lists extends Component {
     });
 
     return (
-      <div className="fl w-25-l w-third-m w-100">
-        {
-          isShowLists ?
-            <button type="button" onClick={hideLists}
-            className="bg-yellow b--none pointer pv1 ml3 mv1 toggle-lists">
-              {STR_HIDE_LISTS} &#9650;
-            </button>
-          :
-            <button type="button" onClick={showLists}
-            className="bg-yellow b--none pointer pv1 ml3 mv1 toggle-lists">
-              {STR_SHOW_LISTS} &#9660;
-            </button>
+      <LocaleConsumer>
+        {str =>
+          <div className="fl w-25-l w-third-m w-100">
+            {
+              isShowLists ?
+                <button
+                  type="button"
+                  onClick={hideLists}
+                  className="bg-yellow b--none pointer pv1 ml3 mv1 toggle-lists"
+                >
+                  {str.HIDE_LISTS} &#9650;
+                </button>
+              :
+                <button
+                  type="button"
+                  onClick={showLists}
+                  className="bg-yellow b--none pointer pv1 ml3 mv1 toggle-lists"
+                >
+                  {str.SHOW_LISTS} &#9660;
+                </button>
+            }
+            <div className={`lists ${isShowLists ? '' : 'dn'}`}>
+              {
+                listComponents.length > 0 ?
+                  <Fragment>
+                    {listComponents}
+                    <hr className="dn-ns moon-gray" />
+                  </Fragment>
+                :
+                  <div className="ml3">
+                    <p>{str.NO_LIST_FOUND}</p>
+                    <Button onClick={this.props.showAddList} color="green">
+                      <FontAwesomeIcon icon={faPlus} /> {str.ADD_LIST}
+                    </Button>
+                  </div>
+              }
+            </div>
+          </div>
         }
-        <div className={`lists ${isShowLists ? '' : 'dn'}`}>
-          {
-            listComponents.length > 0 ?
-              <Fragment>
-                {listComponents}
-                <hr className="dn-ns moon-gray" />
-              </Fragment>
-            :
-              <div className="ml3">
-                <p>{STR_NO_LIST_FOUND}</p>
-                <Button onClick={this.props.showAddList} color="green">
-                  <FontAwesomeIcon icon={faPlus} /> {STR_ADD_LIST}
-                </Button>
-              </div>
-          }
-        </div>
-      </div>
+      </LocaleConsumer>
     );
   }
 }

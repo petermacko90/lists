@@ -21,8 +21,8 @@ const store = createStore(
 store.subscribe(
   debounce(() => {
     saveState({
-      listsReducer: { lists: store.getState().listsReducer.lists },
-      itemsReducer: { items: store.getState().itemsReducer.items }
+      lists: store.getState().listsReducer.lists,
+      items: store.getState().itemsReducer.items
     });
   }, 1000)
 );

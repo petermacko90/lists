@@ -4,7 +4,7 @@ import {
 import { loadState } from '../localStorage';
 
 export const requestItems = () => (dispatch) => {
-  const items = loadState() === undefined ? [] : loadState().itemsReducer.items;
+  const items = loadState() === undefined ? [] : loadState().items;
   dispatch({ type: FETCH_ITEMS, payload: items });
 }
 

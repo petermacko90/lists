@@ -10,6 +10,24 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read http://bit.ly/CRA-PWA
 
+import { strings } from './constants/strings';
+
+let str = null;
+switch (window.navigator.language) {
+  case 'sk':
+  case 'sk-SK':
+    str = strings.sk
+    break;
+  default:
+    str = strings.en;
+}
+
+let toast = document.createElement('div');
+toast.classList.add('toast');
+toast.title = str.DISMISS;
+toast.onclick = () => toast.classList.remove('show');
+document.body.insertBefore(toast, document.getElementById('root'));
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -19,12 +37,6 @@ const isLocalhost = Boolean(
       /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
     )
 );
-
-let toast = document.createElement('div');
-toast.classList.add('toast');
-toast.title = 'Dismiss';
-toast.onclick = () => toast.classList.remove('show');
-document.body.insertBefore(toast, document.getElementById('root'));
 
 export function register(config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
@@ -80,7 +92,7 @@ function registerValidSW(swUrl, config) {
                   'tabs for this page are closed. See http://bit.ly/CRA-PWA.'
               );
               toast.classList.add('show');
-              toast.textContent = 'New content is available and will be used when all tabs for this page are closed';
+              toast.textContent = str.NEW_CONTENT;
 
               // Execute callback
               if (config && config.onUpdate) {
@@ -92,7 +104,7 @@ function registerValidSW(swUrl, config) {
               // "Content is cached for offline use." message.
               console.log('Content is cached for offline use.');
               toast.classList.add('show');
-              toast.textContent = 'App is available for offline use';
+              toast.textContent = str.APP_AVAILABLE;
 
               // Execute callback
               if (config && config.onSuccess) {
