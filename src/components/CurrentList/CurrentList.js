@@ -12,35 +12,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEdit, faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import './CurrentList.css';
 import { MAX_LENGTH_LIST } from '../../constants/constants';
-import {
-  STR_CLOSE_EDIT,
-  STR_CONFIRM_DELETE_ITEM,
-  STR_CONFIRM_DELETE_LIST,
-  STR_COPIED,
-  STR_DELETE_LIST,
-  STR_EDIT_TITLE,
-  STR_LIST_TITLE,
-  STR_NO_ITEMS,
-  STR_NO_TITLE,
-  STR_SAVE
-} from '../../constants/strings';
 
-const mapStateToProps = (state) => {
-  return {
-    list: state.listsReducer.currentList,
-    items: state.itemsReducer.currentItems
-  }
-}
+const mapStateToProps = (state) => ({
+  list: state.listsReducer.currentList,
+  items: state.itemsReducer.currentItems
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onEditList: (id, title, modified) => dispatch(editList(id, title, modified)),
-    onDeleteList: (listId) => dispatch(deleteList(listId)),
-    onEditItem: (list_id, id, name, checked) => dispatch(editItem(list_id, id, name, checked)),
-    onDeleteItem: (itemId) => dispatch(deleteItem(itemId)),
-    onAddItem: (listId, name) => dispatch(addItem(listId, name))
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  onEditList: (id, title, modified) => dispatch(editList(id, title, modified)),
+  onDeleteList: (listId) => dispatch(deleteList(listId)),
+  onEditItem: (list_id, id, name, checked) => dispatch(editItem(list_id, id, name, checked)),
+  onDeleteItem: (itemId) => dispatch(deleteItem(itemId)),
+  onAddItem: (listId, name) => dispatch(addItem(listId, name))
+});
 
 class CurrentList extends Component {
   constructor() {
@@ -63,8 +47,9 @@ class CurrentList extends Component {
 
   componentDidUpdate(prevProps) {
     if (
-      prevProps.list && this.props.list &&
-      this.props.list.id !== prevProps.list.id
+      prevProps.list
+      && this.props.list
+      && this.props.list.id !== prevProps.list.id
     ) {
       this.hideEditTitle();
       this.hideItemToEdit();
@@ -77,7 +62,7 @@ class CurrentList extends Component {
       () => {
         this.copyText.current.select();
         document.execCommand('copy');
-        this.showNotification(`${STR_COPIED}: ${textToCopy}`);
+        this.showNotification(`${this.props.str.COPIED}: ${textToCopy}`);
       }
     );
   }
@@ -133,7 +118,7 @@ class CurrentList extends Component {
 
   /* handle deleting a list */
   handleDeleteList = (listId) => () => {
-    if (window.confirm(STR_CONFIRM_DELETE_LIST)) {
+    if (window.confirm(this.props.str.CONFIRM_DELETE_LIST)) {
       this.props.onDeleteList(listId);
       this.hideEditTitle();
       this.setState({ newItemName: '' });
@@ -178,7 +163,7 @@ class CurrentList extends Component {
 
   /* handle deleting an item */
   handleDeleteItem = (listId, itemId) => () => {
-    if (window.confirm(STR_CONFIRM_DELETE_ITEM)) {
+    if (window.confirm(this.props.str.CONFIRM_DELETE_ITEM)) {
       this.props.onDeleteItem(itemId);
       this.props.onEditList(listId, this.props.list.title, new Date());
     }
@@ -209,53 +194,47 @@ class CurrentList extends Component {
   }
 
   render() {
-    const { list, items } = this.props;
+    const { list, items, str } = this.props;
     if (!list) return null;
     const {
       isEditTitle, newListTitle, newItemName, textToCopy, editItemId,
       editItemName
     } = this.state;
     const { show, text } = this.state.notification;
-    const title = list.title.length === 0 ? STR_NO_TITLE : list.title;
 
-    let itemsComponent = [];
-    if (items.length > 0) {
-      itemsComponent = items.map(item => {
-        if (item.id === editItemId) {
-          return (
-            <EditItem
-              key={item.id}
-              item={item}
-              value={editItemName}
-              onChange={this.onChangeEditItemName}
-              onClick={this.onClickItem}
-              onKeyPress={this.onKeyPressItem}
-              hide={this.hideItemToEdit}
-            />
-          );
-        } else {
-          return (
-            <Item
-              key={item.id}
-              item={item}
-              onClickItem={this.onClickItem}
-              onKeyPressItem={this.onKeyPressItem}
-              onClickDelete={this.handleDeleteItem}
-              setTextToCopy={this.setTextToCopy}
-              setItemToEdit={this.setItemToEdit}
-            />
-          );
-        }
-      });
-    } else {
-      itemsComponent = <p>{STR_NO_ITEMS}</p>;
-    }
+    const itemsComponent = items.map(item => {
+      if (item.id === editItemId) {
+        return (
+          <EditItem
+            key={item.id}
+            item={item}
+            value={editItemName}
+            onChange={this.onChangeEditItemName}
+            onClick={this.onClickItem}
+            onKeyPress={this.onKeyPressItem}
+            hide={this.hideItemToEdit}
+          />
+        );
+      } else {
+        return (
+          <Item
+            key={item.id}
+            item={item}
+            onClickItem={this.onClickItem}
+            onKeyPressItem={this.onKeyPressItem}
+            onClickDelete={this.handleDeleteItem}
+            setTextToCopy={this.setTextToCopy}
+            setItemToEdit={this.setItemToEdit}
+          />
+        );
+      }
+    });
 
     return (
       <div className="fl w-75-l w-two-thirds-m w-100 pa3">
         <ToastNotification show={show} text={text} />
         <Button onClick={this.handleDeleteList(list.id)} color="red">
-          <FontAwesomeIcon icon={faTrashAlt} /> {STR_DELETE_LIST}
+          <FontAwesomeIcon icon={faTrashAlt} /> {str.DELETE_LIST}
         </Button>
         {
           isEditTitle ?
@@ -265,31 +244,48 @@ class CurrentList extends Component {
                 value={newListTitle}
                 onChange={this.onChangeListTitle}
                 onKeyPress={this.onKeyPressEditTitle(list.id, newListTitle)}
-                placeholder={STR_LIST_TITLE}
+                placeholder={str.LIST_TITLE}
                 className="pa3 b--none w-60 w-auto-l"
                 maxLength={MAX_LENGTH_LIST}
                 ref={this.editTitle}
               />
-              <Button onClick={this.onClickEditTitle(list.id, newListTitle)}
-              color="green" title={STR_SAVE} classes="w-20 w-auto-l">
+              <Button
+                onClick={this.onClickEditTitle(list.id, newListTitle)}
+                color="green"
+                title={str.SAVE}
+                classes="w-20 w-auto-l"
+              >
                 <FontAwesomeIcon icon={faCheck} />
               </Button>
-              <Button onClick={this.hideEditTitle} color="red"
-              title={STR_CLOSE_EDIT} classes="w-20 w-auto-l">
+              <Button
+                onClick={this.hideEditTitle} color="red"
+                title={str.CLOSE_EDIT}
+                classes="w-20 w-auto-l"
+              >
                 <FontAwesomeIcon icon={faTimes} />
               </Button>
             </div>
           :
             <div className="mv4">
-              <Button onClick={this.showEditTitle} color="blue"
-              title={STR_EDIT_TITLE}>
+              <Button
+                onClick={this.showEditTitle}
+                color="blue"
+                title={str.EDIT_TITLE}
+              >
                 <FontAwesomeIcon icon={faEdit} />
               </Button>
-              <h2 className="f3 mv0 ml3 di list-title">{title}</h2>
+              <h2 className="f3 mv0 ml3 di list-title">
+                {list.title.length === 0 ? str.NO_TITLE : list.title}
+              </h2>
             </div>
         }
         <p>{list.modified.toLocaleDateString()}</p>
-        <ul className="ma0 pa0 list">{itemsComponent}</ul>
+        <ul className="ma0 pa0 list">
+          { items.length > 0
+            ? itemsComponent
+            : <p>{str.NO_ITEMS}</p>
+          }
+        </ul>
         <input
           type="text"
           readOnly

@@ -2,21 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addList } from '../../actions/lists';
 import Button from '../Button/Button';
+import { LocaleConsumer } from '../../index';
 import { MAX_LENGTH_LIST } from '../../constants/constants';
-import {
-  STR_ADD, STR_ADD_LIST, STR_LIST_TITLE
-} from '../../constants/strings';
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onAddList: (title) => dispatch(addList(title))
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  onAddList: (title) => dispatch(addList(title))
+});
 
 class AddList extends Component {
   constructor() {
     super();
-    this.state = { newListTitle: '' };
+    this.state = {
+      newListTitle: ''
+    };
   }
 
   onChangeNewListTitle = (e) => {
@@ -43,23 +41,30 @@ class AddList extends Component {
     const { newListTitle } = this.state;
 
     return (
-      <div className="fl w-75-l w-two-thirds-m w-100 pa3">
-        <h2>{STR_ADD_LIST}</h2>
-        <input
-          type="text"
-          value={newListTitle}
-          onChange={this.onChangeNewListTitle}
-          onKeyPress={this.onKeyPressAddList(newListTitle)}
-          placeholder={STR_LIST_TITLE}
-          className="pa3 b--none w-75 w-two-thirds-m w-auto-l"
-          maxLength={MAX_LENGTH_LIST}
-          autoFocus
-        />
-        <Button onClick={this.onClickAddList(newListTitle)} color="green"
-        classes="w-25 w-third-m w-auto-l">
-          {STR_ADD}
-        </Button>
-      </div>
+      <LocaleConsumer>
+        {str =>
+          <div className="fl w-75-l w-two-thirds-m w-100 pa3">
+            <h2>{str.ADD_LIST}</h2>
+            <input
+              type="text"
+              value={newListTitle}
+              onChange={this.onChangeNewListTitle}
+              onKeyPress={this.onKeyPressAddList(newListTitle)}
+              placeholder={str.LIST_TITLE}
+              className="pa3 b--none w-75 w-two-thirds-m w-auto-l"
+              maxLength={MAX_LENGTH_LIST}
+              autoFocus
+            />
+            <Button
+              onClick={this.onClickAddList(newListTitle)}
+              color="green"
+              classes="w-25 w-third-m w-auto-l"
+            >
+              {str.ADD}
+            </Button>
+          </div>
+        }
+      </LocaleConsumer>
     );
   }
 }

@@ -5,10 +5,9 @@ import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
 import AddList from './components/AddList/AddList';
 import Footer from './components/Footer/Footer';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import FloatingButton from './components/Button/FloatingButton';
 import { MEDIUM_SCREEN_BREAKPOINT } from './constants/constants';
-import { STR_ADD_LIST } from './constants/strings';
+import { LocaleConsumer } from './index';
 
 class App extends Component {
   constructor() {
@@ -60,32 +59,30 @@ class App extends Component {
     const { isShowLists, isShowAddList } = this.state;
 
     return (
-      <Fragment>
-        <Navigation showAddList={this.showAddList} />
-        <main className="cf">
-          <Lists
-            isShowLists={isShowLists}
-            showLists={this.showLists}
-            hideLists={this.hideLists}
-            scrollToCurrentList={this.scrollToCurrentList}
-            showAddList={this.showAddList}
-          />
-          {
-            isShowAddList ?
-              <AddList scrollToCurrentList={this.scrollToCurrentList} />
-            :
-              <CurrentList showLists={this.showLists} />
-          }
-        </main>
-        <Footer />
-        {
-          this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT &&
-            <div onClick={this.showAddList} title={STR_ADD_LIST} style={{fontSize: '2.5rem'}}
-            className="w3 h3 br-100 fixed z-1 bottom-1 right-1 bg-green hover-bg-dark-green white pointer shadow-3 tc lh-copy">
-              <FontAwesomeIcon icon={faPlus} />
-            </div>
+      <LocaleConsumer>
+        {str =>
+          <Fragment>
+            <Navigation showAddList={this.showAddList} />
+            <main className="cf">
+              <Lists
+                isShowLists={isShowLists}
+                showLists={this.showLists}
+                hideLists={this.hideLists}
+                scrollToCurrentList={this.scrollToCurrentList}
+                showAddList={this.showAddList}
+              />
+              { isShowAddList
+                ? <AddList scrollToCurrentList={this.scrollToCurrentList} />
+                : <CurrentList showLists={this.showLists} str={str} />
+              }
+            </main>
+            <Footer />
+            { this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT &&
+              <FloatingButton onClick={this.showAddList}></FloatingButton>
+            }
+          </Fragment>
         }
-      </Fragment>
+      </LocaleConsumer>
     );
   }
 }
