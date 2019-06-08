@@ -13,6 +13,7 @@ switch (window.navigator.language) {
   case 'sk':
   case 'sk-SK':
     localeStrings = strings.sk;
+    document.documentElement.lang = 'sk';
     break;
   default:
     localeStrings = strings.en;
