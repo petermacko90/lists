@@ -25,13 +25,13 @@ export const itemsReducer = (state = initialState, action = {}) => {
         })
       };
     case EDIT_ITEM:
-      const items = state.items.map((item) => {
+      const items = state.items.map(item => {
         if (item.id === action.payload.id) {
           return { ...item, ...action.payload };
         }
         return item;
       });
-      const currentItems = state.currentItems.map((item) => {
+      const currentItems = state.currentItems.map(item => {
         if (item.id === action.payload.id) {
           return { ...item, ...action.payload };
         }

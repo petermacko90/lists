@@ -14,7 +14,7 @@ export const listsReducer = (state = initialStateLists, action = {}) => {
     case SET_CURRENT_LIST:
       return { ...state, currentList: action.payload };
     case EDIT_LIST:
-      const lists = state.lists.map((list) => {
+      const lists = state.lists.map(list => {
         if (list.id === action.payload.id) {
           return { ...list, ...action.payload };
         }

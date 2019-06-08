@@ -12,7 +12,7 @@ let localeStrings = null;
 switch (window.navigator.language) {
   case 'sk':
   case 'sk-SK':
-    localeStrings = strings.sk
+    localeStrings = strings.sk;
     break;
   default:
     localeStrings = strings.en;
