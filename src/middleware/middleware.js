@@ -29,7 +29,7 @@ export const addListOrItemMiddleware = store => next => action => {
         nextId: maxId + 1,
         modified: action.payload.modified
       }
-    })
+    });
   }
   next(action);
 }

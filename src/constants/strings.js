@@ -27,6 +27,7 @@ export const strings = {
     NO_TITLE: '<No title>',
     SAVE: 'Save',
     SHOW_LISTS: 'Show lists',
+    TOGGLE_MENU: 'Toggle menu',
     UNCHECK: 'Uncheck'
   },
   sk: {
@@ -57,6 +58,7 @@ export const strings = {
     NO_TITLE: '<Bez názvu>',
     SAVE: 'Uložiť',
     SHOW_LISTS: 'Zobraziť zoznamy',
+    TOGGLE_MENU: 'Prepnúť menu',
     UNCHECK: 'Odškrtnúť'
   }
 }

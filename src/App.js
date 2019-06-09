@@ -15,8 +15,10 @@ class App extends Component {
     this.state = {
       isShowLists: true,
       isShowAddList: false,
+      isShowMenu: false,
       windowWidth: 0
     };
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +57,12 @@ class App extends Component {
 
   hideLists = () => this.setState({ isShowLists: false });
 
+  toggleMenu() {
+    this.setState(prevState => {
+      return { isShowMenu: !prevState.isShowMenu };
+    });
+  }
+
   render() {
     const { isShowLists, isShowAddList } = this.state;
 
@@ -62,7 +70,10 @@ class App extends Component {
       <LocaleConsumer>
         {str =>
           <Fragment>
-            <Navigation showAddList={this.showAddList} />
+            <Navigation
+              showAddList={this.showAddList}
+              toggleMenu={this.toggleMenu}
+            />
             <main className="cf">
               <Lists
                 isShowLists={isShowLists}
