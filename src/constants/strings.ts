@@ -21,14 +21,15 @@ export const strings = {
     HIDE_LISTS: 'Hide lists',
     ITEM_NAME: 'Item name',
     LIST_TITLE: 'List title',
-    NEW_CONTENT: 'New content is available and will be used when all tabs for this page are closed',
+    NEW_CONTENT:
+      'New content is available and will be used when all tabs for this page are closed',
     NO_ITEMS: 'No items',
     NO_LIST_FOUND: 'No lists found',
     NO_TITLE: '<No title>',
     SAVE: 'Save',
     SHOW_LISTS: 'Show lists',
     TOGGLE_MENU: 'Toggle menu',
-    UNCHECK: 'Uncheck'
+    UNCHECK: 'Uncheck',
   },
   sk: {
     ACTIONS: 'Akcie',
@@ -52,13 +53,14 @@ export const strings = {
     HIDE_LISTS: 'Zavrieť zoznamy',
     ITEM_NAME: 'Názov položky',
     LIST_TITLE: 'Názov zoznamu',
-    NEW_CONTENT: 'Je dostupný nový obsah a bude použitý po zavretí všetkých kariet tejto stránky',
+    NEW_CONTENT:
+      'Je dostupný nový obsah a bude použitý po zavretí všetkých kariet tejto stránky',
     NO_ITEMS: 'Žiadne položky',
     NO_LIST_FOUND: 'Žiadne zoznamy',
     NO_TITLE: '<Bez názvu>',
     SAVE: 'Uložiť',
     SHOW_LISTS: 'Zobraziť zoznamy',
     TOGGLE_MENU: 'Prepnúť menu',
-    UNCHECK: 'Odškrtnúť'
-  }
-}
+    UNCHECK: 'Odškrtnúť',
+  },
+} as const;
