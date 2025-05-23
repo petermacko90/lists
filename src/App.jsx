@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import { Component, Fragment } from 'react';
 import { debounce } from './helpers';
 import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
@@ -9,14 +9,14 @@ import FloatingButton from './components/Button/FloatingButton';
 import { MEDIUM_SCREEN_BREAKPOINT } from './constants/constants';
 import { LocaleConsumer } from './index';
 
-class App extends Component {
+export default class App extends Component {
   constructor() {
     super();
     this.state = {
       isShowLists: true,
       isShowAddList: false,
       isShowMenu: false,
-      windowWidth: 0
+      windowWidth: 0,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
@@ -35,14 +35,14 @@ class App extends Component {
     if (windowWidth >= MEDIUM_SCREEN_BREAKPOINT) {
       this.showLists();
     }
-  }
+  };
 
   showAddList = () => {
     this.setState({ isShowAddList: true });
     if (this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT) {
       this.hideLists();
     }
-  }
+  };
 
   hideAddList = () => this.setState({ isShowAddList: false });
 
@@ -51,14 +51,14 @@ class App extends Component {
       this.hideLists();
     }
     this.hideAddList();
-  }
+  };
 
   showLists = () => this.setState({ isShowLists: true });
 
   hideLists = () => this.setState({ isShowLists: false });
 
   toggleMenu() {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return { isShowMenu: !prevState.isShowMenu };
     });
   }
@@ -68,12 +68,9 @@ class App extends Component {
 
     return (
       <LocaleConsumer>
-        {str =>
+        {(str) => (
           <Fragment>
-            <Navigation
-              showAddList={this.showAddList}
-              toggleMenu={this.toggleMenu}
-            />
+            <Navigation showAddList={this.showAddList} toggleMenu={this.toggleMenu} />
             <main className="cf">
               <Lists
                 isShowLists={isShowLists}
@@ -82,20 +79,19 @@ class App extends Component {
                 scrollToCurrentList={this.scrollToCurrentList}
                 showAddList={this.showAddList}
               />
-              { isShowAddList
-                ? <AddList scrollToCurrentList={this.scrollToCurrentList} />
-                : <CurrentList showLists={this.showLists} str={str} />
-              }
+              {isShowAddList ? (
+                <AddList scrollToCurrentList={this.scrollToCurrentList} />
+              ) : (
+                <CurrentList showLists={this.showLists} str={str} />
+              )}
             </main>
             <Footer />
-            { this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT &&
+            {this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT && (
               <FloatingButton onClick={this.showAddList}></FloatingButton>
-            }
+            )}
           </Fragment>
-        }
+        )}
       </LocaleConsumer>
     );
   }
 }
-
-export default App;

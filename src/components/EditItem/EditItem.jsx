@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import Button from '../Button/Button';
 import { LocaleConsumer } from '../../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,10 +6,10 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { checkEmptyString } from '../../helpers';
 import { MAX_LENGTH_ITEM } from '../../constants/constants';
 
-const EditItem = ({ item, hide, value, onChange, onClick, onKeyPress }) => {
+export default function EditItem({ item, hide, value, onChange, onClick, onKeyPress }) {
   return (
     <LocaleConsumer>
-      {str =>
+      {(str) => (
         <Fragment>
           <input
             type="text"
@@ -30,18 +30,11 @@ const EditItem = ({ item, hide, value, onChange, onClick, onKeyPress }) => {
           >
             <FontAwesomeIcon icon={faCheck} />
           </Button>
-          <Button
-            onClick={hide}
-            color="red"
-            title={str.CLOSE_EDIT}
-            classes="w-20 w-auto-l"
-          >
+          <Button onClick={hide} color="red" title={str.CLOSE_EDIT} classes="w-20 w-auto-l">
             <FontAwesomeIcon icon={faTimes} />
           </Button>
         </Fragment>
-      }
+      )}
     </LocaleConsumer>
   );
 }
-
-export default EditItem;

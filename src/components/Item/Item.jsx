@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import ItemDropdown from './ItemDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import './Item.css';
 import { LocaleConsumer } from '../../index';
 
-class Item extends Component {
+export default class Item extends Component {
   constructor() {
     super();
     this.state = { isActionsOpen: false };
@@ -16,35 +16,33 @@ class Item extends Component {
     this.timeOutId = setTimeout(() => {
       this.setState({ isActionsOpen: false });
     });
-  }
+  };
 
   onFocus = () => clearTimeout(this.timeOutId);
 
   onClickToggleActions = () => {
     this.handleToggleActions();
-  }
+  };
 
   onKeyPressToggleActions = (e) => {
     if (e.key === 'Enter') {
       this.handleToggleActions();
     }
-  }
+  };
 
   handleToggleActions() {
     this.setState({ isActionsOpen: !this.state.isActionsOpen });
   }
 
   render() {
-    const {
-      onClickItem, onKeyPressItem, onClickDelete, setTextToCopy, setItemToEdit
-    } = this.props;
+    const { onClickItem, onKeyPressItem, onClickDelete, setTextToCopy, setItemToEdit } = this.props;
     const { id, list_id, checked, name } = this.props.item;
     const { isActionsOpen } = this.state;
 
     return (
       <LocaleConsumer>
-        {str =>
-          <li className={"flex justify-between relative noselect" + (checked ? ' checked' : '')}>
+        {(str) => (
+          <li className={'flex justify-between relative noselect' + (checked ? ' checked' : '')}>
             <div
               className="flex pv3 w-100 pointer"
               tabIndex="0"
@@ -52,9 +50,7 @@ class Item extends Component {
               onClick={onClickItem(list_id, id, name, !checked)}
               onKeyPress={onKeyPressItem(list_id, id, name, !checked)}
             >
-              <span className="check tc b">
-                { checked && <FontAwesomeIcon icon={faCheck} /> }
-              </span>
+              <span className="check tc b">{checked && <FontAwesomeIcon icon={faCheck} />}</span>
               <span className="item-name">{name}</span>
             </div>
             <div
@@ -69,7 +65,7 @@ class Item extends Component {
               <span className="f3">
                 <FontAwesomeIcon icon={faEllipsisV} />
               </span>
-              { isActionsOpen &&
+              {isActionsOpen && (
                 <ItemDropdown
                   id={id}
                   listId={list_id}
@@ -81,13 +77,11 @@ class Item extends Component {
                   setTextToCopy={setTextToCopy}
                   setItemToEdit={setItemToEdit}
                 />
-              }
+              )}
             </div>
           </li>
-        }
+        )}
       </LocaleConsumer>
     );
   }
 }
-
-export default Item;

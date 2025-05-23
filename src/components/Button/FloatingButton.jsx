@@ -1,12 +1,11 @@
-import React from 'react';
 import { LocaleConsumer } from '../../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const FloatingButton = ({ onClick }) => {
+export default function FloatingButton({ onClick }) {
   return (
     <LocaleConsumer>
-      {str =>
+      {(str) => (
         <div
           onClick={onClick}
           title={str.ADD_LIST}
@@ -15,9 +14,7 @@ const FloatingButton = ({ onClick }) => {
         >
           <FontAwesomeIcon icon={faPlus} />
         </div>
-      }
+      )}
     </LocaleConsumer>
   );
 }
-
-export default FloatingButton;

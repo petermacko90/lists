@@ -1,7 +1,6 @@
-import React from 'react';
 import './Button.css';
 
-const Button = ({ onClick, color, children, title, classes, disabled }) => {
+export default function Button({ onClick, color, children, title, classes, disabled }) {
   return (
     <button
       type="button"
@@ -15,5 +14,3 @@ const Button = ({ onClick, color, children, title, classes, disabled }) => {
     </button>
   );
 }
-
-export default Button;

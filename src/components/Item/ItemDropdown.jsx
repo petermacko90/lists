@@ -1,17 +1,21 @@
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCheck, faCopy, faEdit, faTrashAlt
-} from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCopy, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { LocaleConsumer } from '../../index';
 
-const ItemDropdown = ({
-  id, listId, name, checked, checkAction,
-  onClickItem, onClickDelete, setTextToCopy, setItemToEdit
-}) => {
+export default function ItemDropdown({
+  id,
+  listId,
+  name,
+  checked,
+  checkAction,
+  onClickItem,
+  onClickDelete,
+  setTextToCopy,
+  setItemToEdit,
+}) {
   return (
     <LocaleConsumer>
-      {str =>
+      {(str) => (
         <div className="actions-content w4 shadow-3">
           <button
             type="button"
@@ -46,9 +50,7 @@ const ItemDropdown = ({
             <FontAwesomeIcon icon={faCopy} /> {str.COPY_NAME}
           </button>
         </div>
-      }
+      )}
     </LocaleConsumer>
   );
 }
-
-export default ItemDropdown;

@@ -1,14 +1,13 @@
-import React from 'react';
 import './Navigation.css';
 import { LocaleConsumer } from '../../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assests/list32.png';
 
-const Navigation = ({ showAddList, toggleMenu }) => {
+export default function Navigation({ showAddList, toggleMenu }) {
   return (
     <LocaleConsumer>
-      {str =>
+      {(str) => (
         <nav className="bg-yellow shadow-2 mb2 flex justify-between">
           <div>
             <button
@@ -29,13 +28,13 @@ const Navigation = ({ showAddList, toggleMenu }) => {
             className="b--none ml4 mr3 bg-transparent f3 b pointer v-mid add-list"
             aria-label={str.ADD_LIST}
           >
-            <span><FontAwesomeIcon icon={faPlus} /></span>
+            <span>
+              <FontAwesomeIcon icon={faPlus} />
+            </span>
             <span className="dn di-ns"> {str.ADD_LIST}</span>
           </button>
         </nav>
-      }
+      )}
     </LocaleConsumer>
   );
 }
-
-export default Navigation;

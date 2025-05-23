@@ -1,15 +1,18 @@
-import React from 'react';
 import Button from '../Button/Button';
 import { checkEmptyString } from '../../helpers';
 import { MAX_LENGTH_ITEM } from '../../constants/constants';
 import { LocaleConsumer } from '../../index';
 
-const AddItem = ({
-  listId, newItemName, onSetNewItemName, onClickAddItem, onKeyPressAddItem
-}) => {
+export default function AddItem({
+  listId,
+  newItemName,
+  onSetNewItemName,
+  onClickAddItem,
+  onKeyPressAddItem,
+}) {
   return (
     <LocaleConsumer>
-      {str =>
+      {(str) => (
         <div className="mt3">
           <input
             type="text"
@@ -29,9 +32,7 @@ const AddItem = ({
             {str.ADD}
           </Button>
         </div>
-      }
+      )}
     </LocaleConsumer>
   );
 }
-
-export default AddItem;
