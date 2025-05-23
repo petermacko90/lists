@@ -1,5 +1,5 @@
 import Button from '../Button/Button';
-import { checkEmptyString } from '../../helpers';
+import { isEmptyString } from '../../helpers';
 import { MAX_LENGTH_ITEM } from '../../constants/constants';
 import { LocaleConsumer } from '../../index';
 
@@ -27,7 +27,7 @@ export default function AddItem({
             onClick={onClickAddItem(listId, newItemName)}
             color="green"
             classes="w-25 w-third-m w-auto-l"
-            disabled={checkEmptyString(newItemName)}
+            disabled={isEmptyString(newItemName)}
           >
             {str.ADD}
           </Button>

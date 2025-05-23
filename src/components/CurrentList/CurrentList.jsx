@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editList, deleteList } from '../../actions/lists';
 import { editItem, deleteItem, addItem } from '../../actions/items';
-import { checkEmptyString } from '../../helpers';
+import { isEmptyString } from '../../helpers';
 import Item from '../Item/Item';
 import AddItem from '../AddItem/AddItem';
 import EditItem from '../EditItem/EditItem';
@@ -131,7 +131,7 @@ class CurrentList extends Component {
   };
 
   handleEditItem = (list_id, id, name, checked) => {
-    if (checkEmptyString(name)) {
+    if (isEmptyString(name)) {
       return;
     }
     this.props.onEditItem(list_id, id, name, checked);
@@ -174,7 +174,7 @@ class CurrentList extends Component {
   };
 
   handleAddItem = (listId, name) => {
-    if (checkEmptyString(name)) {
+    if (isEmptyString(name)) {
       return;
     }
     this.props.onAddItem(listId, name);

@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import { LocaleConsumer } from '../../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { checkEmptyString } from '../../helpers';
+import { isEmptyString } from '../../helpers';
 import { MAX_LENGTH_ITEM } from '../../constants/constants';
 
 export default function EditItem({ item, hide, value, onChange, onClick, onKeyPress }) {
@@ -25,7 +25,7 @@ export default function EditItem({ item, hide, value, onChange, onClick, onKeyPr
             onClick={onClick(item.list_id, item.id, value, item.checked)}
             color="green"
             title={str.SAVE}
-            disabled={checkEmptyString(value)}
+            disabled={isEmptyString(value)}
             classes="w-20 w-auto-l"
           >
             <FontAwesomeIcon icon={faCheck} />
