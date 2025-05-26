@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import './index.css';
@@ -22,13 +22,13 @@ switch (window.navigator.language) {
 const LocaleContext = React.createContext(strings.en);
 export const LocaleConsumer = LocaleContext.Consumer;
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'));
+root.render(
   <Provider store={store}>
     <LocaleContext.Provider value={localeStrings}>
       <App />
     </LocaleContext.Provider>
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 );
 
 serviceWorker.register();
