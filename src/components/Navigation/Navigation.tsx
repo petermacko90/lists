@@ -2,7 +2,6 @@ import './Navigation.css';
 import { LocaleConsumer } from '../../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
-import logo from '../../assests/list32.png';
 
 export default function Navigation({ showAddList, toggleMenu }) {
   return (
@@ -19,7 +18,7 @@ export default function Navigation({ showAddList, toggleMenu }) {
             >
               <FontAwesomeIcon icon={faBars} />
             </button>
-            <img src={logo} alt="logo" className="ma1 v-mid" />
+            <img src="/list32.png" alt="logo" className="ma1 v-mid" />
             <h1 className="dib f2 mv2 v-mid">Lists</h1>
           </div>
           <button

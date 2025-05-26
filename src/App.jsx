@@ -69,7 +69,7 @@ export default class App extends Component {
     return (
       <LocaleConsumer>
         {(str) => (
-          <Fragment>
+          <div>
             <Navigation showAddList={this.showAddList} toggleMenu={this.toggleMenu} />
             <main className="cf">
               <Lists
@@ -89,7 +89,7 @@ export default class App extends Component {
             {this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT && (
               <FloatingButton onClick={this.showAddList}></FloatingButton>
             )}
-          </Fragment>
+          </div>
         )}
       </LocaleConsumer>
     );

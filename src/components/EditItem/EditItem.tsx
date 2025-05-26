@@ -10,12 +10,12 @@ export default function EditItem({ item, hide, value, onChange, onClick, onKeyPr
   return (
     <LocaleConsumer>
       {(str) => (
-        <Fragment>
+        <div>
           <input
             type="text"
             value={value}
             onChange={onChange}
-            onKeyPress={onKeyPress(item.list_id, item.id, value, item.checked)}
+            onKeyUp={onKeyPress(item.list_id, item.id, value, item.checked)}
             placeholder={str.ITEM_NAME}
             className="pa3 b--none w-60 w-auto-l"
             maxLength={MAX_LENGTH_ITEM}
@@ -33,7 +33,7 @@ export default function EditItem({ item, hide, value, onChange, onClick, onKeyPr
           <Button onClick={hide} color="red" title={str.CLOSE_EDIT} classes="w-20 w-auto-l">
             <FontAwesomeIcon icon={faTimes} />
           </Button>
-        </Fragment>
+        </div>
       )}
     </LocaleConsumer>
   );

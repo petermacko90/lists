@@ -48,7 +48,7 @@ export default class Item extends Component {
               tabIndex="0"
               title={checked ? str.UNCHECK : str.CHECK}
               onClick={onClickItem(list_id, id, name, !checked)}
-              onKeyPress={onKeyPressItem(list_id, id, name, !checked)}
+              onKeyUp={onKeyPressItem(list_id, id, name, !checked)}
             >
               <span className="check tc b">{checked && <FontAwesomeIcon icon={faCheck} />}</span>
               <span className="item-name">{name}</span>
@@ -67,11 +67,7 @@ export default class Item extends Component {
               </span>
               {isActionsOpen && (
                 <ItemDropdown
-                  id={id}
-                  listId={list_id}
-                  name={name}
-                  checked={checked}
-                  checkAction={checked ? str.UNCHECK : str.CHECK}
+                  item={this.props.item}
                   onClickItem={onClickItem}
                   onClickDelete={onClickDelete}
                   setTextToCopy={setTextToCopy}

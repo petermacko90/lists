@@ -9,6 +9,12 @@ export default function AddItem({
   onSetNewItemName,
   onClickAddItem,
   onKeyPressAddItem,
+}: {
+  listId: number;
+  newItemName: string;
+  onSetNewItemName: React.ChangeEventHandler<HTMLInputElement>;
+  onClickAddItem: Function;
+  onKeyPressAddItem: Function;
 }) {
   return (
     <LocaleConsumer>
@@ -18,7 +24,7 @@ export default function AddItem({
             type="text"
             value={newItemName}
             onChange={onSetNewItemName}
-            onKeyPress={onKeyPressAddItem(listId, newItemName)}
+            onKeyUp={onKeyPressAddItem(listId, newItemName)}
             placeholder={str.ITEM_NAME}
             maxLength={MAX_LENGTH_ITEM}
             className="pa3 b--none w-75 w-two-thirds-m w-auto-l"

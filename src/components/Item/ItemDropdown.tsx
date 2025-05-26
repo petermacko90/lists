@@ -1,17 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCopy, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { LocaleConsumer } from '../../index';
+import { ItemType } from '../../constants/types';
 
 export default function ItemDropdown({
-  id,
-  listId,
-  name,
-  checked,
-  checkAction,
+  item,
   onClickItem,
   onClickDelete,
   setTextToCopy,
   setItemToEdit,
+}: {
+  item: ItemType;
+  onClickItem: Function;
+  onClickDelete: Function;
+  setTextToCopy: Function;
+  setItemToEdit: Function;
 }) {
   return (
     <LocaleConsumer>
@@ -19,7 +22,7 @@ export default function ItemDropdown({
         <div className="actions-content w4 shadow-3">
           <button
             type="button"
-            onClick={setItemToEdit(id, name)}
+            onClick={setItemToEdit(item.id, item.name)}
             className="w-100 pointer"
             title={str.EDIT_ITEM_NAME}
           >
@@ -27,15 +30,15 @@ export default function ItemDropdown({
           </button>
           <button
             type="button"
-            onClick={onClickItem(listId, id, name, !checked)}
+            onClick={onClickItem(item.list_id, item.id, item.name, !item.checked)}
             className="w-100 pointer"
-            title={checkAction}
+            title={item.checked ? str.UNCHECK : str.CHECK}
           >
-            <FontAwesomeIcon icon={faCheck} /> {checkAction}
+            <FontAwesomeIcon icon={faCheck} /> {item.checked ? str.UNCHECK : str.CHECK}
           </button>
           <button
             type="button"
-            onClick={onClickDelete(listId, id)}
+            onClick={onClickDelete(item.list_id, item.id)}
             className="w-100 pointer"
             title={str.DELETE_ITEM}
           >
@@ -43,7 +46,7 @@ export default function ItemDropdown({
           </button>
           <button
             type="button"
-            onClick={setTextToCopy(name)}
+            onClick={setTextToCopy(item.name)}
             className="w-100 pointer"
             title={str.COPY_TO_CLIPBOARD}
           >

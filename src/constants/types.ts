@@ -1,10 +1,17 @@
-export type List = {
+export type ListType = {
   id: number;
   title: string;
   modified: Date;
 };
 
 export type ListsState = {
-  lists: List[];
-  currentList: List | null;
+  lists: ListType[];
+  currentList: ListType | null;
+};
+
+export type ItemType = {
+  list_id: number;
+  id: number;
+  name: string;
+  checked: boolean;
 };

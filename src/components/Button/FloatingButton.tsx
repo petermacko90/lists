@@ -1,8 +1,9 @@
 import { LocaleConsumer } from '../../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { MouseEventHandler } from 'react';
 
-export default function FloatingButton({ onClick }) {
+export default function FloatingButton({ onClick }: { onClick: MouseEventHandler<HTMLDivElement> }) {
   return (
     <LocaleConsumer>
       {(str) => (
