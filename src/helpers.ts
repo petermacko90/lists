@@ -6,7 +6,7 @@ export function isEmptyString(text: string): boolean {
 }
 
 export function debounce(func: Function, wait: number, immediate?: boolean) {
-  let timeout: number | undefined;
+  let timeout: NodeJS.Timeout | undefined;
   return function () {
     let context = this;
     let args = arguments;

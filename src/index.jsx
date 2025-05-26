@@ -24,11 +24,13 @@ export const LocaleConsumer = LocaleContext.Consumer;
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store}>
-    <LocaleContext.Provider value={localeStrings}>
-      <App />
-    </LocaleContext.Provider>
-  </Provider>
+  <React.StrictMode>
+    <Provider store={store}>
+      <LocaleContext.Provider value={localeStrings}>
+        <App />
+      </LocaleContext.Provider>
+    </Provider>
+  </React.StrictMode>
 );
 
 serviceWorker.register();
