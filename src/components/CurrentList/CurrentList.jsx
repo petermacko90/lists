@@ -30,12 +30,10 @@ class CurrentList extends Component {
   constructor() {
     super();
     this.editTitle = React.createRef();
-    this.copyText = React.createRef();
     this.state = {
       isEditTitle: false,
       newListTitle: '',
       newItemName: '',
-      textToCopy: '',
       editItemId: -1,
       editItemName: '',
       notification: {
@@ -53,9 +51,7 @@ class CurrentList extends Component {
   }
 
   setTextToCopy = (textToCopy) => () => {
-    this.setState({ textToCopy }, () => {
-      this.copyText.current.select();
-      document.execCommand('copy');
+    navigator.clipboard.writeText(textToCopy).then(() => {
       this.showNotification(`${this.props.str.COPIED}: ${textToCopy}`);
     });
   };
@@ -189,7 +185,7 @@ class CurrentList extends Component {
   render() {
     const { list, items, str } = this.props;
     if (!list) return null;
-    const { isEditTitle, newListTitle, newItemName, textToCopy, editItemId, editItemName } = this.state;
+    const { isEditTitle, newListTitle, newItemName, editItemId, editItemName } = this.state;
     const { show, text } = this.state.notification;
 
     const itemsComponent = items.map((item) => {
@@ -232,7 +228,7 @@ class CurrentList extends Component {
               type="text"
               value={newListTitle}
               onChange={this.onChangeListTitle}
-              onKeyPress={this.onKeyPressEditTitle(list.id, newListTitle)}
+              onKeyDown={this.onKeyPressEditTitle(list.id, newListTitle)}
               placeholder={str.LIST_TITLE}
               className="pa3 b--none w-60 w-auto-l"
               maxLength={MAX_LENGTH_LIST}
@@ -262,14 +258,6 @@ class CurrentList extends Component {
         )}
         <p>{list.modified.toLocaleDateString()}</p>
         <ul className="ma0 pa0 list">{items.length > 0 ? itemsComponent : <p>{str.NO_ITEMS}</p>}</ul>
-        <input
-          type="text"
-          readOnly
-          value={textToCopy}
-          ref={this.copyText}
-          className="copy-text"
-          tabIndex="-1"
-        />
         <AddItem
           listId={list.id}
           newItemName={newItemName}
