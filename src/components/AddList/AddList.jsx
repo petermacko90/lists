@@ -49,7 +49,7 @@ class AddList extends Component {
               type="text"
               value={newListTitle}
               onChange={this.onChangeNewListTitle}
-              onKeyPress={this.onKeyPressAddList(newListTitle)}
+              onKeyDown={this.onKeyPressAddList(newListTitle)}
               placeholder={str.LIST_TITLE}
               className="pa3 b--none w-75 w-two-thirds-m w-auto-l"
               maxLength={MAX_LENGTH_LIST}

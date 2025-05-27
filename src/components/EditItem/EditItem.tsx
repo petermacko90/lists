@@ -4,8 +4,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { isEmptyString } from '../../helpers';
 import { MAX_LENGTH_ITEM } from '../../constants/constants';
+import { ItemType } from '../../constants/types';
 
-export default function EditItem({ item, hide, value, onChange, onClick, onKeyPress }) {
+export default function EditItem({
+  item,
+  onCloseEdit,
+  value,
+  onChange,
+  onClick,
+  onKeyPress,
+}: {
+  item: ItemType;
+  onCloseEdit: React.MouseEventHandler<HTMLButtonElement>;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onClick: Function;
+  onKeyPress: Function;
+}) {
   return (
     <LocaleConsumer>
       {(str) => (
@@ -29,7 +44,7 @@ export default function EditItem({ item, hide, value, onChange, onClick, onKeyPr
           >
             <FontAwesomeIcon icon={faCheck} />
           </Button>
-          <Button onClick={hide} color="red" title={str.CLOSE_EDIT} classes="w-20 w-auto-l">
+          <Button onClick={onCloseEdit} color="red" title={str.CLOSE_EDIT} classes="w-20 w-auto-l">
             <FontAwesomeIcon icon={faTimes} />
           </Button>
         </div>

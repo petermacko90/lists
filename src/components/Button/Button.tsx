@@ -1,7 +1,7 @@
 import { MouseEventHandler, ReactNode } from 'react';
 import './Button.css';
 
-export type ButtonColor = 'red' | 'green' | 'blue';
+type ButtonColor = 'red' | 'green' | 'blue';
 
 export default function Button({
   onClick,

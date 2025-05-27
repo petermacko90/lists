@@ -198,7 +198,7 @@ class CurrentList extends Component {
             onChange={this.onChangeEditItemName}
             onClick={this.onClickItem}
             onKeyPress={this.onKeyPressItem}
-            hide={this.hideItemToEdit}
+            onCloseEdit={this.hideItemToEdit}
           />
         );
       } else {
