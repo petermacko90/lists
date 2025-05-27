@@ -1,4 +1,4 @@
-import { LocaleConsumer } from '../../index';
+import { LocaleConsumer } from '../../App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { MouseEventHandler } from 'react';

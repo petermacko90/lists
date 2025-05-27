@@ -1,5 +1,5 @@
 import './Navigation.css';
-import { LocaleConsumer } from '../../index';
+import { LocaleConsumer } from '../../App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
 

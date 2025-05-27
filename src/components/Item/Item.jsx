@@ -3,7 +3,7 @@ import ItemDropdown from './ItemDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import './Item.css';
-import { LocaleConsumer } from '../../index';
+import { LocaleConsumer } from '../../App';
 
 export default class Item extends Component {
   constructor() {

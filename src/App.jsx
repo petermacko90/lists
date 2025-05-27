@@ -1,5 +1,6 @@
-import { Component, Fragment } from 'react';
-import { debounce } from './helpers';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { debounce, getTranslations } from './helpers';
 import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
@@ -7,9 +8,14 @@ import AddList from './components/AddList/AddList';
 import Footer from './components/Footer/Footer';
 import FloatingButton from './components/Button/FloatingButton';
 import { MEDIUM_SCREEN_BREAKPOINT } from './constants/constants';
-import { LocaleConsumer } from './index';
+import store from './store/store';
+import { strings } from './constants/strings';
 
-export default class App extends Component {
+const LocaleContext = React.createContext(strings.en);
+export const LocaleConsumer = LocaleContext.Consumer;
+const translations = getTranslations();
+
+export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -67,31 +73,35 @@ export default class App extends Component {
     const { isShowLists, isShowAddList } = this.state;
 
     return (
-      <LocaleConsumer>
-        {(str) => (
-          <div>
-            <Navigation showAddList={this.showAddList} toggleMenu={this.toggleMenu} />
-            <main className="cf">
-              <Lists
-                isShowLists={isShowLists}
-                showLists={this.showLists}
-                hideLists={this.hideLists}
-                scrollToCurrentList={this.scrollToCurrentList}
-                showAddList={this.showAddList}
-              />
-              {isShowAddList ? (
-                <AddList scrollToCurrentList={this.scrollToCurrentList} />
-              ) : (
-                <CurrentList showLists={this.showLists} str={str} />
-              )}
-            </main>
-            <Footer />
-            {this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT && (
-              <FloatingButton onClick={this.showAddList}></FloatingButton>
+      <Provider store={store}>
+        <LocaleContext.Provider value={translations}>
+          <LocaleConsumer>
+            {(str) => (
+              <>
+                <Navigation showAddList={this.showAddList} toggleMenu={this.toggleMenu} />
+                <main className="cf">
+                  <Lists
+                    isShowLists={isShowLists}
+                    showLists={this.showLists}
+                    hideLists={this.hideLists}
+                    scrollToCurrentList={this.scrollToCurrentList}
+                    showAddList={this.showAddList}
+                  />
+                  {isShowAddList ? (
+                    <AddList scrollToCurrentList={this.scrollToCurrentList} />
+                  ) : (
+                    <CurrentList showLists={this.showLists} str={str} />
+                  )}
+                </main>
+                <Footer />
+                {this.state.windowWidth < MEDIUM_SCREEN_BREAKPOINT && (
+                  <FloatingButton onClick={this.showAddList}></FloatingButton>
+                )}
+              </>
             )}
-          </div>
-        )}
-      </LocaleConsumer>
+          </LocaleConsumer>
+        </LocaleContext.Provider>
+      </Provider>
     );
   }
 }

@@ -1,3 +1,5 @@
+import { strings } from './constants/strings';
+
 export function isEmptyString(text: string): boolean {
   if (text.trim().length === 0) {
     return true;
@@ -19,4 +21,15 @@ export function debounce(func: Function, wait: number, immediate?: boolean) {
     timeout = setTimeout(later, wait);
     if (callNow) func.apply(context, args);
   };
+}
+
+export function getTranslations() {
+  switch (window.navigator.language) {
+    case 'sk':
+    case 'sk-SK':
+      document.documentElement.lang = 'sk';
+      return strings.sk;
+    default:
+      return strings.en;
+  }
 }

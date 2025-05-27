@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import List from '../List/List';
 import Button from '../Button/Button';
 import './Lists.css';
-import { LocaleConsumer } from '../../index';
+import { LocaleConsumer } from '../../App';
 import { requestLists, setCurrentList } from '../../actions/lists';
 import { requestItems, setCurrentItems } from '../../actions/items';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
