@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCopy, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { LocaleConsumer } from '../../App';
+import { LocaleConsumer } from '../../context';
 import { ItemType } from '../../constants/types';
 
 export default function ItemDropdown({

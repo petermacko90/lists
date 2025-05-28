@@ -1,5 +1,5 @@
 import Button from '../Button/Button';
-import { LocaleConsumer } from '../../App';
+import { LocaleConsumer } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { isEmptyString } from '../../helpers';

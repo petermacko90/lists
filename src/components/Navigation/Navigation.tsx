@@ -1,9 +1,15 @@
 import './Navigation.css';
-import { LocaleConsumer } from '../../App';
+import { LocaleConsumer } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
 
-export default function Navigation({ showAddList, toggleMenu }) {
+export default function Navigation({
+  showAddList,
+  toggleMenu,
+}: {
+  showAddList: Function;
+  toggleMenu: Function;
+}) {
   return (
     <LocaleConsumer>
       {(str) => (
@@ -23,7 +29,7 @@ export default function Navigation({ showAddList, toggleMenu }) {
           </div>
           <button
             type="button"
-            onClick={showAddList}
+            onClick={() => showAddList()}
             className="b--none ml4 mr3 bg-transparent f3 b pointer v-mid add-list"
             aria-label={str.ADD_LIST}
           >

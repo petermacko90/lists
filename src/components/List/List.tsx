@@ -1,5 +1,5 @@
 import './List.css';
-import { LocaleConsumer } from '../../App';
+import { LocaleConsumer } from '../../context';
 import { ListType, ItemType } from '../../constants/types';
 
 export default function List({

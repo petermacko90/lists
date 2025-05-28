@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { addList } from '../../actions/lists';
 import Button from '../Button/Button';
-import { LocaleConsumer } from '../../App';
+import { LocaleConsumer } from '../../context';
 import { MAX_LENGTH_LIST } from '../../constants/constants';
 
 const mapDispatchToProps = (dispatch) => ({

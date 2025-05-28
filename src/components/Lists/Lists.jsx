@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import List from '../List/List';
 import Button from '../Button/Button';
 import './Lists.css';
-import { LocaleConsumer } from '../../App';
+import { LocaleConsumer } from '../../context';
 import { requestLists, setCurrentList } from '../../actions/lists';
 import { requestItems, setCurrentItems } from '../../actions/items';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -45,7 +45,7 @@ class Lists extends Component {
   };
 
   render() {
-    const { lists, items, isShowLists, showLists, hideLists } = this.props;
+    const { lists, items, showLists, setShowLists, showAddList } = this.props;
     let listComponents = [];
     let itemsProp = [];
 
@@ -71,10 +71,10 @@ class Lists extends Component {
       <LocaleConsumer>
         {(str) => (
           <div className="fl w-25-l w-third-m w-100">
-            {isShowLists ? (
+            {showLists ? (
               <button
                 type="button"
-                onClick={hideLists}
+                onClick={() => setShowLists(false)}
                 className="bg-yellow b--none pointer pv1 ml3 mv1 toggle-lists"
               >
                 {str.HIDE_LISTS} &#9650;
@@ -82,13 +82,13 @@ class Lists extends Component {
             ) : (
               <button
                 type="button"
-                onClick={showLists}
+                onClick={() => setShowLists(true)}
                 className="bg-yellow b--none pointer pv1 ml3 mv1 toggle-lists"
               >
                 {str.SHOW_LISTS} &#9660;
               </button>
             )}
-            <div className={`lists ${isShowLists ? '' : 'dn'}`}>
+            <div className={`lists ${showLists ? '' : 'dn'}`}>
               {listComponents.length > 0 ? (
                 <Fragment>
                   {listComponents}
@@ -97,7 +97,7 @@ class Lists extends Component {
               ) : (
                 <div className="ml3">
                   <p>{str.NO_LIST_FOUND}</p>
-                  <Button onClick={this.props.showAddList} color="green">
+                  <Button onClick={() => showAddList()} color="green">
                     <FontAwesomeIcon icon={faPlus} /> {str.ADD_LIST}
                   </Button>
                 </div>

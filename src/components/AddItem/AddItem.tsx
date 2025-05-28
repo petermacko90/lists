@@ -1,7 +1,7 @@
 import Button from '../Button/Button';
 import { isEmptyString } from '../../helpers';
 import { MAX_LENGTH_ITEM } from '../../constants/constants';
-import { LocaleConsumer } from '../../App';
+import { LocaleConsumer } from '../../context';
 
 export default function AddItem({
   listId,
