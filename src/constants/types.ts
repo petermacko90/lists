@@ -15,3 +15,8 @@ export type ItemType = {
   name: string;
   checked: boolean;
 };
+
+export type ItemsState = {
+  items: ItemType[];
+  currentItems: ItemType[];
+};

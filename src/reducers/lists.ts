@@ -5,7 +5,7 @@ import {
   DELETE_LIST,
   ADD_LIST_WITH_ID,
 } from '../constants/action-types';
-import { List, ListsState } from '../constants/types';
+import { ListType, ListsState } from '../constants/types';
 
 const initialStateLists: ListsState = {
   lists: [],
@@ -37,7 +37,7 @@ export const listsReducer = (state = initialStateLists, action) => {
         currentList: null,
       };
     case ADD_LIST_WITH_ID:
-      const newList: List = {
+      const newList: ListType = {
         id: action.payload.nextId,
         title: action.payload.title,
         modified: action.payload.modified,

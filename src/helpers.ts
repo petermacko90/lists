@@ -1,4 +1,4 @@
-import { strings } from './constants/strings';
+import { strings, Translations } from './constants/strings';
 
 export function isEmptyString(text: string): boolean {
   if (text.trim().length === 0) {
@@ -23,7 +23,7 @@ export function debounce(func: Function, wait: number, immediate?: boolean) {
   };
 }
 
-export function getTranslations() {
+export function getTranslations(): Translations {
   switch (window.navigator.language) {
     case 'sk':
     case 'sk-SK':

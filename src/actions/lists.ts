@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { FETCH_LISTS, SET_CURRENT_LIST, EDIT_LIST, DELETE_LIST, ADD_LIST } from '../constants/action-types';
-import { List } from '../constants/types';
+import { ListType } from '../constants/types';
 import { loadState } from '../localStorage';
 
 export const requestLists = () => (dispatch: Dispatch) => {
@@ -8,7 +8,7 @@ export const requestLists = () => (dispatch: Dispatch) => {
   dispatch({ type: FETCH_LISTS, payload: lists });
 };
 
-export const setCurrentList = (list: List) => ({
+export const setCurrentList = (list: ListType) => ({
   type: SET_CURRENT_LIST,
   payload: list,
 });

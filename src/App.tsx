@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Provider } from 'react-redux';
-import { debounce, getTranslations } from './helpers';
+import { getTranslations } from './helpers';
 import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';

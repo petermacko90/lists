@@ -4,14 +4,18 @@ import { addList } from '../../actions/lists';
 import Button from '../Button/Button';
 import { LocaleConsumer } from '../../context';
 import { MAX_LENGTH_LIST } from '../../constants/constants';
+import { Dispatch } from 'redux';
 
-const mapDispatchToProps = (dispatch) => ({
-  onAddList: (title) => dispatch(addList(title)),
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onAddList: (title: string) => dispatch(addList(title)),
 });
 
-class AddList extends Component {
-  constructor() {
-    super();
+class AddList extends Component<
+  { scrollToCurrentList: Function; onAddList: Function },
+  { newListTitle: string }
+> {
+  constructor(props: { scrollToCurrentList: Function; onAddList: Function }) {
+    super(props);
     this.state = {
       newListTitle: '',
     };
@@ -21,17 +25,17 @@ class AddList extends Component {
     this.setState({ newListTitle: e.target.value });
   };
 
-  onClickAddList = (title) => () => {
+  onClickAddList = (title: string) => () => {
     this.handleAddList(title);
   };
 
-  onKeyPressAddList = (title) => (e) => {
+  onKeyPressAddList = (title: string) => (e) => {
     if (e.key === 'Enter') {
       this.handleAddList(title);
     }
   };
 
-  handleAddList = (title) => {
+  handleAddList = (title: string) => {
     this.props.scrollToCurrentList();
     this.props.onAddList(title);
     this.setState({ newListTitle: '' });
