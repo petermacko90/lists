@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import './Item.css';
 import { LocaleContext } from '../../context';
+import { ItemType } from '../../constants/types';
 
 export default function Item({
   item,
@@ -12,26 +13,33 @@ export default function Item({
   onClickDelete,
   setTextToCopy,
   setItemToEdit,
+}: {
+  item: ItemType;
+  onClickItem: Function;
+  onKeyPressItem: Function;
+  onClickDelete: Function;
+  setTextToCopy: Function;
+  setItemToEdit: Function;
 }) {
   const [showActions, setShowActions] = useState(false);
 
-  let timeoutRef = useRef(null);
+  const timeoutRef = useRef<number | undefined>(undefined);
 
   const translation = useContext(LocaleContext);
 
   function onActionsBlur() {
-    timeoutRef = setTimeout(() => setShowActions(false));
+    timeoutRef.current = window.setTimeout(() => setShowActions(false));
   }
 
   function onActionsFocus() {
-    clearTimeout(timeoutRef);
+    window.clearTimeout(timeoutRef.current);
   }
 
   return (
     <li className={`flex justify-between relative noselect${item.checked ? ' checked' : ''}`}>
       <div
         className="flex pv3 w-100 pointer"
-        tabIndex="0"
+        tabIndex={0}
         title={item.checked ? translation.UNCHECK : translation.CHECK}
         onClick={onClickItem(item.list_id, item.id, item.name, !item.checked)}
         onKeyUp={onKeyPressItem(item.list_id, item.id, item.name, !item.checked)}
@@ -41,7 +49,7 @@ export default function Item({
       </div>
       <div
         className="actions-dropdown hover-bg-red tc pointer"
-        tabIndex="0"
+        tabIndex={0}
         title={translation.ACTIONS}
         onBlur={() => onActionsBlur()}
         onFocus={() => onActionsFocus()}

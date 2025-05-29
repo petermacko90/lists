@@ -8,7 +8,7 @@ export function isEmptyString(text: string): boolean {
 }
 
 export function debounce(func: Function, wait: number, immediate?: boolean) {
-  let timeout: NodeJS.Timeout | undefined;
+  let timeout: number | undefined;
   return function () {
     let context = this;
     let args = arguments;
@@ -17,8 +17,8 @@ export function debounce(func: Function, wait: number, immediate?: boolean) {
       if (!immediate) func.apply(context, args);
     };
     let callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
+    window.clearTimeout(timeout);
+    timeout = window.setTimeout(later, wait);
     if (callNow) func.apply(context, args);
   };
 }
