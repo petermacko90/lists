@@ -1,83 +1,66 @@
-import { Component } from 'react';
+import { useState, useContext, useRef } from 'react';
 import ItemDropdown from './ItemDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import './Item.css';
-import { LocaleConsumer } from '../../context';
+import { LocaleContext } from '../../context';
 
-export default class Item extends Component {
-  constructor() {
-    super();
-    this.state = { isActionsOpen: false };
-    this.timeoutId = null;
+export default function Item({
+  item,
+  onClickItem,
+  onKeyPressItem,
+  onClickDelete,
+  setTextToCopy,
+  setItemToEdit,
+}) {
+  const [showActions, setShowActions] = useState(false);
+
+  let timeoutRef = useRef(null);
+
+  const translation = useContext(LocaleContext);
+
+  function onActionsBlur() {
+    timeoutRef = setTimeout(() => setShowActions(false));
   }
 
-  onBlur = () => {
-    this.timeOutId = setTimeout(() => {
-      this.setState({ isActionsOpen: false });
-    });
-  };
-
-  onFocus = () => clearTimeout(this.timeOutId);
-
-  onClickToggleActions = () => {
-    this.handleToggleActions();
-  };
-
-  onKeyPressToggleActions = (e) => {
-    if (e.key === 'Enter') {
-      this.handleToggleActions();
-    }
-  };
-
-  handleToggleActions() {
-    this.setState({ isActionsOpen: !this.state.isActionsOpen });
+  function onActionsFocus() {
+    clearTimeout(timeoutRef);
   }
 
-  render() {
-    const { onClickItem, onKeyPressItem, onClickDelete, setTextToCopy, setItemToEdit } = this.props;
-    const { id, list_id, checked, name } = this.props.item;
-    const { isActionsOpen } = this.state;
-
-    return (
-      <LocaleConsumer>
-        {(str) => (
-          <li className={'flex justify-between relative noselect' + (checked ? ' checked' : '')}>
-            <div
-              className="flex pv3 w-100 pointer"
-              tabIndex="0"
-              title={checked ? str.UNCHECK : str.CHECK}
-              onClick={onClickItem(list_id, id, name, !checked)}
-              onKeyUp={onKeyPressItem(list_id, id, name, !checked)}
-            >
-              <span className="check tc b">{checked && <FontAwesomeIcon icon={faCheck} />}</span>
-              <span className="item-name">{name}</span>
-            </div>
-            <div
-              className="actions-dropdown hover-bg-red tc pointer"
-              tabIndex="0"
-              title={str.ACTIONS}
-              onBlur={this.onBlur}
-              onFocus={this.onFocus}
-              onClick={this.onClickToggleActions}
-              onKeyUp={this.onKeyPressToggleActions}
-            >
-              <span className="f3">
-                <FontAwesomeIcon icon={faEllipsisV} />
-              </span>
-              {isActionsOpen && (
-                <ItemDropdown
-                  item={this.props.item}
-                  onClickItem={onClickItem}
-                  onClickDelete={onClickDelete}
-                  setTextToCopy={setTextToCopy}
-                  setItemToEdit={setItemToEdit}
-                />
-              )}
-            </div>
-          </li>
+  return (
+    <li className={`flex justify-between relative noselect${item.checked ? ' checked' : ''}`}>
+      <div
+        className="flex pv3 w-100 pointer"
+        tabIndex="0"
+        title={item.checked ? translation.UNCHECK : translation.CHECK}
+        onClick={onClickItem(item.list_id, item.id, item.name, !item.checked)}
+        onKeyUp={onKeyPressItem(item.list_id, item.id, item.name, !item.checked)}
+      >
+        <span className="check tc b">{item.checked && <FontAwesomeIcon icon={faCheck} />}</span>
+        <span className="item-name">{item.name}</span>
+      </div>
+      <div
+        className="actions-dropdown hover-bg-red tc pointer"
+        tabIndex="0"
+        title={translation.ACTIONS}
+        onBlur={() => onActionsBlur()}
+        onFocus={() => onActionsFocus()}
+        onClick={() => setShowActions(!showActions)}
+        onKeyUp={(e) => e.key === 'Enter' && setShowActions(!showActions)}
+      >
+        <span className="f3">
+          <FontAwesomeIcon icon={faEllipsisV} />
+        </span>
+        {showActions && (
+          <ItemDropdown
+            item={item}
+            onClickItem={onClickItem}
+            onClickDelete={onClickDelete}
+            setTextToCopy={setTextToCopy}
+            setItemToEdit={setItemToEdit}
+          />
         )}
-      </LocaleConsumer>
-    );
-  }
+      </div>
+    </li>
+  );
 }
