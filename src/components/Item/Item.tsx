@@ -51,8 +51,8 @@ export default function Item({
         className="actions-dropdown hover-bg-red tc pointer"
         tabIndex={0}
         title={translation.ACTIONS}
-        onBlur={() => onActionsBlur()}
-        onFocus={() => onActionsFocus()}
+        onBlur={onActionsBlur}
+        onFocus={onActionsFocus}
         onClick={() => setShowActions(!showActions)}
         onKeyUp={(e) => e.key === 'Enter' && setShowActions(!showActions)}
       >

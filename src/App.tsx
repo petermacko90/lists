@@ -35,7 +35,7 @@ export default function App() {
                 showAddList={() => setShowAddList(true)}
                 toggleMenu={() => setShowMenu(!showMenu)}
               />
-              <main>
+              <main className="cf">
                 <Lists
                   showLists={showLists}
                   setShowLists={setShowLists}
