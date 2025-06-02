@@ -1,4 +1,4 @@
-type ListType2 = {
+export type ListType2 = {
   id: string;
   title: string;
   modified: Date;
@@ -15,7 +15,7 @@ type ItemType2 = {
 
 type ItemsRecord = Record<string, ItemType2>;
 
-type State = {
+export type State = {
   lists: ListsRecord;
   items: ItemsRecord;
   currentListId: string | null;
@@ -27,7 +27,7 @@ export const initialState: State = {
   currentListId: null,
 };
 
-type Action =
+export type Action =
   | { type: 'fetched'; payload: State }
   | { type: 'list selected'; payload: string }
   | { type: 'list added'; payload: ListType2 }
@@ -41,19 +41,26 @@ type Action =
 export function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'fetched': {
-      return action.payload;
+      return {
+        lists: action.payload.lists,
+        items: action.payload.items,
+        currentListId: null,
+      };
     }
     case 'list selected': {
-      return { ...state, currentListId: action.payload };
+      return {
+        ...state,
+        currentListId: action.payload,
+      };
     }
     case 'list added': {
       return {
         ...state,
-        currentListId: action.payload.id,
         lists: {
           ...state.lists,
           [action.payload.id]: action.payload,
         },
+        currentListId: action.payload.id,
       };
     }
     case 'list edited': {
@@ -72,9 +79,9 @@ export function reducer(state: State, action: Action): State {
       });
       const { [action.payload]: deleted, ...newLists } = state.lists;
       return {
-        ...state,
         lists: newLists,
         items: newItems,
+        currentListId: null,
       };
     }
     case 'list modified date updated': {
