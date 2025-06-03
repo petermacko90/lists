@@ -1,3 +1,5 @@
+import { selectCurrentList } from './selectors';
+
 export type ListType2 = {
   id: string;
   title: string;
@@ -7,7 +9,7 @@ export type ListType2 = {
 
 type ListsRecord = Record<string, ListType2>;
 
-type ItemType2 = {
+export type ItemType2 = {
   id: string;
   text: string;
   checked: boolean;
@@ -133,16 +135,4 @@ export function reducer(state: State, action: Action): State {
       };
     }
   }
-}
-
-export function selectCurrentList(state: State) {
-  return state.lists[state.currentListId!];
-}
-
-export function selectItems(state: State) {
-  const items: ItemType2[] = [];
-  selectCurrentList(state).itemsIds.forEach((itemId) => {
-    items.push(state.items[itemId]);
-  });
-  return items;
 }
