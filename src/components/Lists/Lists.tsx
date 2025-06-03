@@ -8,7 +8,17 @@ import { faCaretDown, faCaretUp, faPlus } from '@fortawesome/free-solid-svg-icon
 import { initialState, reducer } from '../../reducers/reducer';
 import { selectItems, selectListsCount } from '../../reducers/selectors';
 
-export default function Lists({ showLists, setShowLists, scrollToCurrentList, showAddList }) {
+export default function Lists({
+  showLists,
+  setShowLists,
+  scrollToCurrentList,
+  showAddList,
+}: {
+  showLists: boolean;
+  setShowLists: React.Dispatch<React.SetStateAction<boolean>>;
+  scrollToCurrentList: () => void;
+  showAddList: React.MouseEventHandler<HTMLButtonElement>;
+}) {
   useEffect(() => {
     // fetch mocked state
     dispatch({
@@ -66,7 +76,7 @@ export default function Lists({ showLists, setShowLists, scrollToCurrentList, sh
 
   const listsCount = selectListsCount(state);
 
-  function handleSelectList(id) {
+  function handleSelectList(id: string) {
     dispatch({ type: 'list selected', payload: id });
     scrollToCurrentList();
   }

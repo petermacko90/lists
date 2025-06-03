@@ -14,7 +14,7 @@ export default function Button({
   onClick: MouseEventHandler<HTMLButtonElement>;
   color: ButtonColor;
   children: ReactNode;
-  classes: string;
+  classes?: string;
   title?: string;
   disabled?: boolean;
 }) {
