@@ -1,11 +1,10 @@
-import { useContext, useEffect, useReducer } from 'react';
+import { useContext, useEffect } from 'react';
 import List from '../List/List';
 import Button from '../Button/Button';
 import './Lists.css';
-import { LocaleContext } from '../../context';
+import { LocaleContext, StateContext, StateDispatchContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { initialState, reducer } from '../../reducers/reducer';
 import { selectItems, selectListsCount } from '../../reducers/selectors';
 
 export default function Lists({
@@ -72,7 +71,8 @@ export default function Lists({
 
   const translation = useContext(LocaleContext);
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const state = useContext(StateContext);
+  const dispatch = useContext(StateDispatchContext);
 
   const listsCount = selectListsCount(state);
 

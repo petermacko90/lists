@@ -1,76 +1,46 @@
-import { Component } from 'react';
-import { connect } from 'react-redux';
-import { addList } from '../../actions/lists';
+import { useContext, useState } from 'react';
 import Button from '../Button/Button';
-import { LocaleConsumer } from '../../context';
+import { LocaleContext, StateDispatchContext } from '../../context';
 import { MAX_LENGTH_LIST } from '../../constants/constants';
-import { Dispatch } from 'redux';
+import { v4 as uuidv4 } from 'uuid';
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onAddList: (title: string) => dispatch(addList(title)),
-});
+export default function AddList({ scrollToCurrentList }: { scrollToCurrentList: () => void }) {
+  const translation = useContext(LocaleContext);
 
-class AddList extends Component<
-  { scrollToCurrentList: Function; onAddList: Function },
-  { newListTitle: string }
-> {
-  constructor(props: { scrollToCurrentList: Function; onAddList: Function }) {
-    super(props);
-    this.state = {
-      newListTitle: '',
-    };
+  const [newListTitle, setNewListTitle] = useState('');
+
+  const dispatch = useContext(StateDispatchContext);
+
+  function handleAddList(title: string) {
+    scrollToCurrentList();
+    dispatch({
+      type: 'list added',
+      payload: {
+        id: uuidv4(),
+        itemsIds: [],
+        modified: new Date(),
+        title: title,
+      },
+    });
+    setNewListTitle('');
   }
 
-  onChangeNewListTitle = (e) => {
-    this.setState({ newListTitle: e.target.value });
-  };
-
-  onClickAddList = (title: string) => () => {
-    this.handleAddList(title);
-  };
-
-  onKeyPressAddList = (title: string) => (e) => {
-    if (e.key === 'Enter') {
-      this.handleAddList(title);
-    }
-  };
-
-  handleAddList = (title: string) => {
-    this.props.scrollToCurrentList();
-    this.props.onAddList(title);
-    this.setState({ newListTitle: '' });
-  };
-
-  render() {
-    const { newListTitle } = this.state;
-
-    return (
-      <LocaleConsumer>
-        {(str) => (
-          <div className="fl w-75-l w-two-thirds-m w-100 pa3">
-            <h2>{str.ADD_LIST}</h2>
-            <input
-              type="text"
-              value={newListTitle}
-              onChange={this.onChangeNewListTitle}
-              onKeyDown={this.onKeyPressAddList(newListTitle)}
-              placeholder={str.LIST_TITLE}
-              className="pa3 b--none w-75 w-two-thirds-m w-auto-l"
-              maxLength={MAX_LENGTH_LIST}
-              autoFocus
-            />
-            <Button
-              onClick={this.onClickAddList(newListTitle)}
-              color="green"
-              classes="w-25 w-third-m w-auto-l"
-            >
-              {str.ADD}
-            </Button>
-          </div>
-        )}
-      </LocaleConsumer>
-    );
-  }
+  return (
+    <div className="fl w-75-l w-two-thirds-m w-100 pa3">
+      <h2>{translation.ADD_LIST}</h2>
+      <input
+        type="text"
+        value={newListTitle}
+        onChange={(e) => setNewListTitle(e.target.value)}
+        onKeyDown={(e) => e.key === 'Enter' && handleAddList(newListTitle)}
+        placeholder={translation.LIST_TITLE}
+        className="pa3 b--none w-75 w-two-thirds-m w-auto-l"
+        maxLength={MAX_LENGTH_LIST}
+        autoFocus
+      />
+      <Button onClick={() => handleAddList(newListTitle)} color="green" classes="w-25 w-third-m w-auto-l">
+        {translation.ADD}
+      </Button>
+    </div>
+  );
 }
-
-export default connect(null, mapDispatchToProps)(AddList);
