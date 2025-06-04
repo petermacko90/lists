@@ -1,6 +1,6 @@
 import './List.css';
 import { LocaleContext } from '../../context';
-import { useContext } from 'react';
+import { KeyboardEventHandler, MouseEventHandler, useContext } from 'react';
 import { ItemType2, ListType2 } from '../../reducers/reducer';
 
 export default function List({
@@ -11,8 +11,8 @@ export default function List({
 }: {
   list: ListType2;
   items: ItemType2[];
-  onClickList: React.MouseEventHandler<HTMLDivElement>;
-  onEnterList: React.KeyboardEventHandler<HTMLDivElement>;
+  onClickList: MouseEventHandler<HTMLDivElement>;
+  onEnterList: KeyboardEventHandler<HTMLDivElement>;
 }) {
   const numItemsToShow = 5;
   let itemsSlice = '';

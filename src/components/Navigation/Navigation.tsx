@@ -2,14 +2,14 @@ import './Navigation.css';
 import { LocaleContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
-import { useContext } from 'react';
+import { useContext, MouseEventHandler } from 'react';
 
 export default function Navigation({
   showAddList,
   toggleMenu,
 }: {
-  showAddList: Function;
-  toggleMenu: Function;
+  showAddList: MouseEventHandler<HTMLButtonElement>;
+  toggleMenu: MouseEventHandler<HTMLButtonElement>;
 }) {
   const translation = useContext(LocaleContext);
 
@@ -18,7 +18,7 @@ export default function Navigation({
       <div>
         <button
           type="button"
-          onClick={() => toggleMenu()}
+          onClick={toggleMenu}
           className="b--none ma3 bg-transparent f3 b pointer v-mid"
           aria-label={translation.TOGGLE_MENU}
           title={translation.TOGGLE_MENU}
@@ -30,7 +30,7 @@ export default function Navigation({
       </div>
       <button
         type="button"
-        onClick={() => showAddList()}
+        onClick={showAddList}
         className="b--none ml4 mr3 bg-transparent f3 b pointer v-mid add-list"
         aria-label={translation.ADD_LIST}
       >

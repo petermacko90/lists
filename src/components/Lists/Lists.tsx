@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { Dispatch, MouseEventHandler, SetStateAction, useContext, useEffect } from 'react';
 import List from '../List/List';
 import Button from '../Button/Button';
 import './Lists.css';
@@ -14,9 +14,9 @@ export default function Lists({
   showAddList,
 }: {
   showLists: boolean;
-  setShowLists: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowLists: Dispatch<SetStateAction<boolean>>;
   scrollToCurrentList: () => void;
-  showAddList: React.MouseEventHandler<HTMLButtonElement>;
+  showAddList: MouseEventHandler<HTMLButtonElement>;
 }) {
   useEffect(() => {
     // fetch mocked state
