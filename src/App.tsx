@@ -50,7 +50,7 @@ export default function App() {
                     {showAddList ? (
                       <AddList scrollToCurrentList={showCurrentList} />
                     ) : (
-                      <CurrentList showLists={() => setShowLists(true)} str={str} />
+                      <CurrentList showLists={() => setShowLists(true)} />
                     )}
                   </main>
                   <Footer />
