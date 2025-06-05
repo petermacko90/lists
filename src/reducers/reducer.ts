@@ -1,21 +1,21 @@
 import { selectCurrentList } from './selectors';
 
-export type ListType2 = {
+export type ListType = {
   id: string;
   title: string;
   modified: Date;
   itemsIds: string[];
 };
 
-type ListsRecord = Record<string, ListType2>;
+type ListsRecord = Record<string, ListType>;
 
-export type ItemType2 = {
+export type ItemType = {
   id: string;
   text: string;
   checked: boolean;
 };
 
-type ItemsRecord = Record<string, ItemType2>;
+type ItemsRecord = Record<string, ItemType>;
 
 export type State = {
   lists: ListsRecord;
@@ -32,12 +32,12 @@ export const initialState: State = {
 export type Action =
   | { type: 'fetched'; payload: State }
   | { type: 'list selected'; payload: string }
-  | { type: 'list added'; payload: ListType2 }
-  | { type: 'list edited'; payload: ListType2 }
+  | { type: 'list added'; payload: ListType }
+  | { type: 'list edited'; payload: ListType }
   | { type: 'list deleted'; payload: string }
   | { type: 'list modified date updated'; payload: Date }
-  | { type: 'item added'; payload: ItemType2 }
-  | { type: 'item edited'; payload: ItemType2 }
+  | { type: 'item added'; payload: ItemType }
+  | { type: 'item edited'; payload: ItemType }
   | { type: 'item deleted'; payload: string };
 
 export function reducer(state: State, action: Action): State {

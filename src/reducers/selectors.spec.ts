@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { initialState, ItemType2, ListType2, State } from './reducer';
+import { initialState, ItemType, ListType, State } from './reducer';
 import { selectCurrentList, selectItems, selectList, selectListsCount } from './selectors';
 
 describe('selectors', () => {
@@ -50,7 +50,7 @@ describe('selectors', () => {
         currentListId: '456',
       };
 
-      const expected: ListType2 = {
+      const expected: ListType = {
         id: '456',
         title: 'Test 2',
         modified: new Date('2025-06-02T15:24:00Z'),
@@ -109,7 +109,7 @@ describe('selectors', () => {
         currentListId: '456',
       };
 
-      const expected: ListType2 = {
+      const expected: ListType = {
         id: '123',
         title: 'Test',
         modified: new Date('2025-06-02T15:23:00Z'),
@@ -258,7 +258,7 @@ describe('selectors', () => {
         currentListId: '456',
       };
 
-      const expected: ItemType2[] = [
+      const expected: ItemType[] = [
         {
           id: '654',
           checked: false,

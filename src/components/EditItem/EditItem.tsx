@@ -5,9 +5,9 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { isEmptyString } from '../../helpers';
 import { MAX_LENGTH_ITEM } from '../../constants/constants';
 import { useContext, useState } from 'react';
-import { ItemType2 } from '../../reducers/reducer';
+import { ItemType } from '../../reducers/reducer';
 
-export default function EditItem({ item, closeEdit }: { item: ItemType2; closeEdit: () => void }) {
+export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdit: () => void }) {
   const translation = useContext(LocaleContext);
 
   const dispatch = useContext(StateDispatchContext);

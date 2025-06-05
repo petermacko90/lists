@@ -1,7 +1,7 @@
 import './List.css';
 import { LocaleContext } from '../../context';
 import { KeyboardEventHandler, MouseEventHandler, useContext } from 'react';
-import { ItemType2, ListType2 } from '../../reducers/reducer';
+import { ItemType, ListType } from '../../reducers/reducer';
 
 export default function List({
   list,
@@ -9,8 +9,8 @@ export default function List({
   onClickList,
   onEnterList,
 }: {
-  list: ListType2;
-  items: ItemType2[];
+  list: ListType;
+  items: ItemType[];
   onClickList: MouseEventHandler<HTMLDivElement>;
   onEnterList: KeyboardEventHandler<HTMLDivElement>;
 }) {

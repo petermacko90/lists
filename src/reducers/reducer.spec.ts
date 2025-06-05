@@ -1,4 +1,4 @@
-import { Action, initialState, ItemType2, ListType2, reducer, State } from './reducer';
+import { Action, initialState, ItemType, ListType, reducer, State } from './reducer';
 import { describe, expect, it } from 'vitest';
 
 describe('reducer', () => {
@@ -359,7 +359,7 @@ describe('reducer', () => {
     it('should add a list to empty state', () => {
       const state: State = initialState;
 
-      const payload: ListType2 = {
+      const payload: ListType = {
         id: '123',
         title: 'Test',
         modified: new Date('2025-06-02T15:24:00Z'),
@@ -405,7 +405,7 @@ describe('reducer', () => {
         currentListId: '123',
       };
 
-      const payload: ListType2 = {
+      const payload: ListType = {
         id: '456',
         title: 'Test 2',
         modified: new Date('2025-06-02T15:25:00Z'),
@@ -465,7 +465,7 @@ describe('reducer', () => {
         currentListId: '123',
       };
 
-      const payload: ListType2 = {
+      const payload: ListType = {
         id: '123',
         title: 'Testing',
         modified: new Date('2025-06-02T15:25:00Z'),
@@ -673,7 +673,7 @@ describe('reducer', () => {
         currentListId: '123',
       };
 
-      const payload: ItemType2 = {
+      const payload: ItemType = {
         id: '456',
         text: 'Item',
         checked: false,
@@ -750,7 +750,7 @@ describe('reducer', () => {
         currentListId: '456',
       };
 
-      const payload: ItemType2 = {
+      const payload: ItemType = {
         id: '777',
         text: 'Test',
         checked: false,
@@ -834,7 +834,7 @@ describe('reducer', () => {
         currentListId: '123',
       };
 
-      const payload: ItemType2 = {
+      const payload: ItemType = {
         id: '456',
         text: 'Item',
         checked: true,
@@ -911,7 +911,7 @@ describe('reducer', () => {
         currentListId: '456',
       };
 
-      const payload: ItemType2 = {
+      const payload: ItemType = {
         id: '159',
         checked: false,
         text: 'Testing',

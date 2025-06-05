@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import './Item.css';
 import { LocaleContext, StateDispatchContext } from '../../context';
-import { ItemType2 } from '../../reducers/reducer';
+import { ItemType } from '../../reducers/reducer';
 
 export default function Item({
   item,
   setTextToCopy,
   setItemToEdit,
 }: {
-  item: ItemType2;
+  item: ItemType;
   setTextToCopy: (text: string) => void;
   setItemToEdit: Dispatch<SetStateAction<string>>;
 }) {
