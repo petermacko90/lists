@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCopy, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { LocaleContext, StateDispatchContext } from '../../context';
 import { Dispatch, SetStateAction, useContext } from 'react';
-import { ItemType } from '../../reducers/reducer';
+import { ItemType } from '../../reducers/types';
 
 export default function ItemDropdown({
   item,

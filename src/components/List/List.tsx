@@ -1,7 +1,7 @@
 import './List.css';
 import { LocaleContext } from '../../context';
 import { KeyboardEventHandler, MouseEventHandler, useContext } from 'react';
-import { ItemType, ListType } from '../../reducers/reducer';
+import { ItemType, ListType } from '../../reducers/types';
 
 export default function List({
   list,

@@ -1,4 +1,4 @@
-import { ItemType, ListType, State } from './reducer';
+import { ItemType, ListType, State } from './types';
 
 export function selectCurrentList(state: State): ListType {
   return state.lists[state.currentListId!];

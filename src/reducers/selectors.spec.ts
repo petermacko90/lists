@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { initialState, ItemType, ListType, State } from './reducer';
+import { initialState } from './reducer';
+import { ItemType, ListType, State } from './types';
 import { selectCurrentList, selectItems, selectList, selectListsCount } from './selectors';
 
 describe('selectors', () => {

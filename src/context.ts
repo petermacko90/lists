@@ -1,6 +1,8 @@
 import { ActionDispatch, createContext } from 'react';
 import { strings, Translations } from './constants/strings';
-import { Action, initialState, State } from './reducers/reducer';
+import { initialState } from './reducers/reducer';
+import { Action } from './reducers/types';
+import { State } from './reducers/types';
 
 export const LocaleContext = createContext<Translations>(strings.en);
 

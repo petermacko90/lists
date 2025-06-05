@@ -1,4 +1,6 @@
-import { Action, initialState, ItemType, ListType, reducer, State } from './reducer';
+import { initialState, reducer } from './reducer';
+import { Action } from './types';
+import { ItemType, ListType, State } from './types';
 import { describe, expect, it } from 'vitest';
 
 describe('reducer', () => {
