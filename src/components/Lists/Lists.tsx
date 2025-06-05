@@ -18,57 +18,6 @@ export default function Lists({
   scrollToCurrentList: () => void;
   showAddList: MouseEventHandler<HTMLButtonElement>;
 }) {
-  useEffect(() => {
-    // fetch mocked state
-    dispatch({
-      type: 'fetched',
-      payload: {
-        lists: {
-          123: {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          456: {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
-          },
-        },
-        items: {
-          789: {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          987: {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          654: {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          321: {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          159: {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-        },
-        currentListId: null,
-      },
-    });
-  }, []);
-
   const translation = useContext(LocaleContext);
 
   const state = useContext(StateContext);

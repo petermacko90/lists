@@ -1,5 +1,4 @@
-import { useReducer, useState } from 'react';
-import { Provider } from 'react-redux';
+import { useEffect, useReducer, useState } from 'react';
 import { getTranslations } from './helpers';
 import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
@@ -8,9 +7,9 @@ import AddList from './components/AddList/AddList';
 import Footer from './components/Footer/Footer';
 import FloatingButton from './components/Button/FloatingButton';
 import { MEDIUM_SCREEN_BREAKPOINT } from './constants/constants';
-import store from './store/store';
-import { LocaleContext, LocaleConsumer, StateContext, StateDispatchContext } from './context';
-import { initialState, reducer } from './reducers/reducer';
+import { LocaleContext, StateContext, StateDispatchContext } from './context';
+import { initialState, reducer, State } from './reducers/reducer';
+import { loadState, saveState } from './localStorage';
 
 const translations = getTranslations();
 
@@ -21,6 +20,19 @@ export default function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  useEffect(() => {
+    const state: State | undefined = loadState();
+    if (state !== undefined) {
+      dispatch({ type: 'fetched', payload: state });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (state !== initialState) {
+      saveState(state);
+    }
+  }, [state]);
+
   function showCurrentList() {
     if (window.innerWidth < MEDIUM_SCREEN_BREAKPOINT) {
       setShowLists(false);
@@ -29,38 +41,29 @@ export default function App() {
   }
 
   return (
-    <Provider store={store}>
-      <StateContext value={state}>
-        <StateDispatchContext value={dispatch}>
-          <LocaleContext.Provider value={translations}>
-            <LocaleConsumer>
-              {(str) => (
-                <>
-                  <Navigation
-                    showAddList={() => setShowAddList(true)}
-                    toggleMenu={() => setShowMenu(!showMenu)}
-                  />
-                  <main className="cf">
-                    <Lists
-                      showLists={showLists}
-                      setShowLists={setShowLists}
-                      scrollToCurrentList={showCurrentList}
-                      showAddList={() => setShowAddList(true)}
-                    />
-                    {showAddList ? (
-                      <AddList scrollToCurrentList={showCurrentList} />
-                    ) : (
-                      <CurrentList showLists={() => setShowLists(true)} />
-                    )}
-                  </main>
-                  <Footer />
-                  {!showAddList && <FloatingButton showAddList={() => setShowAddList(true)}></FloatingButton>}
-                </>
+    <StateContext value={state}>
+      <StateDispatchContext value={dispatch}>
+        <LocaleContext.Provider value={translations}>
+          <>
+            <Navigation showAddList={() => setShowAddList(true)} toggleMenu={() => setShowMenu(!showMenu)} />
+            <main className="cf">
+              <Lists
+                showLists={showLists}
+                setShowLists={setShowLists}
+                scrollToCurrentList={showCurrentList}
+                showAddList={() => setShowAddList(true)}
+              />
+              {showAddList ? (
+                <AddList scrollToCurrentList={showCurrentList} />
+              ) : (
+                <CurrentList showLists={() => setShowLists(true)} />
               )}
-            </LocaleConsumer>
-          </LocaleContext.Provider>
-        </StateDispatchContext>
-      </StateContext>
-    </Provider>
+            </main>
+            <Footer />
+            {!showAddList && <FloatingButton showAddList={() => setShowAddList(true)}></FloatingButton>}
+          </>
+        </LocaleContext.Provider>
+      </StateDispatchContext>
+    </StateContext>
   );
 }

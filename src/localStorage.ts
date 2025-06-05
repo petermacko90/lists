@@ -1,4 +1,6 @@
-export function loadState() {
+import { State } from './reducers/reducer';
+
+export function loadState(): State | undefined {
   try {
     const serializedState = localStorage.getItem('state');
     if (serializedState === null) {
@@ -12,15 +14,16 @@ export function loadState() {
       }
     });
   } catch (err) {
+    console.error('localStorage loadState error: ' + err);
     return undefined;
   }
 }
 
-export function saveState(state) {
+export function saveState(state: State) {
   try {
     const serializedState = JSON.stringify(state);
     localStorage.setItem('state', serializedState);
   } catch (err) {
-    console.log('localStorage saveState error: ' + err);
+    console.error('localStorage saveState error: ' + err);
   }
 }
