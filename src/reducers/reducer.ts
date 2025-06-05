@@ -99,12 +99,14 @@ export function reducer(state: State, action: Action): State {
     }
     case 'item added': {
       const currentList = { ...selectCurrentList(state) };
-      currentList.itemsIds.push(action.payload.id);
       return {
         ...state,
         lists: {
           ...state.lists,
-          [currentList.id]: currentList,
+          [currentList.id]: {
+            ...currentList,
+            itemsIds: currentList.itemsIds.concat(action.payload.id),
+          },
         },
         items: {
           ...state.items,

@@ -1,44 +1,52 @@
 import Button from '../Button/Button';
 import { isEmptyString } from '../../helpers';
 import { MAX_LENGTH_ITEM } from '../../constants/constants';
-import { LocaleConsumer } from '../../context';
+import { LocaleContext, StateDispatchContext } from '../../context';
+import { useContext, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-export default function AddItem({
-  listId,
-  newItemName,
-  onSetNewItemName,
-  onClickAddItem,
-  onKeyPressAddItem,
-}: {
-  listId: number;
-  newItemName: string;
-  onSetNewItemName: React.ChangeEventHandler<HTMLInputElement>;
-  onClickAddItem: Function;
-  onKeyPressAddItem: Function;
-}) {
+export default function AddItem() {
+  const translation = useContext(LocaleContext);
+
+  const dispatch = useContext(StateDispatchContext);
+
+  const [newItemText, setNewItemText] = useState('');
+
+  function handleItemAdd(text: string) {
+    if (isEmptyString(text)) {
+      return;
+    }
+    dispatch({
+      type: 'item added',
+      payload: {
+        id: uuidv4(),
+        checked: false,
+        text: text,
+      },
+    });
+    dispatch({ type: 'list modified date updated', payload: new Date() });
+    setNewItemText('');
+  }
+
   return (
-    <LocaleConsumer>
-      {(str) => (
-        <div className="mt3">
-          <input
-            type="text"
-            value={newItemName}
-            onChange={onSetNewItemName}
-            onKeyUp={onKeyPressAddItem(listId, newItemName)}
-            placeholder={str.ITEM_NAME}
-            maxLength={MAX_LENGTH_ITEM}
-            className="pa3 b--none w-75 w-two-thirds-m w-auto-l"
-          />
-          <Button
-            onClick={onClickAddItem(listId, newItemName)}
-            color="green"
-            classes="w-25 w-third-m w-auto-l"
-            disabled={isEmptyString(newItemName)}
-          >
-            {str.ADD}
-          </Button>
-        </div>
-      )}
-    </LocaleConsumer>
+    <div className="mt3">
+      <input
+        type="text"
+        value={newItemText}
+        onChange={(e) => setNewItemText(e.target.value)}
+        onKeyUp={(e) => e.key === 'Enter' && handleItemAdd(newItemText)}
+        placeholder={translation.ITEM_NAME}
+        maxLength={MAX_LENGTH_ITEM}
+        className="pa3 b--none w-75 w-two-thirds-m w-auto-l"
+      />
+      <Button
+        onClick={() => handleItemAdd(newItemText)}
+        color="green"
+        classes="w-25 w-third-m w-auto-l"
+        disabled={isEmptyString(newItemText)}
+      >
+        {translation.ADD}
+      </Button>
+    </div>
   );
 }

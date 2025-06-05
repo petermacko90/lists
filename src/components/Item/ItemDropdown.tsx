@@ -1,29 +1,46 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCopy, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { LocaleContext } from '../../context';
-import { ItemType } from '../../constants/types';
-import { useContext } from 'react';
+import { LocaleContext, StateDispatchContext } from '../../context';
+import { Dispatch, SetStateAction, useContext } from 'react';
+import { ItemType2 } from '../../reducers/reducer';
 
 export default function ItemDropdown({
   item,
-  onClickItem,
-  onClickDelete,
   setTextToCopy,
   setItemToEdit,
 }: {
-  item: ItemType;
-  onClickItem: Function;
-  onClickDelete: Function;
-  setTextToCopy: Function;
-  setItemToEdit: Function;
+  item: ItemType2;
+  setTextToCopy: (text: string) => void;
+  setItemToEdit: Dispatch<SetStateAction<string>>;
 }) {
   const translation = useContext(LocaleContext);
+
+  const dispatch = useContext(StateDispatchContext);
+
+  function handleItemCheck() {
+    dispatch({
+      type: 'item edited',
+      payload: {
+        id: item.id,
+        text: item.text,
+        checked: !item.checked,
+      },
+    });
+    dispatch({ type: 'list modified date updated', payload: new Date() });
+  }
+
+  function handleItemDelete() {
+    if (window.confirm(translation.CONFIRM_DELETE_ITEM)) {
+      dispatch({ type: 'item deleted', payload: item.id });
+      dispatch({ type: 'list modified date updated', payload: new Date() });
+    }
+  }
 
   return (
     <div className="actions-content w4 shadow-3">
       <button
         type="button"
-        onClick={setItemToEdit(item.id, item.name)}
+        onClick={() => setItemToEdit(item.id)}
         className="w-100 pointer"
         title={translation.EDIT_ITEM_NAME}
       >
@@ -31,7 +48,7 @@ export default function ItemDropdown({
       </button>
       <button
         type="button"
-        onClick={onClickItem(item.list_id, item.id, item.name, !item.checked)}
+        onClick={() => handleItemCheck()}
         className="w-100 pointer"
         title={item.checked ? translation.UNCHECK : translation.CHECK}
       >
@@ -39,7 +56,7 @@ export default function ItemDropdown({
       </button>
       <button
         type="button"
-        onClick={onClickDelete(item.list_id, item.id)}
+        onClick={() => handleItemDelete()}
         className="w-100 pointer"
         title={translation.DELETE_ITEM}
       >
@@ -47,7 +64,7 @@ export default function ItemDropdown({
       </button>
       <button
         type="button"
-        onClick={setTextToCopy(item.name)}
+        onClick={() => setTextToCopy(item.text)}
         className="w-100 pointer"
         title={translation.COPY_TO_CLIPBOARD}
       >
