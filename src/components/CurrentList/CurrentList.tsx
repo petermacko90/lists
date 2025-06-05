@@ -9,7 +9,7 @@ import { LocaleContext, StateContext, StateDispatchContext } from '../../context
 import { selectCurrentList } from '../../reducers/selectors';
 import Items from '../Items/Items';
 
-export default function CurrentList({ showLists }) {
+export default function CurrentList({ showLists }: { showLists: () => void }) {
   const translation = useContext(LocaleContext);
 
   const state = useContext(StateContext);
@@ -20,7 +20,7 @@ export default function CurrentList({ showLists }) {
 
   const [notification, setNotification] = useState({ show: false, text: '' });
 
-  const editTitleRef = useRef(null); //<HTMLInputElement | null>
+  const editTitleRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     hideEditTitle();
@@ -32,7 +32,7 @@ export default function CurrentList({ showLists }) {
   function showEditTitle() {
     setIsEditTitle(true);
     setNewTitle(list.title);
-    setTimeout(() => editTitleRef.current.focus());
+    setTimeout(() => editTitleRef.current?.focus());
   }
 
   function hideEditTitle() {
@@ -61,7 +61,7 @@ export default function CurrentList({ showLists }) {
     }
   }
 
-  function copyItemText(text) {
+  function copyItemText(text: string) {
     navigator.clipboard.writeText(text).then(() => {
       setNotification({ show: true, text: `${translation.COPIED}: ${text}` });
       setTimeout(() => {

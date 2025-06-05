@@ -1,4 +1,4 @@
-import { Dispatch, MouseEventHandler, SetStateAction, useContext, useEffect } from 'react';
+import { Dispatch, MouseEventHandler, SetStateAction, useContext } from 'react';
 import List from '../List/List';
 import Button from '../Button/Button';
 import './Lists.css';
