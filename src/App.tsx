@@ -46,19 +46,24 @@ export default function App() {
       <StateDispatchContext value={dispatch}>
         <LocaleContext.Provider value={translations}>
           <>
-            <Navigation showAddList={() => setShowAddList(true)} toggleMenu={() => setShowMenu(!showMenu)} />
-            <main className="cf">
-              <Lists
-                showLists={showLists}
-                setShowLists={setShowLists}
-                scrollToCurrentList={showCurrentList}
+            <main>
+              <Navigation
                 showAddList={() => setShowAddList(true)}
+                toggleMenu={() => setShowMenu(!showMenu)}
               />
-              {showAddList ? (
-                <AddList scrollToCurrentList={showCurrentList} />
-              ) : (
-                <CurrentList showLists={() => setShowLists(true)} />
-              )}
+              <div className="flex flex-wrap">
+                <Lists
+                  showLists={showLists}
+                  setShowLists={setShowLists}
+                  scrollToCurrentList={showCurrentList}
+                  showAddList={() => setShowAddList(true)}
+                />
+                {showAddList ? (
+                  <AddList scrollToCurrentList={showCurrentList} />
+                ) : (
+                  <CurrentList showLists={() => setShowLists(true)} />
+                )}
+              </div>
             </main>
             <Footer />
             {!showAddList && <FloatingButton showAddList={() => setShowAddList(true)}></FloatingButton>}

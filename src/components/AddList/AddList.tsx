@@ -26,7 +26,7 @@ export default function AddList({ scrollToCurrentList }: { scrollToCurrentList: 
   }
 
   return (
-    <div className="fl w-75-l w-two-thirds-m w-100 pa3">
+    <div className="w-75-l w-two-thirds-m w-100 pa3">
       <h2>{translation.ADD_LIST}</h2>
       <input
         type="text"

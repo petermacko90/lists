@@ -31,7 +31,7 @@ export default function Lists({
   }
 
   return (
-    <div className="fl w-25-l w-third-m w-100">
+    <div className="w-25-l w-third-m w-100">
       <button
         type="button"
         onClick={() => setShowLists(showLists ? false : true)}

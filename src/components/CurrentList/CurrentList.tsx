@@ -71,7 +71,7 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
   }
 
   return (
-    <div className="fl w-75-l w-two-thirds-m w-100 pa3">
+    <div className="w-75-l w-two-thirds-m w-100 pa3">
       <ToastNotification show={notification.show} text={notification.text} />
       <Button onClick={handleDeleteList} color="red">
         <FontAwesomeIcon icon={faTrashAlt} /> {translation.DELETE_LIST}
