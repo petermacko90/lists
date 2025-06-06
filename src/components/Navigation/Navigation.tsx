@@ -25,7 +25,7 @@ export default function Navigation({
         >
           <FontAwesomeIcon icon={faBars} />
         </button>
-        <img src="/list32.png" alt="logo" className="ma1 v-mid" />
+        <img src="/list32.png" height={32} width={32} alt="logo" className="ma1 v-mid" />
         <h1 className="dib f2 mv2 v-mid">Lists</h1>
       </div>
       <button

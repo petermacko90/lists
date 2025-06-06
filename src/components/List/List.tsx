@@ -25,7 +25,7 @@ export default function List({
       onClick={onClickList}
       onKeyUp={onEnterList}
     >
-      <h3 className="f3-l f4-m f5 truncate">{list.title.length === 0 ? translation.NO_TITLE : list.title}</h3>
+      <h2 className="f3-l f4-m f5 truncate">{list.title.length === 0 ? translation.NO_TITLE : list.title}</h2>
       <p>{list.modified.toLocaleDateString()}</p>
       <p className="truncate pb1">{firstFewItems}</p>
     </div>

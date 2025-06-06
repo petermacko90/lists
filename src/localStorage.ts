@@ -1,4 +1,4 @@
-import { State } from './reducers/reducer';
+import { State } from './reducers/types';
 
 export function loadState(): State | undefined {
   try {

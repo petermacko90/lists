@@ -21,9 +21,9 @@ export default function Items({ copyItemText }: { copyItemText: (text: string) =
 
   return (
     <div>
-      <ul className="ma0 pa0 list">
-        {items.length > 0 ? (
-          items.map((item) => {
+      {items.length > 0 ? (
+        <ul className="ma0 pa0 list">
+          {items.map((item) => {
             if (item.id === editItemId) {
               return <EditItem key={item.id} item={item} closeEdit={() => setEditItemId('')} />;
             } else {
@@ -31,11 +31,11 @@ export default function Items({ copyItemText }: { copyItemText: (text: string) =
                 <Item key={item.id} item={item} setItemToEdit={setEditItemId} setTextToCopy={copyItemText} />
               );
             }
-          })
-        ) : (
-          <p>{translation.NO_ITEMS}</p>
-        )}
-      </ul>
+          })}
+        </ul>
+      ) : (
+        <p>{translation.NO_ITEMS}</p>
+      )}
       <AddItem />
     </div>
   );

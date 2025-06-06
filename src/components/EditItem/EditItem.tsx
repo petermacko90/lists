@@ -6,6 +6,7 @@ import { isEmptyString } from '../../helpers';
 import { MAX_LENGTH_ITEM } from '../../constants/constants';
 import { useContext, useState } from 'react';
 import { ItemType } from '../../reducers/types';
+import './EditItem.css';
 
 export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdit: () => void }) {
   const translation = useContext(LocaleContext);
@@ -31,7 +32,7 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
   }
 
   return (
-    <div>
+    <li className="no-background">
       <input
         type="text"
         value={newText}
@@ -54,6 +55,6 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
       <Button onClick={() => closeEdit()} color="red" title={translation.CLOSE_EDIT} classes="w-20 w-auto-l">
         <FontAwesomeIcon icon={faTimes} />
       </Button>
-    </div>
+    </li>
   );
 }

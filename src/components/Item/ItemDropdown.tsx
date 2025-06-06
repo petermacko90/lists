@@ -3,6 +3,7 @@ import { faCheck, faCopy, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg
 import { LocaleContext, StateDispatchContext } from '../../context';
 import { Dispatch, SetStateAction, useContext } from 'react';
 import { ItemType } from '../../reducers/types';
+import './ItemDropdown.css';
 
 export default function ItemDropdown({
   item,

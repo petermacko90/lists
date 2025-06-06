@@ -8,8 +8,9 @@ import Footer from './components/Footer/Footer';
 import FloatingButton from './components/Button/FloatingButton';
 import { MEDIUM_SCREEN_BREAKPOINT } from './constants/constants';
 import { LocaleContext, StateContext, StateDispatchContext } from './context';
-import { initialState, reducer, State } from './reducers/reducer';
+import { initialState, reducer } from './reducers/reducer';
 import { loadState, saveState } from './localStorage';
+import { State } from './reducers/types';
 
 const translations = getTranslations();
 
