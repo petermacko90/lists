@@ -35,6 +35,7 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
     <li className="no-background">
       <input
         type="text"
+        name="item"
         value={newText}
         onChange={(e) => setNewText(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && handleTextChange(newText)}

@@ -80,6 +80,7 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
         <div className="mv4">
           <input
             type="text"
+            name="title"
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleEditTitle()}

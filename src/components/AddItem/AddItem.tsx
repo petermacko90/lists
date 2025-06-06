@@ -32,6 +32,7 @@ export default function AddItem() {
     <div className="mt3">
       <input
         type="text"
+        name="item"
         value={newItemText}
         onChange={(e) => setNewItemText(e.target.value)}
         onKeyUp={(e) => e.key === 'Enter' && handleItemAdd(newItemText)}

@@ -30,6 +30,7 @@ export default function AddList({ scrollToCurrentList }: { scrollToCurrentList: 
       <h2>{translation.ADD_LIST}</h2>
       <input
         type="text"
+        name="title"
         value={newListTitle}
         onChange={(e) => setNewListTitle(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && handleAddList(newListTitle)}
