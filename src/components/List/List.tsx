@@ -1,29 +1,22 @@
 import './List.css';
-import { LocaleContext } from '../../context';
+import { LocaleContext, StateContext } from '../../context';
 import { KeyboardEventHandler, MouseEventHandler, useContext } from 'react';
-import { ItemType, ListType } from '../../reducers/types';
+import { ListType } from '../../reducers/types';
+import { selectFirstFewItems } from '../../reducers/selectors';
 
 export default function List({
   list,
-  items,
   onClickList,
   onEnterList,
 }: {
   list: ListType;
-  items: ItemType[];
   onClickList: MouseEventHandler<HTMLDivElement>;
   onEnterList: KeyboardEventHandler<HTMLDivElement>;
 }) {
-  const numItemsToShow = 5;
-  let itemsSlice = '';
-  items.slice(0, numItemsToShow).forEach((item, i) => {
-    itemsSlice += `${i === 0 ? '' : ', '}${item.text}`;
-  });
-  if (items.length > numItemsToShow) {
-    itemsSlice += ', ...';
-  }
-
   const translation = useContext(LocaleContext);
+
+  const state = useContext(StateContext);
+  const firstFewItems = selectFirstFewItems(state, list.id);
 
   return (
     <div
@@ -34,7 +27,7 @@ export default function List({
     >
       <h3 className="f3-l f4-m f5 truncate">{list.title.length === 0 ? translation.NO_TITLE : list.title}</h3>
       <p>{list.modified.toLocaleDateString()}</p>
-      <p className="truncate pb1">{itemsSlice}</p>
+      <p className="truncate pb1">{firstFewItems}</p>
     </div>
   );
 }

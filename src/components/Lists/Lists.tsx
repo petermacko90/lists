@@ -5,7 +5,7 @@ import './Lists.css';
 import { LocaleContext, StateContext, StateDispatchContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { selectItems, selectListsCount } from '../../reducers/selectors';
+import { selectListsCount } from '../../reducers/selectors';
 
 export default function Lists({
   showLists,
@@ -55,7 +55,6 @@ export default function Lists({
                 <List
                   key={list.id}
                   list={list}
-                  items={selectItems(state, list.id)}
                   onClickList={() => handleSelectList(list.id)}
                   onEnterList={(e) => e.key === 'Enter' && handleSelectList(list.id)}
                 />

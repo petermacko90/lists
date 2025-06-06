@@ -19,3 +19,20 @@ export function selectItems(state: State, id: string): ItemType[] {
   });
   return items;
 }
+
+export function selectItem(state: State, id: string): ItemType {
+  return state.items[id];
+}
+
+export function selectFirstFewItems(state: State, listId: string): string {
+  const numItemsToShow = 5;
+  let items = '';
+  const itemsIds = selectList(state, listId).itemsIds;
+  itemsIds.slice(0, numItemsToShow).forEach((itemId, i) => {
+    items += `${i === 0 ? '' : ', '}${selectItem(state, itemId).text}`;
+  });
+  if (itemsIds.length > numItemsToShow) {
+    items += ', ...';
+  }
+  return items;
+}
