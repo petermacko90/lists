@@ -65,8 +65,8 @@ export default function App() {
                 )}
               </div>
             </main>
-            <Footer />
             {!showAddList && <FloatingButton showAddList={() => setShowAddList(true)}></FloatingButton>}
+            <Footer />
           </>
         </LocaleContext.Provider>
       </StateDispatchContext>
