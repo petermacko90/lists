@@ -31,12 +31,10 @@ export default function Navigation({
       <button
         type="button"
         onClick={showAddList}
-        className="b--none ml4 mr3 bg-transparent f3 b pointer v-mid add-list"
+        className="b--none ml4 mr3 bg-transparent f4 b pointer v-mid add-list"
         aria-label={translation.ADD_LIST}
       >
-        <span>
-          <FontAwesomeIcon icon={faPlus} />
-        </span>
+        <FontAwesomeIcon icon={faPlus} />
         <span className="dn di-ns"> {translation.ADD_LIST}</span>
       </button>
     </nav>

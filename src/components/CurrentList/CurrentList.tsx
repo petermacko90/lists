@@ -76,36 +76,43 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
       <Button onClick={handleDeleteList} color="red">
         <FontAwesomeIcon icon={faTrashAlt} /> {translation.DELETE_LIST}
       </Button>
-      {isEditTitle ? (
-        <div className="mv4">
-          <input
-            type="text"
-            name="title"
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleEditTitle()}
-            placeholder={translation.LIST_TITLE}
-            className="pa3 b--none w-60 w-auto-l"
-            maxLength={MAX_LENGTH_LIST}
-            ref={editTitleRef}
-          />
-          <Button onClick={handleEditTitle} color="green" title={translation.SAVE} classes="w-20 w-auto-l">
-            <FontAwesomeIcon icon={faCheck} />
-          </Button>
-          <Button onClick={hideEditTitle} color="red" title={translation.CLOSE_EDIT} classes="w-20 w-auto-l">
-            <FontAwesomeIcon icon={faTimes} />
-          </Button>
-        </div>
-      ) : (
-        <div className="mv4">
-          <Button onClick={showEditTitle} color="blue" title={translation.EDIT_TITLE}>
-            <FontAwesomeIcon icon={faEdit} />
-          </Button>
-          <h2 className="f3 mv0 ml3 di list-title">
-            {list.title.length === 0 ? translation.NO_TITLE : list.title}
-          </h2>
-        </div>
-      )}
+      <div className="mv4">
+        {isEditTitle ? (
+          <>
+            <input
+              type="text"
+              name="title"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleEditTitle()}
+              placeholder={translation.LIST_TITLE}
+              className="pa3 b--none w-60 w-auto-l"
+              maxLength={MAX_LENGTH_LIST}
+              ref={editTitleRef}
+            />
+            <Button onClick={handleEditTitle} color="green" title={translation.SAVE} classes="w-20 w-auto-l">
+              <FontAwesomeIcon icon={faCheck} />
+            </Button>
+            <Button
+              onClick={hideEditTitle}
+              color="red"
+              title={translation.CLOSE_EDIT}
+              classes="w-20 w-auto-l"
+            >
+              <FontAwesomeIcon icon={faTimes} />
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button onClick={showEditTitle} color="blue" title={translation.EDIT_TITLE}>
+              <FontAwesomeIcon icon={faEdit} />
+            </Button>
+            <h2 className="f3 mv0 ml3 di list-title">
+              {list.title.length === 0 ? translation.NO_TITLE : list.title}
+            </h2>
+          </>
+        )}
+      </div>
       <p>{list.modified.toLocaleDateString()}</p>
       <Items copyItemText={copyItemText} />
     </div>

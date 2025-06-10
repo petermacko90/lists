@@ -56,7 +56,7 @@ export default function Item({
         <span className="item-name">{item.text}</span>
       </div>
       <div
-        className="actions-dropdown hover-bg-red tc pointer"
+        className="actions-dropdown hover-bg-red f3 tc pointer"
         tabIndex={0}
         title={translation.ACTIONS}
         onBlur={onActionsBlur}
@@ -64,9 +64,7 @@ export default function Item({
         onClick={() => setShowActions(!showActions)}
         onKeyUp={(e) => e.key === 'Enter' && setShowActions(!showActions)}
       >
-        <span className="f3">
-          <FontAwesomeIcon icon={faEllipsisV} />
-        </span>
+        <FontAwesomeIcon icon={faEllipsisV} />
         {showActions && (
           <ItemDropdown item={item} setTextToCopy={setTextToCopy} setItemToEdit={setItemToEdit} />
         )}
