@@ -49,7 +49,7 @@ export default function Lists({
             </Button>
           </div>
         ) : (
-          <div>
+          <ul className="ma0 pa0 list">
             {Object.values(state.lists).map((list) => {
               return (
                 <List
@@ -60,7 +60,7 @@ export default function Lists({
                 />
               );
             })}
-          </div>
+          </ul>
         )}
       </div>
     </div>

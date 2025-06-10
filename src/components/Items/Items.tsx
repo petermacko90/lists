@@ -20,9 +20,9 @@ export default function Items({ copyItemText }: { copyItemText: (text: string) =
   const items = selectItems(state, currentList.id);
 
   return (
-    <div>
+    <>
       {items.length > 0 ? (
-        <ul className="ma0 pa0 list">
+        <ul className="ma0 pa0 list items">
           {items.map((item) => {
             if (item.id === editItemId) {
               return <EditItem key={item.id} item={item} closeEdit={() => setEditItemId('')} />;
@@ -37,6 +37,6 @@ export default function Items({ copyItemText }: { copyItemText: (text: string) =
         <p>{translation.NO_ITEMS}</p>
       )}
       <AddItem />
-    </div>
+    </>
   );
 }

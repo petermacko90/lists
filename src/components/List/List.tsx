@@ -10,8 +10,8 @@ export default function List({
   onEnterList,
 }: {
   list: ListType;
-  onClickList: MouseEventHandler<HTMLDivElement>;
-  onEnterList: KeyboardEventHandler<HTMLDivElement>;
+  onClickList: MouseEventHandler<HTMLLIElement>;
+  onEnterList: KeyboardEventHandler<HTMLLIElement>;
 }) {
   const translation = useContext(LocaleContext);
 
@@ -19,7 +19,7 @@ export default function List({
   const firstFewItems = selectFirstFewItems(state, list.id);
 
   return (
-    <div
+    <li
       className="pa2 ma3 bg-yellow pointer shadow-3 noselect list-menu"
       tabIndex={0}
       onClick={onClickList}
@@ -28,6 +28,6 @@ export default function List({
       <h2 className="f3-l f4-m f5 truncate">{list.title.length === 0 ? translation.NO_TITLE : list.title}</h2>
       <p>{list.modified.toLocaleDateString()}</p>
       <p className="truncate pb1">{firstFewItems}</p>
-    </div>
+    </li>
   );
 }

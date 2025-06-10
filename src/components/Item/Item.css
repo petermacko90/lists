@@ -1,19 +1,19 @@
-ul li {
+ul.items > li {
   background-color: #eee;
   transition: 0.2s;
 }
 
-ul li:nth-child(odd) {
+ul.items > li:nth-child(odd) {
   background-color: #f9f9f9;
 }
 
-ul li.checked {
+ul.items > li.checked {
   background-color: #888;
   color: #fff;
 }
 
-ul li:hover,
-ul li:focus {
+ul.items > li:hover,
+ul.items > li:focus {
   background-color: #bbb;
 }
 
