@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCopy, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { LocaleContext, StateDispatchContext } from '../../context';
-import { Dispatch, SetStateAction, useContext } from 'react';
+import { Dispatch, RefObject, SetStateAction, useContext } from 'react';
 import { ItemType } from '../../reducers/types';
 import './ItemDropdown.css';
 
@@ -9,47 +9,38 @@ export default function ItemDropdown({
   item,
   setTextToCopy,
   setItemToEdit,
+  onItemCheck,
+  onItemDelete,
+  setShowActions,
+  actionsRef,
 }: {
   item: ItemType;
   setTextToCopy: (text: string) => void;
   setItemToEdit: Dispatch<SetStateAction<string>>;
+  onItemCheck: (item: ItemType) => void;
+  onItemDelete: (id: string) => void;
+  setShowActions: Dispatch<SetStateAction<boolean>>;
+  actionsRef: RefObject<HTMLButtonElement | null>;
 }) {
   const translation = useContext(LocaleContext);
 
-  const dispatch = useContext(StateDispatchContext);
-
-  function handleItemCheck() {
-    dispatch({
-      type: 'item edited',
-      payload: {
-        id: item.id,
-        text: item.text,
-        checked: !item.checked,
-      },
-    });
-    dispatch({ type: 'list modified date updated', payload: new Date() });
-  }
-
-  function handleItemDelete() {
-    if (window.confirm(translation.CONFIRM_DELETE_ITEM)) {
-      dispatch({ type: 'item deleted', payload: item.id });
-      dispatch({ type: 'list modified date updated', payload: new Date() });
-    }
-  }
-
   return (
-    <div className="actions-content w4 shadow-3">
+    <div
+      className="actions-content w4 f5 shadow-3"
+      onKeyUp={(e) => e.key === 'Escape' && setShowActions(false)}
+    >
       <button
         type="button"
         onClick={() => setItemToEdit(item.id)}
         className="w-100 pointer"
         title={translation.EDIT_ITEM_NAME}
+        ref={actionsRef}
       >
         <FontAwesomeIcon icon={faEdit} /> {translation.EDIT}
       </button>
       <button
         type="button"
-        onClick={() => handleItemCheck()}
+        onClick={() => onItemCheck(item)}
         className="w-100 pointer"
         title={item.checked ? translation.UNCHECK : translation.CHECK}
       >
@@ -57,7 +48,7 @@ export default function ItemDropdown({
       </button>
       <button
         type="button"
-        onClick={() => handleItemDelete()}
+        onClick={() => onItemDelete(item.id)}
         className="w-100 pointer"
         title={translation.DELETE_ITEM}
       >

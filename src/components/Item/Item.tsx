@@ -1,4 +1,4 @@
-import { useState, useContext, useRef, Dispatch, SetStateAction } from 'react';
+import { useState, useContext, useRef, Dispatch, SetStateAction, KeyboardEvent } from 'react';
 import ItemDropdown from './ItemDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
@@ -21,6 +21,8 @@ export default function Item({
 
   const [showActions, setShowActions] = useState(false);
 
+  const actionsRef = useRef<HTMLButtonElement | null>(null);
+
   const timeoutRef = useRef<number | undefined>(undefined);
 
   function onActionsBlur() {
@@ -31,7 +33,7 @@ export default function Item({
     window.clearTimeout(timeoutRef.current);
   }
 
-  function handleItemCheck() {
+  function handleItemCheck(item: ItemType) {
     dispatch({
       type: 'item edited',
       payload: {
@@ -43,14 +45,43 @@ export default function Item({
     dispatch({ type: 'list modified date updated', payload: new Date() });
   }
 
+  function handleItemDelete(id: string) {
+    if (window.confirm(translation.CONFIRM_DELETE_ITEM)) {
+      dispatch({ type: 'item deleted', payload: id });
+      dispatch({ type: 'list modified date updated', payload: new Date() });
+    }
+  }
+
+  function handleItemKeyUp(e: KeyboardEvent<HTMLDivElement>) {
+    if (e.key === 'Enter') {
+      handleItemCheck(item);
+    } else if (e.key === 'Delete') {
+      handleItemDelete(item.id);
+    } else if (e.key === 'F2') {
+      setItemToEdit(item.id);
+    } else if (e.key === ' ') {
+      setShowActions(!showActions);
+      setTimeout(() => actionsRef.current?.focus());
+    } else if (e.ctrlKey && (e.key === 'c' || e.key === 'C')) {
+      setTextToCopy(item.text);
+    }
+  }
+
+  function handleActionsKeyUp(e: KeyboardEvent<HTMLDivElement>) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      setShowActions(!showActions);
+      setTimeout(() => actionsRef.current?.focus());
+    }
+  }
+
   return (
     <li className={`flex justify-between relative noselect${item.checked ? ' checked' : ''}`}>
       <div
         className="flex pv3 w-100 pointer"
         tabIndex={0}
         title={item.checked ? translation.UNCHECK : translation.CHECK}
-        onClick={() => handleItemCheck()}
-        onKeyUp={(e) => e.key === 'Enter' && handleItemCheck()}
+        onClick={() => handleItemCheck(item)}
+        onKeyUp={handleItemKeyUp}
       >
         <span className="check tc b">{item.checked && <FontAwesomeIcon icon={faCheck} />}</span>
         <span className="item-name">{item.text}</span>
@@ -62,11 +93,19 @@ export default function Item({
         onBlur={onActionsBlur}
         onFocus={onActionsFocus}
         onClick={() => setShowActions(!showActions)}
-        onKeyUp={(e) => e.key === 'Enter' && setShowActions(!showActions)}
+        onKeyUp={handleActionsKeyUp}
       >
         <FontAwesomeIcon icon={faEllipsisV} />
         {showActions && (
-          <ItemDropdown item={item} setTextToCopy={setTextToCopy} setItemToEdit={setItemToEdit} />
+          <ItemDropdown
+            item={item}
+            setTextToCopy={setTextToCopy}
+            setItemToEdit={setItemToEdit}
+            onItemCheck={handleItemCheck}
+            onItemDelete={handleItemDelete}
+            setShowActions={setShowActions}
+            actionsRef={actionsRef}
+          />
         )}
       </div>
     </li>
