@@ -25,7 +25,7 @@ export default function Button({
       disabled={disabled}
       title={title}
       aria-label={title}
-      className={`black b--none pa3 b pointer dim bg-${color} ${classes ? classes : ''}`}
+      className={`black b--none br3 pa3 b pointer dim shadow-4 bg-${color} ${classes ? classes : ''}`}
     >
       {children}
     </button>

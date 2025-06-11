@@ -38,12 +38,12 @@ export default function AddItem() {
         onKeyUp={(e) => e.key === 'Enter' && handleItemAdd(newItemText)}
         placeholder={translation.ITEM_NAME}
         maxLength={MAX_LENGTH_ITEM}
-        className="pa3 b--none w-75 w-two-thirds-m w-auto-l"
+        className="pa3 br3 br--left b--none shadow-4 w-75 w-two-thirds-m w-auto-l"
       />
       <Button
         onClick={() => handleItemAdd(newItemText)}
         color="green"
-        classes="w-25 w-third-m w-auto-l"
+        classes="w-25 w-third-m w-auto-l br--right"
         disabled={isEmptyString(newItemText)}
       >
         {translation.ADD}

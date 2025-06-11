@@ -49,11 +49,16 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
         color="green"
         title={translation.SAVE}
         disabled={isEmptyString(newText)}
-        classes="w-20 w-auto-l"
+        classes="w-20 w-auto-l br--left br--right"
       >
         <FontAwesomeIcon icon={faCheck} />
       </Button>
-      <Button onClick={() => closeEdit()} color="red" title={translation.CLOSE_EDIT} classes="w-20 w-auto-l">
+      <Button
+        onClick={() => closeEdit()}
+        color="red"
+        title={translation.CLOSE_EDIT}
+        classes="w-20 w-auto-l br--left br--right"
+      >
         <FontAwesomeIcon icon={faTimes} />
       </Button>
     </li>

@@ -86,18 +86,23 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
               onChange={(e) => setNewTitle(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleEditTitle()}
               placeholder={translation.LIST_TITLE}
-              className="pa3 b--none w-60 w-auto-l"
+              className="pa3 br3 br--left b--none shadow-4 w-60 w-auto-l"
               maxLength={MAX_LENGTH_LIST}
               ref={editTitleRef}
             />
-            <Button onClick={handleEditTitle} color="green" title={translation.SAVE} classes="w-20 w-auto-l">
+            <Button
+              onClick={handleEditTitle}
+              color="green"
+              title={translation.SAVE}
+              classes="w-20 w-auto-l br--left br--right"
+            >
               <FontAwesomeIcon icon={faCheck} />
             </Button>
             <Button
               onClick={hideEditTitle}
               color="red"
               title={translation.CLOSE_EDIT}
-              classes="w-20 w-auto-l"
+              classes="w-20 w-auto-l br--right"
             >
               <FontAwesomeIcon icon={faTimes} />
             </Button>

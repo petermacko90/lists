@@ -35,7 +35,7 @@ export default function Lists({
       <button
         type="button"
         onClick={() => setShowLists(showLists ? false : true)}
-        className="bg-yellow b--none pointer pv1 ml3 mv1 toggle-lists"
+        className="bg-yellow br2 b--none shadow-4 pointer pv1 ml3 mv1 toggle-lists"
       >
         {showLists ? `${translation.HIDE_LISTS}` : `${translation.SHOW_LISTS}`}{' '}
         <FontAwesomeIcon icon={showLists ? faCaretUp : faCaretDown} />
