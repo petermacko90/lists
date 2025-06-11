@@ -1,10 +1,3 @@
-button.bg-green:disabled {
-  background-color: #9EEBCF;
-  color: #555;
-}
-
-button.bg-green:disabled:hover {
-  background-color: #9EEBCF;
+button:disabled:hover {
   cursor: not-allowed;
-  opacity: 1;
 }

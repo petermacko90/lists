@@ -17,7 +17,6 @@ const translations = getTranslations();
 export default function App() {
   const [showLists, setShowLists] = useState(true);
   const [showAddList, setShowAddList] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -46,7 +45,7 @@ export default function App() {
       <StateDispatchContext value={dispatch}>
         <LocaleContext.Provider value={translations}>
           <main>
-            <Navigation showAddList={() => setShowAddList(true)} toggleMenu={() => setShowMenu(!showMenu)} />
+            <Navigation showAddList={() => setShowAddList(true)} />
             <div className="flex flex-wrap">
               <Lists
                 showLists={showLists}

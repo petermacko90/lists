@@ -1,9 +1,11 @@
 .add-list {
-  color: #444;
+  min-width: 2rem;
 }
 
-.add-list:hover {
-  color: #222;
+.separator {
+  width: 1px;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 @media screen and (min-width: 480px) {
