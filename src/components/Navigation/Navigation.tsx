@@ -2,10 +2,29 @@ import './Navigation.css';
 import { LocaleContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faLanguage } from '@fortawesome/free-solid-svg-icons';
-import { useContext, MouseEventHandler } from 'react';
+import { useContext, MouseEventHandler, useState, useRef, Dispatch, SetStateAction } from 'react';
+import LanguageSelction from './LanguageSelection';
+import { Translations } from '../../constants/strings';
 
-export default function Navigation({ showAddList }: { showAddList: MouseEventHandler<HTMLButtonElement> }) {
+export default function Navigation({
+  showAddList,
+  setTranslations,
+}: {
+  showAddList: MouseEventHandler<HTMLButtonElement>;
+  setTranslations: Dispatch<SetStateAction<Translations | null>>;
+}) {
   const translation = useContext(LocaleContext);
+
+  const [showLanguageSelection, setShowLanguageSelection] = useState(false);
+  const timeoutRef = useRef<number | undefined>(undefined);
+
+  function onLanguageSelectionBlur() {
+    timeoutRef.current = window.setTimeout(() => setShowLanguageSelection(false));
+  }
+
+  function onLanguageSelectionFocus() {
+    window.clearTimeout(timeoutRef.current);
+  }
 
   return (
     <nav className="bg-yellow shadow-2 mb2 flex justify-between">
@@ -16,22 +35,31 @@ export default function Navigation({ showAddList }: { showAddList: MouseEventHan
       <div className="flex mr2 ml-auto">
         <button
           type="button"
-          className="b--none bg-transparent mid-gray hover-black f4 b pointer"
-          title={translation.LANGUAGE}
-          aria-label={translation.LANGUAGE}
-        >
-          <FontAwesomeIcon icon={faLanguage} />
-        </button>
-        <div className="separator bl b--mid-gray"></div>
-        <button
-          type="button"
           onClick={showAddList}
           className="b--none bg-transparent mid-gray hover-black f4 b pointer add-list"
+          title={translation.ADD_LIST}
           aria-label={translation.ADD_LIST}
         >
-          <FontAwesomeIcon icon={faPlus} className="di dn-ns" />
-          <span className="dn di-ns"> {translation.ADD_LIST}</span>
+          <FontAwesomeIcon icon={faPlus} />
         </button>
+        <div className="separator bl b--mid-gray"></div>
+        <div onBlur={onLanguageSelectionBlur} onFocus={onLanguageSelectionFocus} className="flex relative">
+          <button
+            type="button"
+            onClick={() => setShowLanguageSelection(!showLanguageSelection)}
+            className="b--none bg-transparent mid-gray hover-black f4 b pointer"
+            title={translation.LANGUAGE}
+            aria-label={translation.LANGUAGE}
+          >
+            <FontAwesomeIcon icon={faLanguage} />
+          </button>
+          {showLanguageSelection && (
+            <LanguageSelction
+              hideLanguageSelection={() => setShowLanguageSelection(false)}
+              setTranslations={setTranslations}
+            />
+          )}
+        </div>
       </div>
     </nav>
   );

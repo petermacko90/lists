@@ -59,6 +59,12 @@ export const strings = {
   },
 } as const;
 
-type Language = 'en' | 'sk';
+export type Language = 'en' | 'sk';
 
 export type Translations = (typeof strings)[Language];
+
+type LanguageDropdown = Array<{ value: Language; label: string }>;
+export const languageDropdown: LanguageDropdown = [
+  { value: 'en', label: 'English' },
+  { value: 'sk', label: 'Slovenčina' },
+];

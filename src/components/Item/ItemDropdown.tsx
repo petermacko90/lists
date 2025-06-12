@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCopy, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { LocaleContext, StateDispatchContext } from '../../context';
+import { LocaleContext } from '../../context';
 import { Dispatch, RefObject, SetStateAction, useContext } from 'react';
 import { ItemType } from '../../reducers/types';
 import './ItemDropdown.css';

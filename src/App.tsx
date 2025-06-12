@@ -11,12 +11,14 @@ import { LocaleContext, StateContext, StateDispatchContext } from './context';
 import { initialState, reducer } from './reducers/reducer';
 import { loadState, saveState } from './localStorage';
 import { State } from './reducers/types';
+import { Translations } from './constants/strings';
 
-const translations = getTranslations();
+const initialTranslations = getTranslations();
 
 export default function App() {
   const [showLists, setShowLists] = useState(true);
   const [showAddList, setShowAddList] = useState(false);
+  const [translations, setTranslations] = useState<Translations | null>(null);
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -43,9 +45,9 @@ export default function App() {
   return (
     <StateContext value={state}>
       <StateDispatchContext value={dispatch}>
-        <LocaleContext.Provider value={translations}>
+        <LocaleContext.Provider value={translations ?? initialTranslations}>
           <main>
-            <Navigation showAddList={() => setShowAddList(true)} />
+            <Navigation showAddList={() => setShowAddList(true)} setTranslations={setTranslations} />
             <div className="flex flex-wrap">
               <Lists
                 showLists={showLists}
