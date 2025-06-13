@@ -3,3 +3,12 @@
   right: 0;
   top: 48px;
 }
+
+.selection > li > button {
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.selection > li:last-child > button {
+  border: none;
+}

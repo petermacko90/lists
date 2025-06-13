@@ -67,15 +67,8 @@ export default function Item({
     }
   }
 
-  function handleActionsKeyUp(e: KeyboardEvent<HTMLDivElement>) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      setShowActions(!showActions);
-      setTimeout(() => actionsRef.current?.focus());
-    }
-  }
-
   return (
-    <li className={`flex justify-between relative noselect${item.checked ? ' checked' : ''}`}>
+    <li className={`flex justify-between noselect${item.checked ? ' checked' : ''}`}>
       <div
         className="flex pv3 w-100 pointer"
         tabIndex={0}
@@ -86,16 +79,15 @@ export default function Item({
         <span className="check tc b">{item.checked && <FontAwesomeIcon icon={faCheck} />}</span>
         <span className="item-name">{item.text}</span>
       </div>
-      <div
-        className="actions-dropdown hover-bg-red f3 tc pointer"
-        tabIndex={0}
-        title={translation.ACTIONS}
-        onBlur={onActionsBlur}
-        onFocus={onActionsFocus}
-        onClick={() => setShowActions(!showActions)}
-        onKeyUp={handleActionsKeyUp}
-      >
-        <FontAwesomeIcon icon={faEllipsisV} />
+      <div className="actions-dropdown relative" onBlur={onActionsBlur} onFocus={onActionsFocus}>
+        <button
+          type="button"
+          onClick={() => setShowActions(!showActions)}
+          className="bn hover-bg-red bg-transparent f3 tc pointer"
+          title={translation.ACTIONS}
+        >
+          <FontAwesomeIcon icon={faEllipsisV} />
+        </button>
         {showActions && (
           <ItemDropdown
             item={item}

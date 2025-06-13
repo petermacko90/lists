@@ -3,18 +3,21 @@
   right: 0;
   top: 50px;
   z-index: 2;
-  background-color: #eee;
 }
 
 .actions-content > button {
   display: block;
   background-color: transparent;
-  padding: 12px 16px;
   border: none;
+  border-bottom: 1px solid #ccc;
   text-align: left;
+}
+
+.actions-content > button:last-child {
+  border: none;
 }
 
 .actions-content > button:hover,
 .actions-content > button:focus {
-  background-color: #ddd;
+  background-color: #eee;
 }

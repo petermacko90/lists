@@ -25,7 +25,7 @@ export default function LanguageSelction({
             <button
               type="button"
               onClick={() => handleSelection(language.value)}
-              className="w-100 pv2 ph3 bn bg-transparent hover-bg-light-gray tl pointer"
+              className="w-100 pa3 bg-transparent hover-bg-light-gray tl pointer"
             >
               {language.label}
             </button>

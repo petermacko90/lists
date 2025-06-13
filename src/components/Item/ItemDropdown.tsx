@@ -26,13 +26,13 @@ export default function ItemDropdown({
 
   return (
     <div
-      className="actions-content w4 f5 shadow-3"
+      className="actions-content w4 f5 bg-white shadow-3"
       onKeyUp={(e) => e.key === 'Escape' && setShowActions(false)}
     >
       <button
         type="button"
         onClick={() => setItemToEdit(item.id)}
-        className="w-100 pointer"
+        className="w-100 pa3 pointer"
         title={translation.EDIT_ITEM_NAME}
         ref={actionsRef}
       >
@@ -41,7 +41,7 @@ export default function ItemDropdown({
       <button
         type="button"
         onClick={() => onItemCheck(item)}
-        className="w-100 pointer"
+        className="w-100 pa3 pointer"
         title={item.checked ? translation.UNCHECK : translation.CHECK}
       >
         <FontAwesomeIcon icon={faCheck} /> {item.checked ? translation.UNCHECK : translation.CHECK}
@@ -49,7 +49,7 @@ export default function ItemDropdown({
       <button
         type="button"
         onClick={() => onItemDelete(item.id)}
-        className="w-100 pointer"
+        className="w-100 pa3 pointer"
         title={translation.DELETE_ITEM}
       >
         <FontAwesomeIcon icon={faTrashAlt} /> {translation.DELETE}
@@ -57,7 +57,7 @@ export default function ItemDropdown({
       <button
         type="button"
         onClick={() => setTextToCopy(item.text)}
-        className="w-100 pointer"
+        className="w-100 pa3 pointer"
         title={translation.COPY_TO_CLIPBOARD}
       >
         <FontAwesomeIcon icon={faCopy} /> {translation.COPY_NAME}

@@ -42,7 +42,9 @@ export default function Navigation({
         >
           <FontAwesomeIcon icon={faPlus} />
         </button>
+
         <div className="separator bl b--mid-gray"></div>
+
         <div onBlur={onLanguageSelectionBlur} onFocus={onLanguageSelectionFocus} className="flex relative">
           <button
             type="button"
