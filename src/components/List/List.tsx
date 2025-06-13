@@ -20,7 +20,7 @@ export default function List({
 
   return (
     <li
-      className="pa2 ma3 bg-yellow pointer shadow-3 noselect list-menu"
+      className="ml3 ml1-m ml1-l mr3 mt1 mb3 pa2 bg-yellow pointer shadow-3 noselect list-menu"
       tabIndex={0}
       onClick={onClickList}
       onKeyUp={onEnterList}

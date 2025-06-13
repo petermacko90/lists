@@ -32,7 +32,7 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
   }
 
   return (
-    <li className="no-background">
+    <li className="flex no-background">
       <input
         type="text"
         name="item"
@@ -40,7 +40,7 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
         onChange={(e) => setNewText(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && handleTextChange(newText)}
         placeholder={translation.ITEM_NAME}
-        className="pa3 b--none w-60 w-auto-l"
+        className="w-100 pa3 b--none"
         maxLength={MAX_LENGTH_ITEM}
         autoFocus
       />
@@ -49,7 +49,7 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
         color="green"
         title={translation.SAVE}
         disabled={isEmptyString(newText)}
-        classes="w-20 w-auto-l br--left br--right"
+        classes="br--left br--right edit-button"
       >
         <FontAwesomeIcon icon={faCheck} />
       </Button>
@@ -57,7 +57,7 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
         onClick={() => closeEdit()}
         color="red"
         title={translation.CLOSE_EDIT}
-        classes="w-20 w-auto-l br--left br--right"
+        classes="br--left br--right edit-button"
       >
         <FontAwesomeIcon icon={faTimes} />
       </Button>

@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="mh3 mv5 tc">
+    <footer className="mh3 mt5 mb6 tc">
       Icons made by{' '}
       <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">
         Smashicons

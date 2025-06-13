@@ -27,29 +27,29 @@ export default function Navigation({
   }
 
   return (
-    <nav className="bg-yellow shadow-2 mb2 flex justify-between">
-      <div className="pl1">
+    <nav className="flex justify-between mb2 ph1 ph4-m ph7-l bg-yellow shadow-2">
+      <div>
         <img src="/lists/list64.png" height={32} width={32} alt="logo" className="ma1 v-mid" />
         <h1 className="dib f3 mv2 v-mid">Lists</h1>
       </div>
-      <div className="flex mr2 ml-auto">
+      <div className="flex ml-auto ml4-m ml7-l">
         <button
           type="button"
           onClick={showAddList}
-          className="b--none bg-transparent mid-gray hover-black f4 b pointer add-list"
+          className="b--none bg-transparent black dim f3 b pointer add-list"
           title={translation.ADD_LIST}
           aria-label={translation.ADD_LIST}
         >
           <FontAwesomeIcon icon={faPlus} />
         </button>
 
-        <div className="separator bl b--mid-gray"></div>
+        <div className="separator bl b--black"></div>
 
         <div onBlur={onLanguageSelectionBlur} onFocus={onLanguageSelectionFocus} className="flex relative">
           <button
             type="button"
             onClick={() => setShowLanguageSelection(!showLanguageSelection)}
-            className="b--none bg-transparent mid-gray hover-black f4 b pointer"
+            className="b--none bg-transparent black dim f3 b pointer"
             title={translation.LANGUAGE}
             aria-label={translation.LANGUAGE}
           >

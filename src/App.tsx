@@ -48,7 +48,7 @@ export default function App() {
         <LocaleContext.Provider value={translations ?? initialTranslations}>
           <main>
             <Navigation showAddList={() => setShowAddList(true)} setTranslations={setTranslations} />
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap mh1 mh4-m mh7-l">
               <Lists
                 showLists={showLists}
                 setShowLists={setShowLists}

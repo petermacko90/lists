@@ -1,3 +1,7 @@
 ul li.no-background {
   background: none;
 }
+
+.edit-button {
+  width: 48px;
+}

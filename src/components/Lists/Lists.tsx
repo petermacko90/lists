@@ -35,14 +35,14 @@ export default function Lists({
       <button
         type="button"
         onClick={() => setShowLists(showLists ? false : true)}
-        className="bg-yellow br2 b--none shadow-4 pointer pv1 ml3 mv1 toggle-lists"
+        className="mh3 mh1-m mh1-l mv1 pv1 br2 b--none bg-yellow shadow-4 pointer toggle-lists"
       >
         {showLists ? `${translation.HIDE_LISTS}` : `${translation.SHOW_LISTS}`}{' '}
         <FontAwesomeIcon icon={showLists ? faCaretUp : faCaretDown} />
       </button>
-      <div className={`lists${showLists ? '' : ' dn'}`}>
+      <div className={`mt2 lists${showLists ? '' : ' dn'}`}>
         {listsCount === 0 ? (
-          <div className="ml3">
+          <div>
             <p>{translation.NO_LIST_FOUND}</p>
             <Button onClick={showAddList} color="green">
               <FontAwesomeIcon icon={faPlus} /> {translation.ADD_LIST}
