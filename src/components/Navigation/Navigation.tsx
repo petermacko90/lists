@@ -27,7 +27,7 @@ export default function Navigation({
   }
 
   return (
-    <nav className="flex justify-between mb2 ph1 ph4-m ph7-l bg-yellow shadow-2">
+    <nav className="flex justify-between mb2 ph3 ph4-m ph7-l bg-yellow shadow-2">
       <div>
         <img src="/lists/list64.png" height={32} width={32} alt="logo" className="ma1 v-mid" />
         <h1 className="dib f3 mv2 v-mid">Lists</h1>

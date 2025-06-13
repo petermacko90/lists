@@ -28,6 +28,10 @@ code {
   user-select: none;
 }
 
+.edit-button {
+  min-width: 48px;
+}
+
 .toast {
   position: fixed;
   z-index: 3;

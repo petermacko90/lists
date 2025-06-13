@@ -2,12 +2,12 @@ import { useState, useRef, useContext, useEffect } from 'react';
 import ToastNotification from '../ToastNotification/ToastNotification';
 import Button from '../Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEdit, faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import './CurrentList.css';
-import { MAX_LENGTH_LIST } from '../../constants/constants';
 import { LocaleContext, StateContext, StateDispatchContext } from '../../context';
 import { selectCurrentList } from '../../reducers/selectors';
 import Items from '../Items/Items';
+import { EditListTitle } from './EditListTitle';
 
 export default function CurrentList({ showLists }: { showLists: () => void }) {
   const translation = useContext(LocaleContext);
@@ -40,7 +40,7 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
     setNewTitle('');
   }
 
-  function handleEditTitle() {
+  function handleEditTitle(newTitle: string) {
     dispatch({
       type: 'list edited',
       payload: {
@@ -78,35 +78,13 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
       </Button>
       <div className="mv4">
         {isEditTitle ? (
-          <>
-            <input
-              type="text"
-              name="title"
-              value={newTitle}
-              onChange={(e) => setNewTitle(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleEditTitle()}
-              placeholder={translation.LIST_TITLE}
-              className="pa3 br3 br--left b--none shadow-4 w-60 w-auto-l"
-              maxLength={MAX_LENGTH_LIST}
-              ref={editTitleRef}
-            />
-            <Button
-              onClick={handleEditTitle}
-              color="green"
-              title={translation.SAVE}
-              classes="w-20 w-auto-l br--left br--right"
-            >
-              <FontAwesomeIcon icon={faCheck} />
-            </Button>
-            <Button
-              onClick={hideEditTitle}
-              color="red"
-              title={translation.CLOSE_EDIT}
-              classes="w-20 w-auto-l br--right"
-            >
-              <FontAwesomeIcon icon={faTimes} />
-            </Button>
-          </>
+          <EditListTitle
+            newTitle={newTitle}
+            setNewTitle={setNewTitle}
+            handleEditTitle={handleEditTitle}
+            hideEditTitle={hideEditTitle}
+            editTitleRef={editTitleRef}
+          />
         ) : (
           <>
             <Button onClick={showEditTitle} color="blue" title={translation.EDIT_TITLE}>
