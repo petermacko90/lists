@@ -3,7 +3,7 @@ import { LocaleContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faLanguage } from '@fortawesome/free-solid-svg-icons';
 import { useContext, MouseEventHandler, useState, useRef, Dispatch, SetStateAction } from 'react';
-import LanguageSelction from './LanguageSelection';
+import LanguageSelection from './LanguageSelection';
 import { Translations } from '../../constants/strings';
 
 export default function Navigation({
@@ -56,7 +56,7 @@ export default function Navigation({
             <FontAwesomeIcon icon={faLanguage} />
           </button>
           {showLanguageSelection && (
-            <LanguageSelction
+            <LanguageSelection
               hideLanguageSelection={() => setShowLanguageSelection(false)}
               setTranslations={setTranslations}
             />

@@ -59,7 +59,9 @@ export const strings = {
   },
 } as const;
 
-export type Language = 'en' | 'sk';
+export const languages = ['en', 'sk'] as const;
+
+export type Language = (typeof languages)[number];
 
 export type Translations = (typeof strings)[Language];
 

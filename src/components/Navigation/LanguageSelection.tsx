@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Language, languageDropdown, strings, Translations } from '../../constants/strings';
 import './LanguageSelection.css';
+import { saveLanguage } from '../../localStorage';
 
 export default function LanguageSelction({
   hideLanguageSelection,
@@ -11,6 +12,8 @@ export default function LanguageSelction({
 }) {
   function handleSelection(language: Language) {
     setTranslations(strings[language]);
+    document.documentElement.lang = language;
+    saveLanguage(language);
     hideLanguageSelection();
   }
 
