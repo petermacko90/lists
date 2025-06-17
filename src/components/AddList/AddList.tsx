@@ -3,6 +3,7 @@ import Button from '../Button/Button';
 import { LocaleContext, StateDispatchContext } from '../../context';
 import { MAX_LENGTH_LIST } from '../../constants/constants';
 import { v4 as uuidv4 } from 'uuid';
+import { ListId } from '../../reducers/types';
 
 export default function AddList({ scrollToCurrentList }: { scrollToCurrentList: () => void }) {
   const translation = useContext(LocaleContext);
@@ -16,7 +17,7 @@ export default function AddList({ scrollToCurrentList }: { scrollToCurrentList: 
     dispatch({
       type: 'list added',
       payload: {
-        id: uuidv4(),
+        id: uuidv4() as ListId,
         itemsIds: [],
         modified: new Date(),
         title: title,

@@ -1,33 +1,37 @@
+export type ListId = string & { readonly brand: unique symbol };
+
 export type ListType = {
-  id: string;
+  id: ListId;
   title: string;
   modified: Date;
-  itemsIds: string[];
+  itemsIds: ItemId[];
 };
 
-type ListsRecord = Record<string, ListType>;
+type ListsRecord = Record<ListId, ListType>;
+
+export type ItemId = string & { readonly brand: unique symbol };
 
 export type ItemType = {
-  id: string;
+  id: ItemId;
   text: string;
   checked: boolean;
 };
 
-type ItemsRecord = Record<string, ItemType>;
+type ItemsRecord = Record<ItemId, ItemType>;
 
 export type State = {
   lists: ListsRecord;
   items: ItemsRecord;
-  currentListId: string | null;
+  currentListId: ListId | null;
 };
 
 export type Action =
   | { type: 'fetched'; payload: State }
-  | { type: 'list selected'; payload: string }
+  | { type: 'list selected'; payload: ListId }
   | { type: 'list added'; payload: ListType }
   | { type: 'list edited'; payload: ListType }
-  | { type: 'list deleted'; payload: string }
+  | { type: 'list deleted'; payload: ListId }
   | { type: 'list modified date updated'; payload: Date }
   | { type: 'item added'; payload: ItemType }
   | { type: 'item edited'; payload: ItemType }
-  | { type: 'item deleted'; payload: string };
+  | { type: 'item deleted'; payload: ItemId };

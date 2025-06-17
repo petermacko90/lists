@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCopy, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { LocaleContext } from '../../context';
 import { Dispatch, RefObject, SetStateAction, useContext } from 'react';
-import { ItemType } from '../../reducers/types';
+import { ItemId, ItemType } from '../../reducers/types';
 import './ItemDropdown.css';
 
 export default function ItemDropdown({
@@ -18,7 +18,7 @@ export default function ItemDropdown({
   setTextToCopy: (text: string) => void;
   setItemToEdit: Dispatch<SetStateAction<string>>;
   onItemCheck: (item: ItemType) => void;
-  onItemDelete: (id: string) => void;
+  onItemDelete: (itemId: ItemId) => void;
   setShowActions: Dispatch<SetStateAction<boolean>>;
   actionsRef: RefObject<HTMLButtonElement | null>;
 }) {

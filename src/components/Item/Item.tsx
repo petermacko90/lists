@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import './Item.css';
 import { LocaleContext, StateDispatchContext } from '../../context';
-import { ItemType } from '../../reducers/types';
+import { ItemId, ItemType } from '../../reducers/types';
 
 export default function Item({
   item,
@@ -45,9 +45,9 @@ export default function Item({
     dispatch({ type: 'list modified date updated', payload: new Date() });
   }
 
-  function handleItemDelete(id: string) {
+  function handleItemDelete(itemId: ItemId) {
     if (window.confirm(translation.CONFIRM_DELETE_ITEM)) {
-      dispatch({ type: 'item deleted', payload: id });
+      dispatch({ type: 'item deleted', payload: itemId });
       dispatch({ type: 'list modified date updated', payload: new Date() });
     }
   }

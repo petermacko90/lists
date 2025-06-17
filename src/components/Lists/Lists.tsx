@@ -6,6 +6,7 @@ import { LocaleContext, StateContext, StateDispatchContext } from '../../context
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { selectListsCount } from '../../reducers/selectors';
+import { ListId } from '../../reducers/types';
 
 export default function Lists({
   showLists,
@@ -25,8 +26,8 @@ export default function Lists({
 
   const listsCount = selectListsCount(state);
 
-  function handleSelectList(id: string) {
-    dispatch({ type: 'list selected', payload: id });
+  function handleSelectList(listId: ListId) {
+    dispatch({ type: 'list selected', payload: listId });
     scrollToCurrentList();
   }
 

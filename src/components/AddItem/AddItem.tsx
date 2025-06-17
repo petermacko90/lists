@@ -4,6 +4,7 @@ import { MAX_LENGTH_ITEM } from '../../constants/constants';
 import { LocaleContext, StateDispatchContext } from '../../context';
 import { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { ItemId } from '../../reducers/types';
 
 export default function AddItem() {
   const translation = useContext(LocaleContext);
@@ -19,7 +20,7 @@ export default function AddItem() {
     dispatch({
       type: 'item added',
       payload: {
-        id: uuidv4(),
+        id: uuidv4() as ItemId,
         checked: false,
         text: text,
       },

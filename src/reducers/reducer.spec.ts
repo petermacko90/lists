@@ -1,3 +1,16 @@
+import {
+  itemId159,
+  itemId777,
+  itemId789,
+  listId123,
+  listId456,
+  listType123,
+  listType456,
+  oneListWithOneItem,
+  oneListWithoutItems,
+  oneListWithTwoItems,
+  twoListsWithSomeItems,
+} from './mocks';
 import { initialState, reducer } from './reducer';
 import { Action } from './types';
 import { ItemType, ListType, State } from './types';
@@ -29,33 +42,11 @@ describe('reducer', () => {
     it('should fetch one list with zero items', () => {
       const state: State = initialState;
 
-      const payload: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: [],
-          },
-        },
-        items: {},
-        currentListId: null,
-      };
+      const payload: State = oneListWithoutItems;
 
       const action: Action = { type: 'fetched', payload: payload };
 
-      const expected: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: [],
-          },
-        },
-        items: {},
-        currentListId: null,
-      };
+      const expected: State = oneListWithoutItems;
 
       const result = reducer(state, action);
       expect(result).toEqual(expected);
@@ -64,97 +55,11 @@ describe('reducer', () => {
     it('should fetch two lists with some items', () => {
       const state: State = initialState;
 
-      const payload: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-        },
-        currentListId: null,
-      };
+      const payload: State = twoListsWithSomeItems;
 
       const action: Action = { type: 'fetched', payload: payload };
 
-      const expected: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-        },
-        currentListId: null,
-      };
+      const expected: State = twoListsWithSomeItems;
 
       const result = reducer(state, action);
       expect(result).toEqual(expected);
@@ -163,96 +68,13 @@ describe('reducer', () => {
 
   describe('list selected', () => {
     it('should select a list when none was selected previously', () => {
-      const state = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-        },
-        currentListId: null,
-      };
+      const state: State = twoListsWithSomeItems;
 
-      const action: Action = { type: 'list selected', payload: '123' };
+      const action: Action = { type: 'list selected', payload: listId123 };
 
-      const expected = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-        },
-        currentListId: '123',
+      const expected: State = {
+        ...twoListsWithSomeItems,
+        currentListId: listId123,
       };
 
       const result = reducer(state, action);
@@ -260,96 +82,16 @@ describe('reducer', () => {
     });
 
     it('should select a list when there was a previously selected one', () => {
-      const state = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-        },
-        currentListId: '123',
+      const state: State = {
+        ...twoListsWithSomeItems,
+        currentListId: listId123,
       };
 
-      const action: Action = { type: 'list selected', payload: '789' };
+      const action: Action = { type: 'list selected', payload: listId456 };
 
-      const expected = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-        },
-        currentListId: '789',
+      const expected: State = {
+        ...twoListsWithSomeItems,
+        currentListId: listId456,
       };
 
       const result = reducer(state, action);
@@ -361,26 +103,13 @@ describe('reducer', () => {
     it('should add a list to empty state', () => {
       const state: State = initialState;
 
-      const payload: ListType = {
-        id: '123',
-        title: 'Test',
-        modified: new Date('2025-06-02T15:24:00Z'),
-        itemsIds: [],
-      };
+      const payload: ListType = listType123;
 
       const action: Action = { type: 'list added', payload: payload };
 
       const expected: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: [],
-          },
-        },
-        items: {},
-        currentListId: '123',
+        ...oneListWithoutItems,
+        currentListId: listId123,
       };
 
       const result = reducer(state, action);
@@ -388,57 +117,19 @@ describe('reducer', () => {
     });
 
     it('should add a list to non-empty state', () => {
-      const state: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['789'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-        },
-        currentListId: '123',
-      };
+      const state: State = oneListWithOneItem;
 
-      const payload: ListType = {
-        id: '456',
-        title: 'Test 2',
-        modified: new Date('2025-06-02T15:25:00Z'),
-        itemsIds: [],
-      };
+      const payload: ListType = listType456;
 
       const action: Action = { type: 'list added', payload: payload };
 
       const expected: State = {
+        ...oneListWithOneItem,
         lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['789'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:25:00Z'),
-            itemsIds: [],
-          },
+          ...oneListWithOneItem.lists,
+          [listId456]: listType456,
         },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-        },
-        currentListId: '456',
+        currentListId: listId456,
       };
 
       const result = reducer(state, action);
@@ -448,51 +139,22 @@ describe('reducer', () => {
 
   describe('list edited', () => {
     it('should update list title and modified date', () => {
-      const state: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['789'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-        },
-        currentListId: '123',
-      };
+      const state: State = oneListWithOneItem;
 
       const payload: ListType = {
-        id: '123',
+        id: listId123,
         title: 'Testing',
         modified: new Date('2025-06-02T15:25:00Z'),
-        itemsIds: ['789'],
+        itemsIds: [itemId789],
       };
 
       const action: Action = { type: 'list edited', payload: payload };
 
       const expected: State = {
+        ...oneListWithOneItem,
         lists: {
-          '123': {
-            id: '123',
-            title: 'Testing',
-            modified: new Date('2025-06-02T15:25:00Z'),
-            itemsIds: ['789'],
-          },
+          [listId123]: payload,
         },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-        },
-        currentListId: '123',
       };
 
       const result = reducer(state, action);
@@ -502,26 +164,9 @@ describe('reducer', () => {
 
   describe('list deleted', () => {
     it('should delete a list when there is only one list in state', () => {
-      const state: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['789'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-        },
-        currentListId: '123',
-      };
+      const state: State = oneListWithOneItem;
 
-      const action: Action = { type: 'list deleted', payload: '123' };
+      const action: Action = { type: 'list deleted', payload: listId123 };
 
       const expected: State = {
         lists: {},
@@ -534,76 +179,14 @@ describe('reducer', () => {
     });
 
     it('should delete a list when there are multiple lists in state', () => {
-      const state = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-        },
-        currentListId: '456',
+      const state: State = {
+        ...twoListsWithSomeItems,
+        currentListId: listId456,
       };
 
-      const action: Action = { type: 'list deleted', payload: '456' };
+      const action: Action = { type: 'list deleted', payload: listId456 };
 
-      const expected: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-        },
-        currentListId: null,
-      };
+      const expected: State = oneListWithTwoItems;
 
       const result = reducer(state, action);
       expect(result).toEqual(expected);
@@ -612,24 +195,7 @@ describe('reducer', () => {
 
   describe('list modified date updated', () => {
     it('should update modified date', () => {
-      const state: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['789'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-        },
-        currentListId: '123',
-      };
+      const state: State = oneListWithOneItem;
 
       const action: Action = {
         type: 'list modified date updated',
@@ -637,22 +203,14 @@ describe('reducer', () => {
       };
 
       const expected: State = {
+        ...oneListWithOneItem,
         lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
+          ...oneListWithOneItem.lists,
+          [listId123]: {
+            ...oneListWithOneItem.lists[listId123],
             modified: new Date('2025-06-02T15:26:00Z'),
-            itemsIds: ['789'],
           },
         },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-        },
-        currentListId: '123',
       };
 
       const result = reducer(state, action);
@@ -663,20 +221,12 @@ describe('reducer', () => {
   describe('item added', () => {
     it('should add an item to a list without items', () => {
       const state: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: [],
-          },
-        },
-        items: {},
-        currentListId: '123',
+        ...oneListWithoutItems,
+        currentListId: listId123,
       };
 
       const payload: ItemType = {
-        id: '456',
+        id: itemId789,
         text: 'Item',
         checked: false,
       };
@@ -684,22 +234,18 @@ describe('reducer', () => {
       const action: Action = { type: 'item added', payload: payload };
 
       const expected: State = {
+        ...oneListWithoutItems,
         lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['456'],
+          ...oneListWithoutItems.lists,
+          [listId123]: {
+            ...oneListWithoutItems.lists[listId123],
+            itemsIds: [itemId789],
           },
         },
+        currentListId: listId123,
         items: {
-          '456': {
-            id: '456',
-            text: 'Item',
-            checked: false,
-          },
+          [itemId789]: payload,
         },
-        currentListId: '123',
       };
 
       const result = reducer(state, action);
@@ -708,52 +254,12 @@ describe('reducer', () => {
 
     it('should add an item to a list with items', () => {
       const state: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-        },
-        currentListId: '456',
+        ...twoListsWithSomeItems,
+        currentListId: listId456,
       };
 
       const payload: ItemType = {
-        id: '777',
+        id: itemId777,
         text: 'Test',
         checked: false,
       };
@@ -761,53 +267,19 @@ describe('reducer', () => {
       const action: Action = { type: 'item added', payload: payload };
 
       const expected: State = {
+        ...twoListsWithSomeItems,
+        currentListId: listId456,
         lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159', '777'],
+          ...twoListsWithSomeItems.lists,
+          [listId456]: {
+            ...twoListsWithSomeItems.lists[listId456],
+            itemsIds: [...twoListsWithSomeItems.lists[listId456].itemsIds, itemId777],
           },
         },
         items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-          '777': {
-            id: '777',
-            text: 'Test',
-            checked: false,
-          },
+          ...twoListsWithSomeItems.items,
+          [itemId777]: payload,
         },
-        currentListId: '456',
       };
 
       const result = reducer(state, action);
@@ -817,50 +289,25 @@ describe('reducer', () => {
 
   describe('item edited', () => {
     it('should check an item', () => {
-      const state: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['456'],
-          },
-        },
-        items: {
-          '456': {
-            id: '456',
-            text: 'Item',
-            checked: false,
-          },
-        },
-        currentListId: '123',
-      };
+      const state: State = oneListWithOneItem;
 
       const payload: ItemType = {
-        id: '456',
-        text: 'Item',
+        id: itemId789,
+        text: 'Item 1',
         checked: true,
       };
 
       const action: Action = { type: 'item edited', payload: payload };
 
       const expected: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['456'],
-          },
-        },
+        ...oneListWithOneItem,
         items: {
-          '456': {
-            id: '456',
-            text: 'Item',
+          ...oneListWithOneItem.items,
+          [itemId789]: {
+            ...oneListWithOneItem.items[itemId789],
             checked: true,
           },
         },
-        currentListId: '123',
       };
 
       const result = reducer(state, action);
@@ -869,52 +316,12 @@ describe('reducer', () => {
 
     it('should update item text', () => {
       const state: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-        },
-        currentListId: '456',
+        ...twoListsWithSomeItems,
+        currentListId: listId456,
       };
 
       const payload: ItemType = {
-        id: '159',
+        id: itemId159,
         checked: false,
         text: 'Testing',
       };
@@ -922,48 +329,12 @@ describe('reducer', () => {
       const action: Action = { type: 'item edited', payload: payload };
 
       const expected: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
-          },
-        },
+        ...twoListsWithSomeItems,
+        currentListId: listId456,
         items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Testing',
-          },
+          ...twoListsWithSomeItems.items,
+          [itemId159]: payload,
         },
-        currentListId: '456',
       };
 
       const result = reducer(state, action);
@@ -973,38 +344,13 @@ describe('reducer', () => {
 
   describe('item deleted', () => {
     it('should delete the only item of a list', () => {
-      const state: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['456'],
-          },
-        },
-        items: {
-          '456': {
-            id: '456',
-            text: 'Item',
-            checked: true,
-          },
-        },
-        currentListId: '123',
-      };
+      const state: State = oneListWithOneItem;
 
-      const action: Action = { type: 'item deleted', payload: '456' };
+      const action: Action = { type: 'item deleted', payload: itemId789 };
 
       const expected: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: [],
-          },
-        },
-        items: {},
-        currentListId: '123',
+        ...oneListWithoutItems,
+        currentListId: listId123,
       };
 
       const result = reducer(state, action);
@@ -1013,90 +359,30 @@ describe('reducer', () => {
 
     it('should delete an item from a list with multiple items', () => {
       const state: State = {
+        ...twoListsWithSomeItems,
         lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '321', '159'],
+          ...twoListsWithSomeItems.lists,
+          [listId456]: {
+            ...twoListsWithSomeItems.lists[listId456],
+            itemsIds: [...twoListsWithSomeItems.lists[listId456].itemsIds, itemId777],
           },
         },
         items: {
-          '789': {
-            id: '789',
+          ...twoListsWithSomeItems.items,
+          [itemId777]: {
+            id: itemId777,
             checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '321': {
-            id: '321',
-            checked: false,
-            text: 'Item 4',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
+            text: 'Item 6',
           },
         },
-        currentListId: '456',
+        currentListId: listId456,
       };
 
-      const action: Action = { type: 'item deleted', payload: '321' };
+      const action: Action = { type: 'item deleted', payload: itemId777 };
 
       const expected: State = {
-        lists: {
-          '123': {
-            id: '123',
-            title: 'Test',
-            modified: new Date('2025-06-02T15:23:00Z'),
-            itemsIds: ['789', '987'],
-          },
-          '456': {
-            id: '456',
-            title: 'Test 2',
-            modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: ['654', '159'],
-          },
-        },
-        items: {
-          '789': {
-            id: '789',
-            checked: false,
-            text: 'Item 1',
-          },
-          '987': {
-            id: '987',
-            checked: false,
-            text: 'Item 2',
-          },
-          '654': {
-            id: '654',
-            checked: false,
-            text: 'Item 3',
-          },
-          '159': {
-            id: '159',
-            checked: false,
-            text: 'Item 5',
-          },
-        },
-        currentListId: '456',
+        ...twoListsWithSomeItems,
+        currentListId: listId456,
       };
 
       const result = reducer(state, action);
