@@ -11,7 +11,7 @@ export default function Navigation({
   setTranslations,
 }: {
   showAddList: MouseEventHandler<HTMLButtonElement>;
-  setTranslations: Dispatch<SetStateAction<Translations | null>>;
+  setTranslations: Dispatch<SetStateAction<Translations>>;
 }) {
   const translation = useContext(LocaleContext);
 

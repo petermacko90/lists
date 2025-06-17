@@ -8,7 +8,7 @@ export default function LanguageSelction({
   setTranslations,
 }: {
   hideLanguageSelection: () => void;
-  setTranslations: Dispatch<SetStateAction<Translations | null>>;
+  setTranslations: Dispatch<SetStateAction<Translations>>;
 }) {
   function handleSelection(language: Language) {
     setTranslations(strings[language]);

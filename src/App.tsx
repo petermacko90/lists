@@ -13,12 +13,10 @@ import { loadState, saveState } from './localStorage';
 import { State } from './reducers/types';
 import { Translations } from './constants/strings';
 
-const initialTranslations = getTranslations();
-
 export default function App() {
   const [showLists, setShowLists] = useState(true);
   const [showAddList, setShowAddList] = useState(false);
-  const [translations, setTranslations] = useState<Translations | null>(null);
+  const [translations, setTranslations] = useState<Translations>(getTranslations());
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -45,7 +43,7 @@ export default function App() {
   return (
     <StateContext value={state}>
       <StateDispatchContext value={dispatch}>
-        <LocaleContext.Provider value={translations ?? initialTranslations}>
+        <LocaleContext.Provider value={translations}>
           <main>
             <Navigation showAddList={() => setShowAddList(true)} setTranslations={setTranslations} />
             <div className="flex flex-wrap mh1 mh4-m mh7-l">
