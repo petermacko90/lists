@@ -8,6 +8,7 @@ import { LocaleContext, StateContext, StateDispatchContext } from '../../context
 import { selectCurrentList } from '../../reducers/selectors';
 import Items from '../Items/Items';
 import { EditListTitle } from './EditListTitle';
+import { Dialog } from '../Dialog/Dialog';
 
 export default function CurrentList({ showLists }: { showLists: () => void }) {
   const translation = useContext(LocaleContext);
@@ -21,6 +22,7 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
   const [notification, setNotification] = useState({ show: false, text: '' });
 
   const editTitleRef = useRef<HTMLInputElement | null>(null);
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
     hideEditTitle();
@@ -53,8 +55,8 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
     hideEditTitle();
   }
 
-  function handleDeleteList() {
-    if (window.confirm(translation.CONFIRM_DELETE_LIST)) {
+  function handleDialogOnClose(returnValue: string) {
+    if (returnValue === 'confirm') {
       dispatch({ type: 'list deleted', payload: list.id });
       hideEditTitle();
       showLists();
@@ -73,7 +75,7 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
   return (
     <div className="w-75-l w-two-thirds-m w-100 pa3">
       <ToastNotification show={notification.show} text={notification.text} />
-      <Button onClick={handleDeleteList} color="red">
+      <Button onClick={() => dialogRef.current?.showModal()} color="red">
         <FontAwesomeIcon icon={faTrashAlt} /> {translation.DELETE_LIST}
       </Button>
       <div className="mv4">
@@ -98,6 +100,7 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
       </div>
       <p>{list.modified.toLocaleDateString()}</p>
       <Items copyItemText={copyItemText} />
+      <Dialog ref={dialogRef} text={translation.CONFIRM_DELETE_LIST} onClose={handleDialogOnClose} />
     </div>
   );
 }
