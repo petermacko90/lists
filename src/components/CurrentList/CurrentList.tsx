@@ -18,7 +18,7 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
 
   const [isEditTitle, setIsEditTitle] = useState(false);
   const [newTitle, setNewTitle] = useState('');
-
+  const [showDialog, setShowDialog] = useState(false);
   const [notification, setNotification] = useState({ show: false, text: '' });
 
   const editTitleRef = useRef<HTMLInputElement | null>(null);
@@ -55,12 +55,18 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
     hideEditTitle();
   }
 
+  function showModal() {
+    setShowDialog(true);
+    setTimeout(() => dialogRef.current?.showModal());
+  }
+
   function handleDialogOnClose(returnValue: string) {
     if (returnValue === 'confirm') {
       dispatch({ type: 'list deleted', payload: list.id });
       hideEditTitle();
       showLists();
     }
+    setShowDialog(false);
   }
 
   function copyItemText(text: string) {
@@ -75,7 +81,7 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
   return (
     <div className="w-75-l w-two-thirds-m w-100 pa3">
       <ToastNotification show={notification.show} text={notification.text} />
-      <Button onClick={() => dialogRef.current?.showModal()} color="red">
+      <Button onClick={showModal} color="red">
         <FontAwesomeIcon icon={faTrashAlt} /> {translation.DELETE_LIST}
       </Button>
       <div className="mv4">
@@ -100,7 +106,9 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
       </div>
       <p>{list.modified.toLocaleDateString()}</p>
       <Items copyItemText={copyItemText} />
-      <Dialog ref={dialogRef} text={translation.CONFIRM_DELETE_LIST} onClose={handleDialogOnClose} />
+      {showDialog && (
+        <Dialog ref={dialogRef} text={translation.CONFIRM_DELETE_LIST} onClose={handleDialogOnClose} />
+      )}
     </div>
   );
 }

@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import './Item.css';
 import { LocaleContext, StateDispatchContext } from '../../context';
-import { ItemId, ItemType } from '../../reducers/types';
+import { ItemType } from '../../reducers/types';
+import { Dialog } from '../Dialog/Dialog';
 
 export default function Item({
   item,
@@ -20,9 +21,10 @@ export default function Item({
   const dispatch = useContext(StateDispatchContext);
 
   const [showActions, setShowActions] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
 
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
   const actionsRef = useRef<HTMLButtonElement | null>(null);
-
   const timeoutRef = useRef<number | undefined>(undefined);
 
   function onActionsBlur() {
@@ -45,18 +47,24 @@ export default function Item({
     dispatch({ type: 'list modified date updated', payload: new Date() });
   }
 
-  function handleItemDelete(itemId: ItemId) {
-    if (window.confirm(translation.CONFIRM_DELETE_ITEM)) {
-      dispatch({ type: 'item deleted', payload: itemId });
+  function showModal() {
+    setShowDialog(true);
+    setTimeout(() => dialogRef.current?.showModal());
+  }
+
+  function handleDialogOnClose(returnValue: string) {
+    if (returnValue === 'confirm') {
+      dispatch({ type: 'item deleted', payload: item.id });
       dispatch({ type: 'list modified date updated', payload: new Date() });
     }
+    setShowDialog(false);
   }
 
   function handleItemKeyUp(e: KeyboardEvent<HTMLDivElement>) {
     if (e.key === 'Enter') {
       handleItemCheck(item);
     } else if (e.key === 'Delete') {
-      handleItemDelete(item.id);
+      showModal();
     } else if (e.key === 'F2') {
       setItemToEdit(item.id);
     } else if (e.key === ' ') {
@@ -94,12 +102,15 @@ export default function Item({
             setTextToCopy={setTextToCopy}
             setItemToEdit={setItemToEdit}
             onItemCheck={handleItemCheck}
-            onItemDelete={handleItemDelete}
+            onItemDelete={showModal}
             setShowActions={setShowActions}
             actionsRef={actionsRef}
           />
         )}
       </div>
+      {showDialog && (
+        <Dialog ref={dialogRef} text={translation.CONFIRM_DELETE_ITEM} onClose={handleDialogOnClose} />
+      )}
     </li>
   );
 }
