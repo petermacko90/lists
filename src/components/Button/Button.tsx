@@ -18,7 +18,7 @@ export default function Button({
   title?: string;
   disabled?: boolean;
 }) {
-  const stateClasses = disabled ? `o-50` : `pointer hover-bg-dark-${color} hover-white`;
+  const stateClasses = disabled ? ` o-50` : ` pointer hover-bg-${color} hover-white`;
 
   return (
     <button
@@ -27,7 +27,9 @@ export default function Button({
       disabled={disabled}
       title={title}
       aria-label={title}
-      className={`black b--none br3 pa3 b shadow-4 bg-${color} ${stateClasses} ${classes ?? ''}`}
+      className={`pa3 ba bw1 b--${color} br3 bg-light-${color} bg-transparent black b shadow-4 lh-solid${stateClasses} ${
+        classes ?? ''
+      }`}
     >
       {children}
     </button>

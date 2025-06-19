@@ -29,7 +29,7 @@ export function EditListTitle({
         onChange={(e) => setNewTitle(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && handleEditTitle(newTitle)}
         placeholder={translation.LIST_TITLE}
-        className="w-100 pa3 br3 br--left b--none shadow-4"
+        className="w-100 pa3 br3 br--left b--none shadow-4 lh-title"
         maxLength={MAX_LENGTH_LIST}
         ref={editTitleRef}
       />

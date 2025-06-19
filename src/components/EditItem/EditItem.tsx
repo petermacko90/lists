@@ -40,7 +40,7 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
         onChange={(e) => setNewText(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && handleTextChange(newText)}
         placeholder={translation.ITEM_NAME}
-        className="w-100 pa3 b--none"
+        className="w-100 pa3 b--none lh-title"
         maxLength={MAX_LENGTH_ITEM}
         autoFocus
       />
