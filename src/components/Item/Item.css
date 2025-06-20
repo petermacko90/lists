@@ -1,21 +1,20 @@
-ul.items > li {
-  height: 52px;
-  background-color: #eee;
-  transition: 0.5s;
+ul.items {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
-ul.items > li:nth-child(odd) {
-  background-color: #f9f9f9;
+ul.items > li {
+  height: 52px;
+  margin-bottom: 1px;
+  background-color: #cdecff;
 }
 
 ul.items > li.checked {
-  background-color: #888;
-  color: #fff;
+  background-color: #96ccff;
 }
 
-ul.items > li:hover,
-ul.items > li:focus {
-  background-color: #bbb;
+ul.items > li > div:hover,
+ul.items > li > div:focus {
+  background-color: #357edd;
 }
 
 .actions-dropdown {

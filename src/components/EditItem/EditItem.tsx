@@ -16,6 +16,7 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
   const [newText, setNewText] = useState(item.text);
 
   function handleTextChange(text: string) {
+    if (isEmptyString(text)) return;
     dispatch({
       type: 'item edited',
       payload: {

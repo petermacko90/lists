@@ -24,6 +24,10 @@ code {
   justify-content: space-between;
 }
 
+input {
+  height: 52px;
+}
+
 .noselect {
   user-select: none;
 }

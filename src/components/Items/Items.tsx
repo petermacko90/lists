@@ -22,7 +22,7 @@ export default function Items({ copyItemText }: { copyItemText: (text: string) =
   return (
     <>
       {items.length > 0 ? (
-        <ul className="ma0 pa0 list items">
+        <ul className="ma0 pa0 list shadow-3 items">
           {items.map((item) => {
             if (item.id === editItemId) {
               return <EditItem key={item.id} item={item} closeEdit={() => setEditItemId('')} />;

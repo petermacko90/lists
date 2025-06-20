@@ -91,7 +91,7 @@ export default function Item({
         <button
           type="button"
           onClick={() => setShowActions(!showActions)}
-          className="bn hover-bg-red bg-transparent f3 tc pointer"
+          className="bn bg-transparent hover-bg-blue f3 tc pointer"
           title={translation.ACTIONS}
         >
           <FontAwesomeIcon icon={faEllipsisV} />
