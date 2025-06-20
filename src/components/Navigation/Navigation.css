@@ -1,3 +1,16 @@
+nav {
+  height: 44px;
+}
+
+nav button {
+  width: 44px;
+}
+
+nav button:hover,
+nav button:focus {
+  background-color: #e6c300;
+}
+
 .add-list {
   min-width: 2rem;
 }

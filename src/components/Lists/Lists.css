@@ -3,6 +3,7 @@
   overflow-y: auto;
 }
 
-.toggle-lists:hover {
+.toggle-lists:hover,
+.toggle-lists:focus {
   background-color: #e6c300;
 }

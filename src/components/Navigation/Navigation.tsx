@@ -36,7 +36,7 @@ export default function Navigation({
         <button
           type="button"
           onClick={showAddList}
-          className="b--none bg-transparent black dim f3 b pointer add-list"
+          className="b--none bg-transparent black f3 b pointer add-list"
           title={translation.ADD_LIST}
           aria-label={translation.ADD_LIST}
         >
@@ -49,7 +49,7 @@ export default function Navigation({
           <button
             type="button"
             onClick={() => setShowLanguageSelection(!showLanguageSelection)}
-            className="b--none bg-transparent black dim f3 b pointer"
+            className="b--none bg-transparent black f3 b pointer"
             title={translation.LANGUAGE}
             aria-label={translation.LANGUAGE}
           >
