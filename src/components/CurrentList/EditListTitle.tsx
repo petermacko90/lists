@@ -1,6 +1,6 @@
-import { Dispatch, RefObject, SetStateAction, useContext } from 'react';
+import { Dispatch, KeyboardEvent, RefObject, SetStateAction, useContext } from 'react';
 import { LocaleContext } from '../../context';
-import { MAX_LENGTH_LIST } from '../../constants/constants';
+import { ENTER_KEY, ESCAPE_KEY, MAX_LENGTH_LIST } from '../../constants/constants';
 import Button from '../Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -20,6 +20,14 @@ export function EditListTitle({
 }) {
   const translation = useContext(LocaleContext);
 
+  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+    if (e.key === ENTER_KEY) {
+      handleEditTitle(newTitle);
+    } else if (e.key === ESCAPE_KEY) {
+      hideEditTitle();
+    }
+  }
+
   return (
     <div className="flex">
       <input
@@ -27,7 +35,7 @@ export function EditListTitle({
         name="title"
         value={newTitle}
         onChange={(e) => setNewTitle(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && handleEditTitle(newTitle)}
+        onKeyDown={handleKeyDown}
         placeholder={translation.LIST_TITLE}
         className="w-100 pa3 br3 br--left b--none shadow-4 lh-title"
         maxLength={MAX_LENGTH_LIST}

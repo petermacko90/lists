@@ -1,6 +1,6 @@
 import Button from '../Button/Button';
 import { isEmptyString } from '../../helpers';
-import { MAX_LENGTH_ITEM } from '../../constants/constants';
+import { ENTER_KEY, MAX_LENGTH_ITEM } from '../../constants/constants';
 import { LocaleContext, StateDispatchContext } from '../../context';
 import { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -36,7 +36,7 @@ export default function AddItem() {
         name="item"
         value={newItemText}
         onChange={(e) => setNewItemText(e.target.value)}
-        onKeyUp={(e) => e.key === 'Enter' && handleItemAdd(newItemText)}
+        onKeyUp={(e) => e.key === ENTER_KEY && handleItemAdd(newItemText)}
         placeholder={translation.ITEM_NAME}
         maxLength={MAX_LENGTH_ITEM}
         className="pa3 br3 br--left b--none shadow-4 w-75 w-two-thirds-m w-auto-l lh-title"

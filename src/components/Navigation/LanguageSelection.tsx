@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { Language, languageDropdown, strings, Translations } from '../../constants/strings';
 import './LanguageSelection.css';
 import { saveLanguage } from '../../localStorage';
+import { ESCAPE_KEY } from '../../constants/constants';
 
 export default function LanguageSelction({
   hideLanguageSelection,
@@ -19,7 +20,7 @@ export default function LanguageSelction({
 
   return (
     <menu
-      onKeyUp={(e) => e.key === 'Escape' && hideLanguageSelection()}
+      onKeyUp={(e) => e.key === ESCAPE_KEY && hideLanguageSelection()}
       className="list w4 f5 ma0 pa0 shadow-3 bg-white selection"
     >
       {languageDropdown.map((language) => {

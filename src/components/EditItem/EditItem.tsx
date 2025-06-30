@@ -1,10 +1,10 @@
+import { KeyboardEvent, useContext, useState } from 'react';
 import Button from '../Button/Button';
 import { LocaleContext, StateDispatchContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { isEmptyString } from '../../helpers';
-import { MAX_LENGTH_ITEM } from '../../constants/constants';
-import { useContext, useState } from 'react';
+import { ENTER_KEY, ESCAPE_KEY, MAX_LENGTH_ITEM } from '../../constants/constants';
 import { ItemType } from '../../reducers/types';
 import './EditItem.css';
 
@@ -32,6 +32,14 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
     closeEdit();
   }
 
+  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+    if (e.key === ENTER_KEY) {
+      handleTextChange(newText);
+    } else if (e.key === ESCAPE_KEY) {
+      closeEdit();
+    }
+  }
+
   return (
     <li className="flex no-background">
       <input
@@ -39,7 +47,7 @@ export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdi
         name="item"
         value={newText}
         onChange={(e) => setNewText(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && handleTextChange(newText)}
+        onKeyDown={handleKeyDown}
         placeholder={translation.ITEM_NAME}
         className="w-100 pa3 b--none lh-title"
         maxLength={MAX_LENGTH_ITEM}

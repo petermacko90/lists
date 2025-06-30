@@ -54,7 +54,7 @@ export default function App() {
                 showAddList={() => setShowAddList(true)}
               />
               {showAddList ? (
-                <AddList scrollToCurrentList={showCurrentList} />
+                <AddList scrollToCurrentList={showCurrentList} hideAddList={() => setShowAddList(false)} />
               ) : (
                 <CurrentList showLists={() => setShowLists(true)} />
               )}

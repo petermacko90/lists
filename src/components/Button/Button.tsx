@@ -1,8 +1,6 @@
 import { MouseEventHandler, ReactNode } from 'react';
 import './Button.css';
 
-type ButtonColor = 'red' | 'green' | 'blue';
-
 export default function Button({
   onClick,
   color,
@@ -12,7 +10,7 @@ export default function Button({
   disabled,
 }: {
   onClick: MouseEventHandler<HTMLButtonElement>;
-  color: ButtonColor;
+  color: 'red' | 'green' | 'blue';
   children: ReactNode;
   classes?: string;
   title?: string;
@@ -27,7 +25,7 @@ export default function Button({
       disabled={disabled}
       title={title}
       aria-label={title}
-      className={`pa3 ba bw1 b--${color} br3 bg-light-${color} bg-transparent black b shadow-4 lh-solid${stateClasses} ${
+      className={`pa3 ba bw1 b--${color} br3 bg-light-${color} bg-transparent black b shadow-4 lh-solid action-button${stateClasses} ${
         classes ?? ''
       }`}
     >

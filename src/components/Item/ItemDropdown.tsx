@@ -4,6 +4,7 @@ import { LocaleContext } from '../../context';
 import { Dispatch, RefObject, SetStateAction, useContext } from 'react';
 import { ItemType } from '../../reducers/types';
 import './ItemDropdown.css';
+import { ESCAPE_KEY } from '../../constants/constants';
 
 export default function ItemDropdown({
   item,
@@ -27,7 +28,7 @@ export default function ItemDropdown({
   return (
     <div
       className="actions-content w4 f5 bg-white shadow-3"
-      onKeyUp={(e) => e.key === 'Escape' && setShowActions(false)}
+      onKeyUp={(e) => e.key === ESCAPE_KEY && setShowActions(false)}
     >
       <button
         type="button"

@@ -6,6 +6,7 @@ import './Item.css';
 import { LocaleContext, StateDispatchContext } from '../../context';
 import { ItemType } from '../../reducers/types';
 import { Dialog } from '../Dialog/Dialog';
+import { ENTER_KEY } from '../../constants/constants';
 
 export default function Item({
   item,
@@ -61,7 +62,7 @@ export default function Item({
   }
 
   function handleItemKeyUp(e: KeyboardEvent<HTMLDivElement>) {
-    if (e.key === 'Enter') {
+    if (e.key === ENTER_KEY) {
       handleItemCheck(item);
     } else if (e.key === 'Delete') {
       showModal();

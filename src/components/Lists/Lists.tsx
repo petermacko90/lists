@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { selectListsCount } from '../../reducers/selectors';
 import { ListId } from '../../reducers/types';
+import { ENTER_KEY } from '../../constants/constants';
 
 export default function Lists({
   showLists,
@@ -57,7 +58,7 @@ export default function Lists({
                   key={list.id}
                   list={list}
                   onClickList={() => handleSelectList(list.id)}
-                  onEnterList={(e) => e.key === 'Enter' && handleSelectList(list.id)}
+                  onEnterList={(e) => e.key === ENTER_KEY && handleSelectList(list.id)}
                 />
               );
             })}
