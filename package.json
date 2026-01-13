@@ -4,14 +4,14 @@
   "private": true,
   "homepage": "https://petermacko90.github.io/lists/",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/react-fontawesome": "^3.1.1",
     "gh-pages": "^6.3.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "tachyons": "^4.12.0",
-    "uuid": "^11.1.0"
+    "uuid": "^13.0.0"
   },
   "scripts": {
     "dev": "vite",
@@ -32,12 +32,12 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/react": "^19.1.5",
-    "@types/react-dom": "^19.1.5",
-    "@vitejs/plugin-react": "^4.5.0",
-    "@vitest/coverage-v8": "^3.2.0",
-    "vite": "^6.3.5",
-    "vite-plugin-pwa": "^1.0.0",
-    "vitest": "^3.2.0"
+    "@types/react": "^19.2.3",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/coverage-v8": "^4.0.17",
+    "vite": "^7.3.1",
+    "vite-plugin-pwa": "^1.2.0",
+    "vitest": "^4.0.17"
   }
 }
