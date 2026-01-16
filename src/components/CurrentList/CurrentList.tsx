@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import './CurrentList.css';
-import { LocaleContext, StateContext, StateDispatchContext } from '../../context';
+import { LocaleContext, StateContext, useDispatchContext } from '../../context';
 import { selectCurrentList } from '../../reducers/selectors';
 import Items from '../Items/Items';
 import { EditListTitle } from './EditListTitle';
@@ -14,7 +14,7 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
   const translation = useContext(LocaleContext);
 
   const state = useContext(StateContext);
-  const dispatch = useContext(StateDispatchContext);
+  const dispatch = useDispatchContext();
 
   const [isEditTitle, setIsEditTitle] = useState(false);
   const [newTitle, setNewTitle] = useState('');

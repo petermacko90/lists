@@ -1,7 +1,7 @@
 import Button from '../Button/Button';
 import { isEmptyString } from '../../helpers';
 import { ENTER_KEY, MAX_LENGTH_ITEM } from '../../constants/constants';
-import { LocaleContext, StateDispatchContext } from '../../context';
+import { LocaleContext, useDispatchContext } from '../../context';
 import { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { ItemId } from '../../reducers/types';
@@ -9,7 +9,7 @@ import { ItemId } from '../../reducers/types';
 export default function AddItem() {
   const translation = useContext(LocaleContext);
 
-  const dispatch = useContext(StateDispatchContext);
+  const dispatch = useDispatchContext();
 
   const [newItemText, setNewItemText] = useState('');
 

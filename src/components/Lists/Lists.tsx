@@ -2,7 +2,7 @@ import { Dispatch, MouseEventHandler, SetStateAction, useContext } from 'react';
 import List from '../List/List';
 import Button from '../Button/Button';
 import './Lists.css';
-import { LocaleContext, StateContext, StateDispatchContext } from '../../context';
+import { LocaleContext, StateContext, useDispatchContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { selectListsCount } from '../../reducers/selectors';
@@ -23,7 +23,7 @@ export default function Lists({
   const translation = useContext(LocaleContext);
 
   const state = useContext(StateContext);
-  const dispatch = useContext(StateDispatchContext);
+  const dispatch = useDispatchContext();
 
   const listsCount = selectListsCount(state);
 

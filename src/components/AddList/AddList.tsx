@@ -1,6 +1,6 @@
 import { KeyboardEvent, useContext, useState } from 'react';
 import Button from '../Button/Button';
-import { LocaleContext, StateDispatchContext } from '../../context';
+import { LocaleContext, useDispatchContext } from '../../context';
 import { ENTER_KEY, ESCAPE_KEY, MAX_LENGTH_LIST } from '../../constants/constants';
 import { v4 as uuidv4 } from 'uuid';
 import { ListId } from '../../reducers/types';
@@ -16,7 +16,7 @@ export default function AddList({
 
   const [newListTitle, setNewListTitle] = useState('');
 
-  const dispatch = useContext(StateDispatchContext);
+  const dispatch = useDispatchContext();
 
   function handleAddList(title: string) {
     scrollToCurrentList();

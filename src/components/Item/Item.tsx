@@ -3,7 +3,7 @@ import ItemDropdown from './ItemDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import './Item.css';
-import { LocaleContext, StateDispatchContext } from '../../context';
+import { LocaleContext, useDispatchContext } from '../../context';
 import { ItemType } from '../../reducers/types';
 import { Dialog } from '../Dialog/Dialog';
 import { ENTER_KEY } from '../../constants/constants';
@@ -19,7 +19,7 @@ export default function Item({
 }) {
   const translation = useContext(LocaleContext);
 
-  const dispatch = useContext(StateDispatchContext);
+  const dispatch = useDispatchContext();
 
   const [showActions, setShowActions] = useState(false);
   const [showDialog, setShowDialog] = useState(false);

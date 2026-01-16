@@ -1,6 +1,6 @@
 import { KeyboardEvent, useContext, useState } from 'react';
 import Button from '../Button/Button';
-import { LocaleContext, StateDispatchContext } from '../../context';
+import { LocaleContext, useDispatchContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { isEmptyString } from '../../helpers';
@@ -11,7 +11,7 @@ import './EditItem.css';
 export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdit: () => void }) {
   const translation = useContext(LocaleContext);
 
-  const dispatch = useContext(StateDispatchContext);
+  const dispatch = useDispatchContext();
 
   const [newText, setNewText] = useState(item.text);
 
