@@ -4,7 +4,11 @@ import './index.css';
 import App from './App';
 import 'tachyons';
 
-const root = createRoot(document.getElementById('root')!);
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('root element not found');
+}
+const root = createRoot(rootElement);
 root.render(
   <StrictMode>
     <App />

@@ -4,7 +4,11 @@ import Button from '../Button/Button';
 import './Lists.css';
 import { LocaleContext, StateContext, useDispatchContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown, faCaretUp, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCaretDown,
+  faCaretUp,
+  faPlus,
+} from '@fortawesome/free-solid-svg-icons';
 import { selectListsCount } from '../../reducers/selectors';
 import { ListId } from '../../reducers/types';
 import { ENTER_KEY } from '../../constants/constants';
@@ -34,14 +38,16 @@ export default function Lists({
 
   return (
     <div className="w-25-l w-third-m w-100">
-      <button
-        type="button"
-        onClick={() => setShowLists(showLists ? false : true)}
-        className="h2 mh3 mh1-m mh1-l mv1 pv1 br2 b--none bg-yellow shadow-4 pointer toggle-lists"
-      >
-        {showLists ? `${translation.HIDE_LISTS}` : `${translation.SHOW_LISTS}`}{' '}
-        <FontAwesomeIcon icon={showLists ? faCaretUp : faCaretDown} />
-      </button>
+      {listsCount > 0 && (
+        <button
+          type="button"
+          onClick={() => setShowLists(showLists ? false : true)}
+          className="h2 mh3 mh1-m mh1-l mv1 pv1 br2 b--none bg-yellow shadow-4 pointer toggle-lists"
+        >
+          {showLists ? translation.HIDE_LISTS : translation.SHOW_LISTS}{' '}
+          <FontAwesomeIcon icon={showLists ? faCaretUp : faCaretDown} />
+        </button>
+      )}
       <div className={`mt2 lists${showLists ? '' : ' dn'}`}>
         {listsCount === 0 ? (
           <div>
@@ -58,7 +64,9 @@ export default function Lists({
                   key={list.id}
                   list={list}
                   onClickList={() => handleSelectList(list.id)}
-                  onEnterList={(e) => e.key === ENTER_KEY && handleSelectList(list.id)}
+                  onEnterList={(e) =>
+                    e.key === ENTER_KEY && handleSelectList(list.id)
+                  }
                 />
               );
             })}
