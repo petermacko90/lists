@@ -1,4 +1,11 @@
-import { useState, useContext, useRef, Dispatch, SetStateAction, KeyboardEvent } from 'react';
+import {
+  useState,
+  useContext,
+  useRef,
+  Dispatch,
+  SetStateAction,
+  KeyboardEvent,
+} from 'react';
 import ItemDropdown from './ItemDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
@@ -77,7 +84,9 @@ export default function Item({
   }
 
   return (
-    <li className={`flex justify-between noselect${item.checked ? ' checked' : ''}`}>
+    <li
+      className={`flex justify-between noselect${item.checked ? ' checked' : ''}`}
+    >
       <div
         className="flex pv3 w-100 pointer"
         tabIndex={0}
@@ -85,10 +94,16 @@ export default function Item({
         onClick={() => handleItemCheck(item)}
         onKeyUp={handleItemKeyUp}
       >
-        <span className="check tc b">{item.checked && <FontAwesomeIcon icon={faCheck} />}</span>
-        <span className="item-name">{item.text}</span>
+        <div className="check tc b">
+          {item.checked && <FontAwesomeIcon icon={faCheck} />}
+        </div>
+        <div className="item-name">{item.text}</div>
       </div>
-      <div className="actions-dropdown relative" onBlur={onActionsBlur} onFocus={onActionsFocus}>
+      <div
+        className="actions-dropdown relative"
+        onBlur={onActionsBlur}
+        onFocus={onActionsFocus}
+      >
         <button
           type="button"
           onClick={() => setShowActions(!showActions)}
@@ -110,7 +125,11 @@ export default function Item({
         )}
       </div>
       {showDialog && (
-        <Dialog ref={dialogRef} text={translation.CONFIRM_DELETE_ITEM} onClose={handleDialogOnClose} />
+        <Dialog
+          ref={dialogRef}
+          text={translation.CONFIRM_DELETE_ITEM}
+          onClose={handleDialogOnClose}
+        />
       )}
     </li>
   );

@@ -3,7 +3,7 @@ ul.items {
 }
 
 ul.items > li {
-  height: 52px;
+  min-height: 52px;
   margin-bottom: 1px;
   background-color: #cdecff;
 }
@@ -27,10 +27,11 @@ ul.items > li > div:focus {
 }
 
 .check {
+  align-self: center;
   width: 52px;
 }
 
 .item-name {
-  word-break: break-all;
+  width: inherit;
   word-break: break-word;
 }
