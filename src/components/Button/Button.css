@@ -1,5 +1,5 @@
 .action-button {
-  height: 52px;
+  height: var(--item-height);
 }
 
 button:disabled:hover {

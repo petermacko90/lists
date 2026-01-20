@@ -4,6 +4,7 @@ import { LocaleContext, useDispatchContext } from '../../context';
 import { ENTER_KEY, ESCAPE_KEY, MAX_LENGTH_LIST } from '../../constants/constants';
 import { v4 as uuidv4 } from 'uuid';
 import { ListId } from '../../reducers/types';
+import Footer from '../Footer/Footer';
 
 export default function AddList({
   scrollToCurrentList,
@@ -61,6 +62,7 @@ export default function AddList({
       >
         {translation.ADD}
       </Button>
+      <Footer />
     </div>
   );
 }

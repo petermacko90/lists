@@ -2,20 +2,16 @@ nav {
   position: sticky;
   top: 0;
   z-index: 3;
-  height: 44px;
+  height: var(--nav-height);
 }
 
 nav button {
-  width: 44px;
+  width: var(--nav-height);
 }
 
 nav button:hover,
 nav button:focus {
-  background-color: #e6c300;
-}
-
-.add-list {
-  min-width: 2rem;
+  background-color: var(--list-hover-color);
 }
 
 .separator {

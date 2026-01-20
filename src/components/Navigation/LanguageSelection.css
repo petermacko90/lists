@@ -1,12 +1,12 @@
 .selection {
   position: absolute;
   right: 0;
-  top: 48px;
+  top: calc(var(--nav-height) + 4px);
 }
 
 .selection > li > button {
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--separator-color);
 }
 
 .selection > li:last-child > button {

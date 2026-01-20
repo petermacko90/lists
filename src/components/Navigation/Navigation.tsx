@@ -27,7 +27,7 @@ export default function Navigation({
   }
 
   return (
-    <nav className="flex justify-between mb2 ph1 ph2-m ph3-l bg-yellow shadow-2">
+    <nav className="flex justify-between ph1 ph2-m ph3-l bg-yellow shadow-2">
       <div>
         <img src="/lists/list64.png" height={32} width={32} alt="logo" className="ma1 v-mid" />
         <h1 className="dib f3 mv2 v-mid">Lists</h1>
@@ -36,7 +36,7 @@ export default function Navigation({
         <button
           type="button"
           onClick={showAddList}
-          className="b--none bg-transparent black f3 b pointer add-list"
+          className="b--none bg-transparent black f3 b pointer"
           title={translation.ADD_LIST}
           aria-label={translation.ADD_LIST}
         >

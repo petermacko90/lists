@@ -1,7 +1,7 @@
 .actions-content {
   position: absolute;
   right: 0;
-  top: 52px;
+  top: var(--item-height);
   z-index: 2;
 }
 
@@ -9,7 +9,7 @@
   display: block;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--separator-color);
   text-align: left;
 }
 

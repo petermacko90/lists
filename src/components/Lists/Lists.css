@@ -1,9 +1,10 @@
-.lists {
-  max-height: 75vh;
+.lists-container {
+  max-height: calc(100vh - var(--nav-height));
   overflow-y: auto;
 }
 
-.toggle-lists:hover,
-.toggle-lists:focus {
-  background-color: #e6c300;
+.toggle-lists {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  font-size: 2rem;
 }

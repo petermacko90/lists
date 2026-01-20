@@ -3,7 +3,7 @@ ul.items {
 }
 
 ul.items > li {
-  min-height: 52px;
+  min-height: var(--item-height);
   margin-bottom: 1px;
   background-color: #cdecff;
 }
@@ -18,7 +18,7 @@ ul.items > li > div:focus {
 }
 
 .actions-dropdown {
-  min-width: 52px;
+  min-width: var(--item-height);
 }
 
 .actions-dropdown > button {
@@ -28,7 +28,7 @@ ul.items > li > div:focus {
 
 .check {
   align-self: center;
-  width: 52px;
+  width: var(--item-height);
 }
 
 .item-name {

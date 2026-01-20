@@ -4,7 +4,6 @@ import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
 import AddList from './components/AddList/AddList';
-import Footer from './components/Footer/Footer';
 import FloatingButton from './components/Button/FloatingButton';
 import { MEDIUM_SCREEN_BREAKPOINT } from './constants/constants';
 import { LocaleContext, StateContext, StateDispatchContext } from './context';
@@ -16,7 +15,8 @@ import { Translations } from './constants/strings';
 export default function App() {
   const [showLists, setShowLists] = useState(true);
   const [showAddList, setShowAddList] = useState(false);
-  const [translations, setTranslations] = useState<Translations>(getTranslations());
+  const [translations, setTranslations] =
+    useState<Translations>(getTranslations());
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -44,24 +44,34 @@ export default function App() {
     <StateContext value={state}>
       <StateDispatchContext value={dispatch}>
         <LocaleContext.Provider value={translations}>
-          <main>
-            <Navigation showAddList={() => setShowAddList(true)} setTranslations={setTranslations} />
-            <div className="flex flex-wrap mh1 mh2-m mh3-l">
-              <Lists
-                showLists={showLists}
-                setShowLists={setShowLists}
+          <Navigation
+            showAddList={() => setShowAddList(true)}
+            setTranslations={setTranslations}
+          />
+          <div className="flex flex-wrap">
+            <Lists
+              showLists={showLists}
+              setShowLists={setShowLists}
+              scrollToCurrentList={showCurrentList}
+              showAddList={() => setShowAddList(true)}
+            />
+            {showAddList ? (
+              <AddList
                 scrollToCurrentList={showCurrentList}
-                showAddList={() => setShowAddList(true)}
+                hideAddList={() => setShowAddList(false)}
               />
-              {showAddList ? (
-                <AddList scrollToCurrentList={showCurrentList} hideAddList={() => setShowAddList(false)} />
-              ) : (
-                <CurrentList showLists={() => setShowLists(true)} />
-              )}
-            </div>
-          </main>
-          {!showAddList && <FloatingButton showAddList={() => setShowAddList(true)}></FloatingButton>}
-          <Footer />
+            ) : (
+              <CurrentList
+                showLists={showLists}
+                displayLists={() => setShowLists(true)}
+              />
+            )}
+          </div>
+          {!showAddList && (
+            <FloatingButton
+              showAddList={() => setShowAddList(true)}
+            ></FloatingButton>
+          )}
         </LocaleContext.Provider>
       </StateDispatchContext>
     </StateContext>

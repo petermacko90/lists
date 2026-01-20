@@ -9,8 +9,15 @@ import { selectCurrentList } from '../../reducers/selectors';
 import Items from '../Items/Items';
 import { EditListTitle } from './EditListTitle';
 import { Dialog } from '../Dialog/Dialog';
+import Footer from '../Footer/Footer';
 
-export default function CurrentList({ showLists }: { showLists: () => void }) {
+export default function CurrentList({
+  showLists,
+  displayLists,
+}: {
+  showLists: boolean;
+  displayLists: () => void;
+}) {
   const translation = useContext(LocaleContext);
 
   const state = useContext(StateContext);
@@ -64,7 +71,7 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
     if (returnValue === 'confirm') {
       dispatch({ type: 'list deleted', payload: list.id });
       hideEditTitle();
-      showLists();
+      displayLists();
     }
     setShowDialog(false);
   }
@@ -79,7 +86,9 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
   }
 
   return (
-    <div className="w-75-l w-two-thirds-m w-100 pa3">
+    <div
+      className={`current-list pa3 ${showLists ? 'w-75-l w-two-thirds-m w-100' : 'w-100'}`}
+    >
       <ToastNotification show={notification.show} text={notification.text} />
       <Button onClick={showModal} color="red">
         <FontAwesomeIcon icon={faTrashAlt} /> {translation.DELETE_LIST}
@@ -95,7 +104,11 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
           />
         ) : (
           <>
-            <Button onClick={showEditTitle} color="blue" title={translation.EDIT_TITLE}>
+            <Button
+              onClick={showEditTitle}
+              color="blue"
+              title={translation.EDIT_TITLE}
+            >
               <FontAwesomeIcon icon={faEdit} />
             </Button>
             <h2 className="f3 mv0 ml3 di list-title">
@@ -106,8 +119,13 @@ export default function CurrentList({ showLists }: { showLists: () => void }) {
       </div>
       <p>{list.modified.toLocaleDateString()}</p>
       <Items copyItemText={copyItemText} />
+      <Footer />
       {showDialog && (
-        <Dialog ref={dialogRef} text={translation.CONFIRM_DELETE_LIST} onClose={handleDialogOnClose} />
+        <Dialog
+          ref={dialogRef}
+          text={translation.CONFIRM_DELETE_LIST}
+          onClose={handleDialogOnClose}
+        />
       )}
     </div>
   );

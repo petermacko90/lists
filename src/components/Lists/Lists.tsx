@@ -4,11 +4,7 @@ import Button from '../Button/Button';
 import './Lists.css';
 import { LocaleContext, StateContext, useDispatchContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCaretDown,
-  faCaretUp,
-  faPlus,
-} from '@fortawesome/free-solid-svg-icons';
+import { faList, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { selectListsCount } from '../../reducers/selectors';
 import { ListId } from '../../reducers/types';
 import { ENTER_KEY } from '../../constants/constants';
@@ -37,18 +33,10 @@ export default function Lists({
   }
 
   return (
-    <div className="w-25-l w-third-m w-100">
-      {listsCount > 0 && (
-        <button
-          type="button"
-          onClick={() => setShowLists(showLists ? false : true)}
-          className="h2 mh3 mh1-m mh1-l mv1 pv1 br2 b--none bg-yellow shadow-4 pointer toggle-lists"
-        >
-          {showLists ? translation.HIDE_LISTS : translation.SHOW_LISTS}{' '}
-          <FontAwesomeIcon icon={showLists ? faCaretUp : faCaretDown} />
-        </button>
-      )}
-      <div className={`mt2 lists${showLists ? '' : ' dn'}`}>
+    <div
+      className={`lists-container ${showLists ? 'w-25-l w-third-m w-100' : 'w-0'}`}
+    >
+      <div className={showLists ? '' : 'dn'}>
         {listsCount === 0 ? (
           <div>
             <p>{translation.NO_LIST_FOUND}</p>
@@ -73,6 +61,16 @@ export default function Lists({
           </ul>
         )}
       </div>
+      {listsCount > 0 && state.currentListId !== null && (
+        <button
+          type="button"
+          onClick={() => setShowLists(!showLists)}
+          title={translation.TOGGLE_LISTS}
+          className="w3 h3 bn fixed left-0 bottom-1 z-1 bg-blue hover-bg-dark-blue white pointer shadow-3 toggle-lists"
+        >
+          <FontAwesomeIcon icon={faList} />
+        </button>
+      )}
     </div>
   );
 }
