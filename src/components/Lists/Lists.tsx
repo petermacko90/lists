@@ -36,31 +36,29 @@ export default function Lists({
     <div
       className={`lists-container ${showLists ? 'w-25-l w-third-m w-100' : 'w-0'}`}
     >
-      <div className={showLists ? '' : 'dn'}>
-        {listsCount === 0 ? (
-          <div>
-            <p>{translation.NO_LIST_FOUND}</p>
-            <Button onClick={showAddList} color="green">
-              <FontAwesomeIcon icon={faPlus} /> {translation.ADD_LIST}
-            </Button>
-          </div>
-        ) : (
-          <ul className="ma0 pa0 list">
-            {Object.values(state.lists).map((list) => {
-              return (
-                <List
-                  key={list.id}
-                  list={list}
-                  onClickList={() => handleSelectList(list.id)}
-                  onEnterList={(e) =>
-                    e.key === ENTER_KEY && handleSelectList(list.id)
-                  }
-                />
-              );
-            })}
-          </ul>
-        )}
-      </div>
+      {listsCount === 0 ? (
+        <div>
+          <p>{translation.NO_LIST_FOUND}</p>
+          <Button onClick={showAddList} color="green">
+            <FontAwesomeIcon icon={faPlus} /> {translation.ADD_LIST}
+          </Button>
+        </div>
+      ) : (
+        <ul className="ma0 pa0 list">
+          {Object.values(state.lists).map((list) => {
+            return (
+              <List
+                key={list.id}
+                list={list}
+                onClickList={() => handleSelectList(list.id)}
+                onEnterList={(e) =>
+                  e.key === ENTER_KEY && handleSelectList(list.id)
+                }
+              />
+            );
+          })}
+        </ul>
+      )}
       {listsCount > 0 && state.currentListId !== null && (
         <button
           type="button"

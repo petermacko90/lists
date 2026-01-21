@@ -47,6 +47,8 @@ export default function App() {
           <Navigation
             showAddList={() => setShowAddList(true)}
             setTranslations={setTranslations}
+            showLists={showLists}
+            setShowLists={setShowLists}
           />
           <div className="flex flex-wrap">
             <Lists
