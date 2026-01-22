@@ -54,7 +54,6 @@ export default function App() {
           <div className="flex flex-wrap">
             <Lists
               showLists={showLists}
-              setShowLists={setShowLists}
               scrollToCurrentList={showCurrentList}
               showAddList={() => setShowAddList(true)}
             />

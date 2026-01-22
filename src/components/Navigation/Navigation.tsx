@@ -1,5 +1,5 @@
 import './Navigation.css';
-import { LocaleContext } from '../../context';
+import { LocaleContext, StateContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faLanguage, faList } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -12,6 +12,7 @@ import {
 } from 'react';
 import LanguageSelection from './LanguageSelection';
 import { Translations } from '../../constants/strings';
+import { selectListsCount } from '../../reducers/selectors';
 
 export default function Navigation({
   showAddList,
@@ -26,6 +27,9 @@ export default function Navigation({
 }) {
   const translation = useContext(LocaleContext);
 
+  const state = useContext(StateContext);
+  const listsCount = selectListsCount(state);
+
   const [showLanguageSelection, setShowLanguageSelection] = useState(false);
   const timeoutRef = useRef<number | undefined>(undefined);
 
@@ -39,12 +43,20 @@ export default function Navigation({
     window.clearTimeout(timeoutRef.current);
   }
 
+  function toggleLists() {
+    if (listsCount === 0 || state.currentListId === null) {
+      return;
+    }
+
+    setShowLists(!showLists);
+  }
+
   return (
-    <nav className="flex justify-between ph1 ph2-m ph3-l bg-yellow shadow-2">
+    <nav className="flex justify-between ph1 bg-yellow shadow-2">
       <div>
         <button
           type="button"
-          onClick={() => setShowLists(!showLists)}
+          onClick={toggleLists}
           className="b--none bg-transparent black f3 b pointer"
           title={translation.TOGGLE_LISTS}
           aria-label={translation.TOGGLE_LISTS}
@@ -53,7 +65,7 @@ export default function Navigation({
         </button>
         <h1 className="dib f3 mv2">Lists</h1>
       </div>
-      <div className="flex ml-auto ml4-m ml7-l">
+      <div className="flex ml-auto ml4-m ml6-l">
         <button
           type="button"
           onClick={showAddList}

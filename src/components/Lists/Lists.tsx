@@ -1,22 +1,20 @@
-import { Dispatch, MouseEventHandler, SetStateAction, useContext } from 'react';
+import { MouseEventHandler, useContext } from 'react';
 import List from '../List/List';
 import Button from '../Button/Button';
 import './Lists.css';
 import { LocaleContext, StateContext, useDispatchContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { selectListsCount } from '../../reducers/selectors';
 import { ListId } from '../../reducers/types';
 import { ENTER_KEY } from '../../constants/constants';
 
 export default function Lists({
   showLists,
-  setShowLists,
   scrollToCurrentList,
   showAddList,
 }: {
   showLists: boolean;
-  setShowLists: Dispatch<SetStateAction<boolean>>;
   scrollToCurrentList: () => void;
   showAddList: MouseEventHandler<HTMLButtonElement>;
 }) {
@@ -37,14 +35,14 @@ export default function Lists({
       className={`lists-container ${showLists ? 'w-25-l w-third-m w-100' : 'w-0'}`}
     >
       {listsCount === 0 ? (
-        <div>
+        <div className="pa3">
           <p>{translation.NO_LIST_FOUND}</p>
           <Button onClick={showAddList} color="green">
             <FontAwesomeIcon icon={faPlus} /> {translation.ADD_LIST}
           </Button>
         </div>
       ) : (
-        <ul className="ma0 pa0 list">
+        <ul className="ma0 pa3 list">
           {Object.values(state.lists).map((list) => {
             return (
               <List

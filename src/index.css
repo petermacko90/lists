@@ -3,7 +3,7 @@
   --item-height: 52px;
   --list-hover-color: #e6c300;
   --separator-color: #ccc;
-  --toggle-lists-transiton: width 250ms ease-in-out;
+  --toggle-lists-transiton: width 200ms ease-in-out;
 }
 
 html,

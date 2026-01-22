@@ -20,12 +20,14 @@ export default function List({
 
   return (
     <li
-      className="ml3 ml1-m ml1-l mr3 mt1 mb3 pa2 bg-yellow pointer shadow-3 noselect list-menu"
+      className="mb3 pa2 bg-yellow pointer shadow-3 noselect list-menu"
       tabIndex={0}
       onClick={onClickList}
       onKeyUp={onEnterList}
     >
-      <h2 className="f3-l f4-m f5 truncate">{list.title.length === 0 ? translation.NO_TITLE : list.title}</h2>
+      <h2 className="f3-l f4-m f5 truncate">
+        {list.title.length === 0 ? translation.NO_TITLE : list.title}
+      </h2>
       <p>{list.modified.toLocaleDateString()}</p>
       <p className="truncate pb1">{firstFewItems}</p>
     </li>
