@@ -1,0 +1,11 @@
+.toggle-lists {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  font-size: 2rem;
+}
+
+@media screen and (min-width: 480px) {
+  .toggle-lists {
+    display: none;
+  }
+}

@@ -4,13 +4,14 @@ import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
 import AddList from './components/AddList/AddList';
-import FloatingButton from './components/Button/FloatingButton';
+import AddListButton from './components/Button/AddListButton';
 import { MEDIUM_SCREEN_BREAKPOINT } from './constants/constants';
 import { LocaleContext, StateContext, StateDispatchContext } from './context';
 import { initialState, reducer } from './reducers/reducer';
 import { loadState, saveState } from './localStorage';
 import { State } from './reducers/types';
 import { Translations } from './constants/strings';
+import ToggleListsButton from './components/Button/ToggleListsButton';
 
 export default function App() {
   const [showLists, setShowLists] = useState(true);
@@ -69,10 +70,14 @@ export default function App() {
               />
             )}
           </div>
+          <ToggleListsButton
+            showLists={showLists}
+            setShowLists={setShowLists}
+          />
           {!showAddList && (
-            <FloatingButton
+            <AddListButton
               showAddList={() => setShowAddList(true)}
-            ></FloatingButton>
+            ></AddListButton>
           )}
         </LocaleContext.Provider>
       </StateDispatchContext>

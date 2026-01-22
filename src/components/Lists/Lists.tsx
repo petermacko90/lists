@@ -59,16 +59,6 @@ export default function Lists({
           })}
         </ul>
       )}
-      {listsCount > 0 && state.currentListId !== null && (
-        <button
-          type="button"
-          onClick={() => setShowLists(!showLists)}
-          title={translation.TOGGLE_LISTS}
-          className="w3 h3 bn fixed left-0 bottom-1 z-1 bg-blue hover-bg-dark-blue white pointer shadow-3 toggle-lists"
-        >
-          <FontAwesomeIcon icon={faList} />
-        </button>
-      )}
     </div>
   );
 }
