@@ -87,7 +87,7 @@ export default function CurrentList({
 
   return (
     <div
-      className={`current-list pa3 ${showLists ? 'w-75-l w-two-thirds-m w-100' : 'w-100'}`}
+      className={`current-list pa3 ${showLists ? 'dn db-ns w-two-thirds-m w-75-l' : 'w-100'}`}
     >
       <ToastNotification show={notification.show} text={notification.text} />
       <Button onClick={showModal} color="red">

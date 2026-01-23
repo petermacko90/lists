@@ -1,7 +1,6 @@
 .current-list {
   max-height: calc(100vh - var(--nav-height));
   overflow-y: auto;
-  transition: var(--toggle-lists-transiton);
 }
 
 .list-title {

@@ -32,17 +32,17 @@ export default function Lists({
 
   return (
     <div
-      className={`lists-container ${showLists ? 'w-25-l w-third-m w-100' : 'w-0'}`}
+      className={`lists-container pa3 ${showLists ? 'w-100 w-third-m w-25-l' : 'dn'}`}
     >
       {listsCount === 0 ? (
-        <div className="pa3">
+        <>
           <p>{translation.NO_LIST_FOUND}</p>
           <Button onClick={showAddList} color="green">
             <FontAwesomeIcon icon={faPlus} /> {translation.ADD_LIST}
           </Button>
-        </div>
+        </>
       ) : (
-        <ul className="ma0 pa3 list">
+        <ul className="ma0 pa0 list">
           {Object.values(state.lists).map((list) => {
             return (
               <List

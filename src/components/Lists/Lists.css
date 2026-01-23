@@ -1,10 +1,4 @@
 .lists-container {
   height: calc(100vh - var(--nav-height));
   overflow-y: auto;
-  overflow-x: hidden;
-  transition: var(--toggle-lists-transiton);
-}
-
-.w-0 {
-  width: 0;
 }
