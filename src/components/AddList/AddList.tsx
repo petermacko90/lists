@@ -1,7 +1,11 @@
 import { KeyboardEvent, useContext, useState } from 'react';
 import Button from '../Button/Button';
 import { LocaleContext, useDispatchContext } from '../../context';
-import { ENTER_KEY, ESCAPE_KEY, MAX_LENGTH_LIST } from '../../constants/constants';
+import {
+  ENTER_KEY,
+  ESCAPE_KEY,
+  MAX_LENGTH_LIST,
+} from '../../constants/constants';
 import { v4 as uuidv4 } from 'uuid';
 import { ListId } from '../../reducers/types';
 import Footer from '../Footer/Footer';
@@ -51,14 +55,14 @@ export default function AddList({
         onChange={(e) => setNewListTitle(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={translation.LIST_TITLE}
-        className="pa3 br3 br--left b--none shadow-4 w-75 w-two-thirds-m w-auto-l lh-title"
+        className="pa3 br3 br--left b--none shadow-4 lh-title"
         maxLength={MAX_LENGTH_LIST}
         autoFocus
       />
       <Button
         onClick={() => handleAddList(newListTitle)}
         color="green"
-        classes="w-25 w-third-m w-auto-l br--right"
+        classes="br--right"
       >
         {translation.ADD}
       </Button>
