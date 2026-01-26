@@ -92,7 +92,9 @@ export function reducer(state: State, action: Action): State {
     }
     case 'item deleted': {
       const currentList = { ...selectCurrentList(state) };
-      currentList.itemsIds = currentList.itemsIds.filter((itemId) => itemId !== action.payload);
+      currentList.itemsIds = currentList.itemsIds.filter(
+        (itemId) => itemId !== action.payload,
+      );
       const { [action.payload]: deleted, ...newItems } = state.items;
       return {
         ...state,

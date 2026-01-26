@@ -4,11 +4,21 @@ import { LocaleContext, useDispatchContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { isEmptyString } from '../../helpers';
-import { ENTER_KEY, ESCAPE_KEY, MAX_LENGTH_ITEM } from '../../constants/constants';
+import {
+  ENTER_KEY,
+  ESCAPE_KEY,
+  MAX_LENGTH_ITEM,
+} from '../../constants/constants';
 import { ItemType } from '../../reducers/types';
 import './EditItem.css';
 
-export default function EditItem({ item, closeEdit }: { item: ItemType; closeEdit: () => void }) {
+export default function EditItem({
+  item,
+  closeEdit,
+}: {
+  item: ItemType;
+  closeEdit: () => void;
+}) {
   const translation = useContext(LocaleContext);
 
   const dispatch = useDispatchContext();

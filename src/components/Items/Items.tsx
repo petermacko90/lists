@@ -5,7 +5,11 @@ import Item from '../Item/Item';
 import EditItem from '../EditItem/EditItem';
 import AddItem from '../AddItem/AddItem';
 
-export default function Items({ copyItemText }: { copyItemText: (text: string) => void }) {
+export default function Items({
+  copyItemText,
+}: {
+  copyItemText: (text: string) => void;
+}) {
   const translation = useContext(LocaleContext);
 
   const state = useContext(StateContext);
@@ -25,10 +29,21 @@ export default function Items({ copyItemText }: { copyItemText: (text: string) =
         <ul className="ma0 pa0 list shadow-3 items">
           {items.map((item) => {
             if (item.id === editItemId) {
-              return <EditItem key={item.id} item={item} closeEdit={() => setEditItemId('')} />;
+              return (
+                <EditItem
+                  key={item.id}
+                  item={item}
+                  closeEdit={() => setEditItemId('')}
+                />
+              );
             } else {
               return (
-                <Item key={item.id} item={item} setItemToEdit={setEditItemId} setTextToCopy={copyItemText} />
+                <Item
+                  key={item.id}
+                  item={item}
+                  setItemToEdit={setEditItemId}
+                  setTextToCopy={copyItemText}
+                />
               );
             }
           })}

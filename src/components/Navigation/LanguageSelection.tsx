@@ -1,5 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
-import { Language, languageDropdown, strings, Translations } from '../../constants/strings';
+import {
+  Language,
+  languageDropdown,
+  strings,
+  Translations,
+} from '../../constants/strings';
 import './LanguageSelection.css';
 import { saveLanguage } from '../../localStorage';
 import { ESCAPE_KEY } from '../../constants/constants';

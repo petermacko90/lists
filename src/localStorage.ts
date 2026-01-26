@@ -36,7 +36,9 @@ export function loadLanguage(): Language | undefined {
     if (isLanguage(language)) {
       return language;
     }
-    console.error('localStorage loadLanguage() error - unknown language: ' + language);
+    console.error(
+      'localStorage loadLanguage() error - unknown language: ' + language,
+    );
     return undefined;
   } catch (error) {
     console.error('localStorage loadLanguage() error: ' + error);

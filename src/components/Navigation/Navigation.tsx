@@ -34,9 +34,9 @@ export default function Navigation({
   const timeoutRef = useRef<number | undefined>(undefined);
 
   function onLanguageSelectionBlur() {
-    timeoutRef.current = window.setTimeout(() =>
-      setShowLanguageSelection(false)
-    );
+    timeoutRef.current = window.setTimeout(() => {
+      setShowLanguageSelection(false);
+    });
   }
 
   function onLanguageSelectionFocus() {

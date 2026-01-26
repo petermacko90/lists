@@ -7,7 +7,9 @@ import { State } from './reducers/types';
 export const LocaleContext = createContext<Translations>(strings.en);
 
 export const StateContext = createContext<State>(initialState);
-export const StateDispatchContext = createContext<ActionDispatch<[action: Action]> | null>(null);
+export const StateDispatchContext = createContext<ActionDispatch<
+  [action: Action]
+> | null>(null);
 
 export const useDispatchContext = () => {
   const dispatch = useContext(StateDispatchContext);
@@ -15,4 +17,4 @@ export const useDispatchContext = () => {
     throw new Error('useDispatchContext must be used within a Provider');
   }
   return dispatch;
-}
+};

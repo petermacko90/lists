@@ -1,3 +1,4 @@
-.list-menu:hover, .list-menu:focus {
-  background-color: var(--list-hover-color)
+.list-menu:hover,
+.list-menu:focus {
+  background-color: var(--list-hover-color);
 }

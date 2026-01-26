@@ -169,7 +169,9 @@ describe('selectors', () => {
         currentListId: listId456,
       };
 
-      expect(selectFirstFewItems(state, listId456)).toBe('Item 3, Item 4, Item 5');
+      expect(selectFirstFewItems(state, listId456)).toBe(
+        'Item 3, Item 4, Item 5',
+      );
     });
 
     it('should return concatenated item texts and ellipsis when there are more than five items', () => {
@@ -179,7 +181,14 @@ describe('selectors', () => {
             id: listId456,
             title: 'Test 2',
             modified: new Date('2025-06-02T15:24:00Z'),
-            itemsIds: [itemId789, itemId987, itemId654, itemId321, itemId159, itemId777],
+            itemsIds: [
+              itemId789,
+              itemId987,
+              itemId654,
+              itemId321,
+              itemId159,
+              itemId777,
+            ],
           },
         },
         items: {
@@ -217,7 +226,9 @@ describe('selectors', () => {
         currentListId: listId456,
       };
 
-      expect(selectFirstFewItems(state, listId456)).toBe('Item 1, Item 2, Item 3, Item 4, Item 5, ...');
+      expect(selectFirstFewItems(state, listId456)).toBe(
+        'Item 1, Item 2, Item 3, Item 4, Item 5, ...',
+      );
     });
   });
 });

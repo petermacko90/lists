@@ -31,6 +31,6 @@ export function Dialog({
         </Button>
       </div>
     </dialog>,
-    document.body
+    document.body,
   );
 }

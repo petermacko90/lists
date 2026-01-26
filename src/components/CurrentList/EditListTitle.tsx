@@ -1,6 +1,16 @@
-import { Dispatch, KeyboardEvent, RefObject, SetStateAction, useContext } from 'react';
+import {
+  Dispatch,
+  KeyboardEvent,
+  RefObject,
+  SetStateAction,
+  useContext,
+} from 'react';
 import { LocaleContext } from '../../context';
-import { ENTER_KEY, ESCAPE_KEY, MAX_LENGTH_LIST } from '../../constants/constants';
+import {
+  ENTER_KEY,
+  ESCAPE_KEY,
+  MAX_LENGTH_LIST,
+} from '../../constants/constants';
 import Button from '../Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';

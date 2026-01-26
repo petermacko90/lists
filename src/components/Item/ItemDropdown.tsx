@@ -1,5 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faCopy, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheck,
+  faCopy,
+  faEdit,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import { LocaleContext } from '../../context';
 import { Dispatch, RefObject, SetStateAction, useContext } from 'react';
 import { ItemType } from '../../reducers/types';
@@ -45,7 +50,8 @@ export default function ItemDropdown({
         className="w-100 pa3 pointer"
         title={item.checked ? translation.UNCHECK : translation.CHECK}
       >
-        <FontAwesomeIcon icon={faCheck} /> {item.checked ? translation.UNCHECK : translation.CHECK}
+        <FontAwesomeIcon icon={faCheck} />{' '}
+        {item.checked ? translation.UNCHECK : translation.CHECK}
       </button>
       <button
         type="button"

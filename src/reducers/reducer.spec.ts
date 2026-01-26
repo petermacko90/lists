@@ -273,7 +273,10 @@ describe('reducer', () => {
           ...twoListsWithSomeItems.lists,
           [listId456]: {
             ...twoListsWithSomeItems.lists[listId456],
-            itemsIds: [...twoListsWithSomeItems.lists[listId456].itemsIds, itemId777],
+            itemsIds: [
+              ...twoListsWithSomeItems.lists[listId456].itemsIds,
+              itemId777,
+            ],
           },
         },
         items: {
@@ -364,7 +367,10 @@ describe('reducer', () => {
           ...twoListsWithSomeItems.lists,
           [listId456]: {
             ...twoListsWithSomeItems.lists[listId456],
-            itemsIds: [...twoListsWithSomeItems.lists[listId456].itemsIds, itemId777],
+            itemsIds: [
+              ...twoListsWithSomeItems.lists[listId456].itemsIds,
+              itemId777,
+            ],
           },
         },
         items: {
