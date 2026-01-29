@@ -39,6 +39,7 @@ export function loadLanguage(): Language | undefined {
     console.error(
       'localStorage loadLanguage() error - unknown language: ' + language,
     );
+    localStorage.removeItem(languageKey);
     return undefined;
   } catch (error) {
     console.error('localStorage loadLanguage() error: ' + error);
@@ -52,6 +53,6 @@ export function saveLanguage(language: Language) {
 
 const languageKey = 'listsLanguage';
 
-function isLanguage(input: unknown): input is Language {
-  return typeof input === 'string' && languages.includes(input as any);
+function isLanguage(input: string): input is Language {
+  return languages.includes(input as Language);
 }

@@ -46,7 +46,8 @@ export function reducer(state: State, action: Action): State {
       selectCurrentList(state).itemsIds.forEach((itemId) => {
         delete newItems[itemId];
       });
-      const { [action.payload]: deleted, ...newLists } = state.lists;
+      const newLists = { ...state.lists };
+      delete newLists[action.payload];
       return {
         lists: newLists,
         items: newItems,
@@ -95,7 +96,8 @@ export function reducer(state: State, action: Action): State {
       currentList.itemsIds = currentList.itemsIds.filter(
         (itemId) => itemId !== action.payload,
       );
-      const { [action.payload]: deleted, ...newItems } = state.items;
+      const newItems = { ...state.items };
+      delete newItems[action.payload];
       return {
         ...state,
         lists: {

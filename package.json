@@ -17,6 +17,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "lint": "npx eslint",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "predeploy": "npm run build",
@@ -32,11 +33,17 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@types/react": "^19.2.3",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.2",
     "@vitest/coverage-v8": "^4.0.17",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.2.0",
+    "jiti": "^2.6.1",
     "prettier": "3.8.1",
+    "typescript-eslint": "^8.54.0",
     "vite": "^7.3.1",
     "vite-plugin-pwa": "^1.2.0",
     "vitest": "^4.0.17"
