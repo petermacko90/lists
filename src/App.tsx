@@ -51,7 +51,7 @@ export default function App() {
             showLists={showLists}
             setShowLists={setShowLists}
           />
-          <div className="flex flex-wrap">
+          <main className="flex flex-wrap">
             <Lists
               showLists={showLists}
               scrollToCurrentList={showCurrentList}
@@ -68,7 +68,7 @@ export default function App() {
                 displayLists={() => setShowLists(true)}
               />
             )}
-          </div>
+          </main>
           <ToggleListsButton
             showLists={showLists}
             setShowLists={setShowLists}

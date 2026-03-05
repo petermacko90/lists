@@ -57,7 +57,7 @@ export default function Navigation({
         <button
           type="button"
           onClick={toggleLists}
-          className="b--none bg-transparent black f3 b pointer"
+          className="bg-transparent black f4 pointer navigation-button"
           title={translation.TOGGLE_LISTS}
           aria-label={translation.TOGGLE_LISTS}
         >
@@ -69,14 +69,12 @@ export default function Navigation({
         <button
           type="button"
           onClick={showAddList}
-          className="b--none bg-transparent black f3 b pointer"
+          className="bg-transparent black f4 pointer navigation-button"
           title={translation.ADD_LIST}
           aria-label={translation.ADD_LIST}
         >
           <FontAwesomeIcon icon={faPlus} />
         </button>
-
-        <div className="separator bl b--black"></div>
 
         <div
           onBlur={onLanguageSelectionBlur}
@@ -86,7 +84,7 @@ export default function Navigation({
           <button
             type="button"
             onClick={() => setShowLanguageSelection(!showLanguageSelection)}
-            className="b--none bg-transparent black f3 b pointer"
+            className="bg-transparent black f4 pointer navigation-button"
             title={translation.LANGUAGE}
             aria-label={translation.LANGUAGE}
           >

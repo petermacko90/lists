@@ -1,5 +1,6 @@
 :root {
   --nav-height: 44px;
+  --nav-button-margin: 2px;
   --item-height: 52px;
   --list-hover-color: #e6c300;
   --separator-color: #ccc;

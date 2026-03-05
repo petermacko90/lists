@@ -47,6 +47,9 @@ export default function AddList({
 
   return (
     <div className="w-75-l w-two-thirds-m w-100 pa3">
+      <Button onClick={hideAddList} color="red">
+        {translation.CANCEL}
+      </Button>
       <h2>{translation.ADD_LIST}</h2>
       <input
         type="text"

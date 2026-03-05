@@ -15,14 +15,17 @@ nav button:focus {
   background-color: var(--list-hover-color);
 }
 
-.separator {
-  width: 1px;
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
 @media screen and (min-width: 480px) {
   nav.flex {
     justify-content: initial;
   }
+}
+
+.navigation-button {
+  margin-top: var(--nav-button-margin);
+  margin-bottom: var(--nav-button-margin);
+  height: calc(var(--nav-height) - 2 * var(--nav-button-margin));
+  width: calc(var(--nav-height) - 2 * var(--nav-button-margin));
+  border: 1px solid transparent;
+  border-radius: 4px;
 }
