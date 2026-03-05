@@ -40,6 +40,7 @@ export default function AddItem() {
         placeholder={translation.ITEM_NAME}
         maxLength={MAX_LENGTH_ITEM}
         className="pa3 br3 br--left b--none shadow-4 w-75 w-two-thirds-m w-auto-l lh-title"
+        autoFocus
       />
       <Button
         onClick={() => handleItemAdd(newItemText)}
