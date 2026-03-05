@@ -4,12 +4,12 @@
   "private": true,
   "homepage": "https://petermacko90.github.io/lists/",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^7.1.0",
-    "@fortawesome/free-solid-svg-icons": "^7.1.0",
-    "@fortawesome/react-fontawesome": "^3.1.1",
+    "@fortawesome/fontawesome-svg-core": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
+    "@fortawesome/react-fontawesome": "^3.2.0",
     "gh-pages": "^6.3.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "tachyons": "^4.12.0",
     "uuid": "^13.0.0"
   },
@@ -33,19 +33,19 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "@types/react": "^19.2.3",
+    "@eslint/js": "^9.39.3",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.2",
-    "@vitest/coverage-v8": "^4.0.17",
-    "eslint": "^9.39.2",
+    "@vitejs/plugin-react": "^5.1.4",
+    "@vitest/coverage-v8": "^4.0.18",
+    "eslint": "^9.39.3",
     "eslint-plugin-react": "^7.37.5",
-    "globals": "^17.2.0",
+    "globals": "^17.4.0",
     "jiti": "^2.6.1",
     "prettier": "3.8.1",
-    "typescript-eslint": "^8.54.0",
+    "typescript-eslint": "^8.56.1",
     "vite": "^7.3.1",
     "vite-plugin-pwa": "^1.2.0",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.18"
   }
 }
