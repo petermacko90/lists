@@ -1,7 +1,3 @@
 .action-button {
   height: var(--item-height);
 }
-
-button:disabled:hover {
-  cursor: not-allowed;
-}

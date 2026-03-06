@@ -43,8 +43,12 @@ export default function Navigation({
     window.clearTimeout(timeoutRef.current);
   }
 
+  function isToggleListsDisabled(): boolean {
+    return listsCount === 0 || state.currentListId === null;
+  }
+
   function toggleLists() {
-    if (listsCount === 0 || state.currentListId === null) {
+    if (isToggleListsDisabled()) {
       return;
     }
 
@@ -56,8 +60,9 @@ export default function Navigation({
       <div>
         <button
           type="button"
+          disabled={isToggleListsDisabled()}
           onClick={toggleLists}
-          className="bg-transparent black f4 pointer navigation-button"
+          className={`bg-transparent black f4 pointer navigation-button${isToggleListsDisabled() ? ' o-50' : ''}`}
           title={translation.TOGGLE_LISTS}
           aria-label={translation.TOGGLE_LISTS}
         >

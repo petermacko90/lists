@@ -37,6 +37,10 @@ input {
   height: var(--item-height);
 }
 
+button:disabled:hover {
+  cursor: not-allowed;
+}
+
 .noselect {
   user-select: none;
 }
