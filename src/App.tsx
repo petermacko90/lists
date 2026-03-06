@@ -64,6 +64,7 @@ export default function App() {
               />
             ) : (
               <CurrentList
+                key={state.currentListId}
                 showLists={showLists}
                 displayLists={() => setShowLists(true)}
               />

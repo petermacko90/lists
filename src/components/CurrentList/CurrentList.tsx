@@ -1,4 +1,4 @@
-import { useState, useRef, useContext, useEffect } from 'react';
+import { useState, useRef, useContext } from 'react';
 import ToastNotification from '../ToastNotification/ToastNotification';
 import Button from '../Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,10 +30,6 @@ export default function CurrentList({
 
   const editTitleRef = useRef<HTMLInputElement | null>(null);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
-
-  useEffect(() => {
-    hideEditTitle();
-  }, [state.currentListId]);
 
   if (state.currentListId === null) return null;
   const list = selectCurrentList(state);
@@ -118,7 +114,7 @@ export default function CurrentList({
         )}
       </div>
       <p>{list.modified.toLocaleDateString()}</p>
-      <Items copyItemText={copyItemText} />
+      <Items key={state.currentListId} copyItemText={copyItemText} />
       <Footer />
       {showDialog && (
         <Dialog

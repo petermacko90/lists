@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { LocaleContext, StateContext } from '../../context';
 import { selectCurrentList, selectItems } from '../../reducers/selectors';
 import Item from '../Item/Item';
@@ -15,10 +15,6 @@ export default function Items({
   const state = useContext(StateContext);
 
   const [editItemId, setEditItemId] = useState('');
-
-  useEffect(() => {
-    setEditItemId('');
-  }, [state.currentListId]);
 
   const currentList = selectCurrentList(state);
   const items = selectItems(state, currentList.id);

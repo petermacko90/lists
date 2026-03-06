@@ -30,6 +30,9 @@ export default function Navigation({
   const state = useContext(StateContext);
   const listsCount = selectListsCount(state);
 
+  const isToggleListsDisabled =
+    listsCount === 0 || state.currentListId === null;
+
   const [showLanguageSelection, setShowLanguageSelection] = useState(false);
   const timeoutRef = useRef<number | undefined>(undefined);
 
@@ -43,12 +46,8 @@ export default function Navigation({
     window.clearTimeout(timeoutRef.current);
   }
 
-  function isToggleListsDisabled(): boolean {
-    return listsCount === 0 || state.currentListId === null;
-  }
-
   function toggleLists() {
-    if (isToggleListsDisabled()) {
+    if (isToggleListsDisabled) {
       return;
     }
 
@@ -60,9 +59,9 @@ export default function Navigation({
       <div>
         <button
           type="button"
-          disabled={isToggleListsDisabled()}
+          disabled={isToggleListsDisabled}
           onClick={toggleLists}
-          className={`bg-transparent black f4 pointer navigation-button${isToggleListsDisabled() ? ' o-50' : ''}`}
+          className={`bg-transparent black f4 pointer navigation-button${isToggleListsDisabled ? ' o-50' : ''}`}
           title={translation.TOGGLE_LISTS}
           aria-label={translation.TOGGLE_LISTS}
         >
