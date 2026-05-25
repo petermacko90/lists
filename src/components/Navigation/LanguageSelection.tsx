@@ -9,7 +9,7 @@ import './LanguageSelection.css';
 import { saveLanguage } from '../../localStorage';
 import { ESCAPE_KEY } from '../../constants/constants';
 
-export default function LanguageSelction({
+export default function LanguageSelection({
   hideLanguageSelection,
   setTranslations,
 }: {
