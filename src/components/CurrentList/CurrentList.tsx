@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, RefObject } from 'react';
 import ToastNotification from '../ToastNotification/ToastNotification';
 import Button from '../Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,9 +13,11 @@ import Footer from '../Footer/Footer';
 
 export default function CurrentList({
   showLists,
+  addItemRef,
   displayLists,
 }: {
   showLists: boolean;
+  addItemRef: RefObject<HTMLInputElement | null>;
   displayLists: () => void;
 }) {
   const translation = useContext(LocaleContext);
@@ -114,7 +116,11 @@ export default function CurrentList({
         )}
       </div>
       <p>{list.modified.toLocaleDateString()}</p>
-      <Items key={state.currentListId} copyItemText={copyItemText} />
+      <Items
+        key={state.currentListId}
+        copyItemText={copyItemText}
+        addItemRef={addItemRef}
+      />
       <Footer />
       {showDialog && (
         <Dialog

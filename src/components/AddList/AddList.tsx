@@ -1,4 +1,4 @@
-import { KeyboardEvent, useContext, useState } from 'react';
+import { KeyboardEvent, RefObject, useContext, useState } from 'react';
 import Button from '../Button/Button';
 import { LocaleContext, useDispatchContext } from '../../context';
 import {
@@ -11,9 +11,11 @@ import { ListId } from '../../reducers/types';
 import Footer from '../Footer/Footer';
 
 export default function AddList({
+  addItemRef,
   scrollToCurrentList,
   hideAddList,
 }: {
+  addItemRef: RefObject<HTMLInputElement | null>;
   scrollToCurrentList: () => void;
   hideAddList: () => void;
 }) {
@@ -35,6 +37,7 @@ export default function AddList({
       },
     });
     setNewListTitle('');
+    setTimeout(() => addItemRef.current?.focus());
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {

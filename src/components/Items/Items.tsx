@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { RefObject, useContext, useState } from 'react';
 import { LocaleContext, StateContext } from '../../context';
 import { selectCurrentList, selectItems } from '../../reducers/selectors';
 import Item from '../Item/Item';
@@ -7,8 +7,10 @@ import AddItem from '../AddItem/AddItem';
 
 export default function Items({
   copyItemText,
+  addItemRef,
 }: {
   copyItemText: (text: string) => void;
+  addItemRef: RefObject<HTMLInputElement | null>;
 }) {
   const translation = useContext(LocaleContext);
 
@@ -47,7 +49,7 @@ export default function Items({
       ) : (
         <p>{translation.NO_ITEMS}</p>
       )}
-      <AddItem />
+      <AddItem addItemRef={addItemRef} />
     </>
   );
 }

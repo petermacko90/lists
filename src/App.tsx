@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import { getTranslations } from './helpers';
 import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
@@ -18,6 +18,8 @@ export default function App() {
   const [showAddList, setShowAddList] = useState(false);
   const [translations, setTranslations] =
     useState<Translations>(getTranslations());
+
+  const addItemRef = useRef<HTMLInputElement | null>(null);
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -59,6 +61,7 @@ export default function App() {
             />
             {showAddList ? (
               <AddList
+                addItemRef={addItemRef}
                 scrollToCurrentList={showCurrentList}
                 hideAddList={() => setShowAddList(false)}
               />
@@ -66,6 +69,7 @@ export default function App() {
               <CurrentList
                 key={state.currentListId}
                 showLists={showLists}
+                addItemRef={addItemRef}
                 displayLists={() => setShowLists(true)}
               />
             )}

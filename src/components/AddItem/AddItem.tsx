@@ -2,11 +2,15 @@ import Button from '../Button/Button';
 import { isEmptyString } from '../../helpers';
 import { ENTER_KEY, MAX_LENGTH_ITEM } from '../../constants/constants';
 import { LocaleContext, useDispatchContext } from '../../context';
-import { useContext, useState } from 'react';
+import { RefObject, useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { ItemId } from '../../reducers/types';
 
-export default function AddItem() {
+export default function AddItem({
+  addItemRef,
+}: {
+  addItemRef: RefObject<HTMLInputElement | null>;
+}) {
   const translation = useContext(LocaleContext);
 
   const dispatch = useDispatchContext();
@@ -40,7 +44,7 @@ export default function AddItem() {
         placeholder={translation.ITEM_NAME}
         maxLength={MAX_LENGTH_ITEM}
         className="pa3 br3 br--left b--none shadow-4 w-75 w-two-thirds-m w-auto-l lh-title"
-        autoFocus
+        ref={addItemRef}
       />
       <Button
         onClick={() => handleItemAdd(newItemText)}
