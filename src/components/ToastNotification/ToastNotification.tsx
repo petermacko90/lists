@@ -1,4 +1,5 @@
 import { createPortal } from 'react-dom';
+import './ToastNotification.css';
 
 export default function ToastNotification({
   show,
