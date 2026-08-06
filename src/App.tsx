@@ -15,11 +15,12 @@ import ToggleListsButton from './components/Button/ToggleListsButton';
 
 export default function App() {
   const [showLists, setShowLists] = useState(true);
-  const [showAddList, setShowAddList] = useState(false);
+  const [isShowAddList, setIsShowAddList] = useState(false);
   const [translations, setTranslations] =
     useState<Translations>(getTranslations());
 
   const addItemRef = useRef<HTMLInputElement | null>(null);
+  const addListRef = useRef<HTMLInputElement | null>(null);
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -40,7 +41,22 @@ export default function App() {
     if (window.innerWidth < MEDIUM_SCREEN_BREAKPOINT) {
       setShowLists(false);
     }
-    setShowAddList(false);
+    setIsShowAddList(false);
+  }
+
+  function showAddList() {
+    if (window.innerWidth < MEDIUM_SCREEN_BREAKPOINT) {
+      setShowLists(false);
+    }
+    setIsShowAddList(true);
+    setTimeout(() => addListRef.current?.focus());
+  }
+
+  function hideAddList() {
+    if (window.innerWidth < MEDIUM_SCREEN_BREAKPOINT) {
+      setShowLists(true);
+    }
+    setIsShowAddList(false);
   }
 
   return (
@@ -48,7 +64,7 @@ export default function App() {
       <StateDispatchContext value={dispatch}>
         <LocaleContext.Provider value={translations}>
           <Navigation
-            showAddList={() => setShowAddList(true)}
+            showAddList={showAddList}
             setTranslations={setTranslations}
             showLists={showLists}
             setShowLists={setShowLists}
@@ -57,13 +73,14 @@ export default function App() {
             <Lists
               showLists={showLists}
               scrollToCurrentList={showCurrentList}
-              showAddList={() => setShowAddList(true)}
+              showAddList={showAddList}
             />
-            {showAddList ? (
+            {isShowAddList ? (
               <AddList
                 addItemRef={addItemRef}
+                addListRef={addListRef}
                 scrollToCurrentList={showCurrentList}
-                hideAddList={() => setShowAddList(false)}
+                hideAddList={hideAddList}
               />
             ) : (
               <CurrentList
@@ -78,11 +95,7 @@ export default function App() {
             showLists={showLists}
             setShowLists={setShowLists}
           />
-          {!showAddList && (
-            <AddListButton
-              showAddList={() => setShowAddList(true)}
-            ></AddListButton>
-          )}
+          {!isShowAddList && <AddListButton showAddList={showAddList} />}
         </LocaleContext.Provider>
       </StateDispatchContext>
     </StateContext>

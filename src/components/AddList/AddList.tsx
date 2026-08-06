@@ -12,10 +12,12 @@ import Footer from '../Footer/Footer';
 
 export default function AddList({
   addItemRef,
+  addListRef,
   scrollToCurrentList,
   hideAddList,
 }: {
   addItemRef: RefObject<HTMLInputElement | null>;
+  addListRef: RefObject<HTMLInputElement | null>;
   scrollToCurrentList: () => void;
   hideAddList: () => void;
 }) {
@@ -64,6 +66,7 @@ export default function AddList({
         className="pa3 br3 br--left b--none shadow-4 lh-title"
         maxLength={MAX_LENGTH_LIST}
         autoFocus
+        ref={addListRef}
       />
       <Button
         onClick={() => handleAddList(newListTitle)}
