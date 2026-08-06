@@ -16,4 +16,7 @@ export default defineConfig({
     outDir: 'build',
   },
   base: '/lists/',
+  css: {
+    lightningcss: { errorRecovery: true },
+  },
 });
