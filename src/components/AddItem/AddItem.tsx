@@ -31,6 +31,7 @@ export default function AddItem({
     });
     dispatch({ type: 'list modified date updated', payload: new Date() });
     setNewItemText('');
+    setTimeout(() => addItemRef.current?.focus());
   }
 
   return (
