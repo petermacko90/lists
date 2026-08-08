@@ -11,7 +11,7 @@ export default function AddItem({
 }: {
   addItemRef: RefObject<HTMLInputElement | null>;
 }) {
-  const translation = useContext(LocaleContext);
+  const translation = useContext(LocaleContext).translations;
 
   const dispatch = useDispatchContext();
 
@@ -31,7 +31,13 @@ export default function AddItem({
     });
     dispatch({ type: 'list modified date updated', payload: new Date() });
     setNewItemText('');
-    setTimeout(() => addItemRef.current?.focus());
+    setTimeout(() => {
+      addItemRef.current?.focus();
+      addItemRef.current?.scrollIntoView({
+        block: 'center',
+        behavior: 'smooth',
+      });
+    });
   }
 
   return (

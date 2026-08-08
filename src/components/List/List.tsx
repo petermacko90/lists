@@ -13,7 +13,7 @@ export default function List({
   onClickList: MouseEventHandler<HTMLLIElement>;
   onEnterList: KeyboardEventHandler<HTMLLIElement>;
 }) {
-  const translation = useContext(LocaleContext);
+  const { translations, language } = useContext(LocaleContext);
 
   const state = useContext(StateContext);
   const firstFewItems = selectFirstFewItems(state, list.id);
@@ -26,9 +26,9 @@ export default function List({
       onKeyUp={onEnterList}
     >
       <h2 className="f3-l f4-m f5 truncate">
-        {list.title.length === 0 ? translation.NO_TITLE : list.title}
+        {list.title.length === 0 ? translations.NO_TITLE : list.title}
       </h2>
-      <p>{list.modified.toLocaleDateString()}</p>
+      <p>{list.modified.toLocaleDateString(language)}</p>
       <p className="truncate pb1">{firstFewItems}</p>
     </li>
   );

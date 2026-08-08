@@ -19,7 +19,7 @@ export default function EditItem({
   item: ItemType;
   closeEdit: () => void;
 }) {
-  const translation = useContext(LocaleContext);
+  const translation = useContext(LocaleContext).translations;
 
   const dispatch = useDispatchContext();
 

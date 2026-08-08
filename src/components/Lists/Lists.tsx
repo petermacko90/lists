@@ -19,7 +19,7 @@ export default function Lists({
   scrollToCurrentList: () => void;
   showAddList: MouseEventHandler<HTMLButtonElement>;
 }) {
-  const translation = useContext(LocaleContext);
+  const { language, translations } = useContext(LocaleContext);
 
   const state = useContext(StateContext);
   const dispatch = useDispatchContext();
@@ -46,11 +46,11 @@ export default function Lists({
         );
       case 'titleAsc':
         return Object.values(state.lists).toSorted((a, b) =>
-          a.title.localeCompare(b.title),
+          a.title.localeCompare(b.title, language),
         );
       case 'titleDesc':
         return Object.values(state.lists).toSorted((a, b) =>
-          b.title.localeCompare(a.title),
+          b.title.localeCompare(a.title, language),
         );
     }
   }
@@ -61,14 +61,14 @@ export default function Lists({
     >
       {listsCount === 0 ? (
         <>
-          <p>{translation.NO_LIST_FOUND}</p>
+          <p>{translations.NO_LIST_FOUND}</p>
           <Button onClick={showAddList} color="green">
-            <FontAwesomeIcon icon={faPlus} /> {translation.ADD_LIST}
+            <FontAwesomeIcon icon={faPlus} /> {translations.ADD_LIST}
           </Button>
         </>
       ) : (
         <>
-          <div className="dn db-m mb3">
+          <div className="dn db-ns mb3">
             <SortSelect value={sortValue} setValue={setSortValue} />
           </div>
           <ul className="ma0 pa0 list">
@@ -85,7 +85,7 @@ export default function Lists({
               );
             })}
           </ul>
-          <div className="flex justify-center dn-m">
+          <div className="flex justify-center dn-ns">
             <SortSelect value={sortValue} setValue={setSortValue} />
           </div>
         </>

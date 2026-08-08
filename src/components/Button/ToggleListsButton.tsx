@@ -12,7 +12,7 @@ export default function ToggleListsButton({
   showLists: boolean;
   setShowLists: Dispatch<SetStateAction<boolean>>;
 }) {
-  const translation = useContext(LocaleContext);
+  const translation = useContext(LocaleContext).translations;
 
   const state = useContext(StateContext);
   const listsCount = selectListsCount(state);

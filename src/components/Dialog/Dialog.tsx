@@ -13,7 +13,7 @@ export function Dialog({
   text: string;
   onClose: (returnValue: string) => void;
 }) {
-  const translation = useContext(LocaleContext);
+  const translation = useContext(LocaleContext).translations;
 
   return createPortal(
     <dialog

@@ -1,23 +1,26 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
-import { getTranslations } from './helpers';
+import { getLocale } from './helpers';
 import Navigation from './components/Navigation/Navigation';
 import Lists from './components/Lists/Lists';
 import CurrentList from './components/CurrentList/CurrentList';
 import AddList from './components/AddList/AddList';
 import AddListButton from './components/Button/AddListButton';
 import { MEDIUM_SCREEN_BREAKPOINT } from './constants/constants';
-import { LocaleContext, StateContext, StateDispatchContext } from './context';
+import {
+  Locale,
+  LocaleContext,
+  StateContext,
+  StateDispatchContext,
+} from './context';
 import { initialState, reducer } from './reducers/reducer';
 import { loadState, saveState } from './localStorage';
 import { State } from './reducers/types';
-import { Translations } from './constants/strings';
 import ToggleListsButton from './components/Button/ToggleListsButton';
 
 export default function App() {
   const [showLists, setShowLists] = useState(true);
   const [isShowAddList, setIsShowAddList] = useState(false);
-  const [translations, setTranslations] =
-    useState<Translations>(getTranslations());
+  const [locale, setLocale] = useState<Locale>(getLocale());
 
   const addItemRef = useRef<HTMLInputElement | null>(null);
   const addListRef = useRef<HTMLInputElement | null>(null);
@@ -62,10 +65,10 @@ export default function App() {
   return (
     <StateContext value={state}>
       <StateDispatchContext value={dispatch}>
-        <LocaleContext.Provider value={translations}>
+        <LocaleContext.Provider value={locale}>
           <Navigation
             showAddList={showAddList}
-            setTranslations={setTranslations}
+            setLocale={setLocale}
             showLists={showLists}
             setShowLists={setShowLists}
           />

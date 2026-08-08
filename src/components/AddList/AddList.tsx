@@ -21,7 +21,7 @@ export default function AddList({
   scrollToCurrentList: () => void;
   hideAddList: () => void;
 }) {
-  const translation = useContext(LocaleContext);
+  const translation = useContext(LocaleContext).translations;
 
   const [newListTitle, setNewListTitle] = useState('');
 

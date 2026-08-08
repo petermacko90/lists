@@ -1,5 +1,5 @@
 import './Navigation.css';
-import { LocaleContext, StateContext } from '../../context';
+import { Locale, LocaleContext, StateContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faLanguage, faList } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -11,21 +11,20 @@ import {
   SetStateAction,
 } from 'react';
 import LanguageSelection from './LanguageSelection';
-import { Translations } from '../../constants/strings';
 import { selectListsCount } from '../../reducers/selectors';
 
 export default function Navigation({
   showAddList,
-  setTranslations,
+  setLocale,
   showLists,
   setShowLists,
 }: {
   showAddList: MouseEventHandler<HTMLButtonElement>;
-  setTranslations: Dispatch<SetStateAction<Translations>>;
+  setLocale: Dispatch<SetStateAction<Locale>>;
   showLists: boolean;
   setShowLists: Dispatch<SetStateAction<boolean>>;
 }) {
-  const translation = useContext(LocaleContext);
+  const translation = useContext(LocaleContext).translations;
 
   const state = useContext(StateContext);
   const listsCount = selectListsCount(state);
@@ -97,7 +96,7 @@ export default function Navigation({
           {showLanguageSelection && (
             <LanguageSelection
               hideLanguageSelection={() => setShowLanguageSelection(false)}
-              setTranslations={setTranslations}
+              setLocale={setLocale}
             />
           )}
         </div>

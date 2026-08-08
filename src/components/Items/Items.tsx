@@ -12,7 +12,7 @@ export default function Items({
   copyItemText: (text: string) => void;
   addItemRef: RefObject<HTMLInputElement | null>;
 }) {
-  const translation = useContext(LocaleContext);
+  const translation = useContext(LocaleContext).translations;
 
   const state = useContext(StateContext);
 

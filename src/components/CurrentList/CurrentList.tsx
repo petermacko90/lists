@@ -20,7 +20,7 @@ export default function CurrentList({
   addItemRef: RefObject<HTMLInputElement | null>;
   displayLists: () => void;
 }) {
-  const translation = useContext(LocaleContext);
+  const { language, translations } = useContext(LocaleContext);
 
   const state = useContext(StateContext);
   const dispatch = useDispatchContext();
@@ -76,7 +76,7 @@ export default function CurrentList({
 
   function copyItemText(text: string) {
     navigator.clipboard.writeText(text).then(() => {
-      setNotification({ show: true, text: `${translation.COPIED}: ${text}` });
+      setNotification({ show: true, text: `${translations.COPIED}: ${text}` });
       setTimeout(() => {
         setNotification({ show: false, text: '' });
       }, 3000);
@@ -89,7 +89,7 @@ export default function CurrentList({
     >
       <ToastNotification show={notification.show} text={notification.text} />
       <Button onClick={showModal} color="red">
-        <FontAwesomeIcon icon={faTrashAlt} /> {translation.DELETE_LIST}
+        <FontAwesomeIcon icon={faTrashAlt} /> {translations.DELETE_LIST}
       </Button>
       <div className="mv4">
         {isEditTitle ? (
@@ -105,17 +105,17 @@ export default function CurrentList({
             <Button
               onClick={showEditTitle}
               color="blue"
-              title={translation.EDIT_TITLE}
+              title={translations.EDIT_TITLE}
             >
               <FontAwesomeIcon icon={faEdit} />
             </Button>
             <h2 className="f3 mv0 ml3 di list-title">
-              {list.title.length === 0 ? translation.NO_TITLE : list.title}
+              {list.title.length === 0 ? translations.NO_TITLE : list.title}
             </h2>
           </>
         )}
       </div>
-      <p>{list.modified.toLocaleDateString()}</p>
+      <p>{list.modified.toLocaleDateString(language)}</p>
       <Items
         key={state.currentListId}
         copyItemText={copyItemText}
@@ -125,7 +125,7 @@ export default function CurrentList({
       {showDialog && (
         <Dialog
           ref={dialogRef}
-          text={translation.CONFIRM_DELETE_LIST}
+          text={translations.CONFIRM_DELETE_LIST}
           onClose={handleDialogOnClose}
         />
       )}

@@ -28,7 +28,7 @@ export default function ItemDropdown({
   setShowActions: Dispatch<SetStateAction<boolean>>;
   actionsRef: RefObject<HTMLButtonElement | null>;
 }) {
-  const translation = useContext(LocaleContext);
+  const translation = useContext(LocaleContext).translations;
 
   return (
     <div

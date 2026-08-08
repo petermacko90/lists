@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useContext } from 'react';
+import { LocaleContext } from '../../context';
 
 export type SortValue = 'dateAsc' | 'dateDesc' | 'titleAsc' | 'titleDesc';
 
@@ -14,16 +15,18 @@ export default function SortSelect({
   value: SortValue;
   setValue: Dispatch<SetStateAction<SortValue>>;
 }) {
+  const translation = useContext(LocaleContext).translations;
+
   const options: SelectOption[] = [
-    { value: 'dateAsc', label: 'Earliest' },
-    { value: 'dateDesc', label: 'Most Recent' },
-    { value: 'titleAsc', label: 'Title A-Z' },
-    { value: 'titleDesc', label: 'Title Z-A' },
+    { value: 'dateAsc', label: translation.SORT_BY_DATE_ASC },
+    { value: 'dateDesc', label: translation.SORT_BY_DATE_DESC },
+    { value: 'titleAsc', label: translation.SORT_BY_TITLE_ASC },
+    { value: 'titleDesc', label: translation.SORT_BY_TITLE_DESC },
   ];
 
   return (
     <label>
-      Sort By:{' '}
+      {translation.SORT_BY}
       <select
         name="sort-select"
         onChange={(event) => setValue(event.target.value as SortValue)}

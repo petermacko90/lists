@@ -9,7 +9,7 @@ export default function AddListButton({
 }: {
   showAddList: MouseEventHandler<HTMLButtonElement>;
 }) {
-  const translation = useContext(LocaleContext);
+  const translation = useContext(LocaleContext).translations;
 
   return (
     <button

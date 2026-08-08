@@ -25,6 +25,11 @@ export const strings = {
     NO_LIST_FOUND: 'No lists found',
     NO_TITLE: '<No title>',
     SAVE: 'Save',
+    SORT_BY: 'Sort By: ',
+    SORT_BY_DATE_ASC: 'Earliest',
+    SORT_BY_DATE_DESC: 'Most Recent',
+    SORT_BY_TITLE_ASC: 'Title A-Z',
+    SORT_BY_TITLE_DESC: 'Title Z-A',
     TOGGLE_LISTS: 'Show/hide lists',
     UNCHECK: 'Uncheck',
   },
@@ -54,6 +59,11 @@ export const strings = {
     NO_LIST_FOUND: 'Žiadne zoznamy',
     NO_TITLE: '<Bez názvu>',
     SAVE: 'Uložiť',
+    SORT_BY: 'Zoradiť: ',
+    SORT_BY_DATE_ASC: 'Najstaršie',
+    SORT_BY_DATE_DESC: 'Najnovšie',
+    SORT_BY_TITLE_ASC: 'Názov A-Z',
+    SORT_BY_TITLE_DESC: 'Názov Z-A',
     TOGGLE_LISTS: 'Zobraziť/schovať zoznamy',
     UNCHECK: 'Odškrtnúť',
   },
@@ -66,6 +76,7 @@ export type Language = (typeof languages)[number];
 export type Translations = (typeof strings)[Language];
 
 type LanguageDropdown = Array<{ value: Language; label: string }>;
+
 export const languageDropdown: LanguageDropdown = [
   { value: 'en', label: 'English' },
   { value: 'sk', label: 'Slovenčina' },

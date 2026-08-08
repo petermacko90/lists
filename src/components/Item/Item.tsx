@@ -24,7 +24,7 @@ export default function Item({
   setTextToCopy: (text: string) => void;
   setItemToEdit: Dispatch<SetStateAction<string>>;
 }) {
-  const translation = useContext(LocaleContext);
+  const translation = useContext(LocaleContext).translations;
 
   const dispatch = useDispatchContext();
 

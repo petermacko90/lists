@@ -28,7 +28,7 @@ export function EditListTitle({
   hideEditTitle: () => void;
   editTitleRef: RefObject<HTMLInputElement | null>;
 }) {
-  const translation = useContext(LocaleContext);
+  const translation = useContext(LocaleContext).translations;
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === ENTER_KEY) {
